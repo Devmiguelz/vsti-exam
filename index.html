@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#16233F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VSTI">
+<title>Estudio · Certificación Procesos Críticos VSTI</title>
+<style>
+:root{
+  --bg:#F4F4F1; --paper:#FFFFFF; --ink:#1B1F23; --soft:#5B5F63;
+  --line:#E3E2DD; --navy:#16233F; --brass:#A9843F; --brass-bg:#E9DCC0;
+  --good:#2F6F4E; --good-bg:#E7F1EA; --bad:#A83232; --bad-bg:#F6E7E5;
+  --radius:6px; --shadow:0 1px 4px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.serif{font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;outline:none}
+
+/* Layout */
+#app{min-height:calc(100vh - 60px);padding:20px 16px 80px;max-width:720px;margin:0 auto}
+#nav{position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--paper);border-top:1px solid var(--line);display:flex;z-index:100}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;color:var(--soft);background:none;transition:color .15s}
+.nav-btn.active{color:var(--navy)}
+.nav-btn svg{width:22px;height:22px}
+
+/* Cards */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card-sm{padding:16px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:var(--radius);font-size:15px;font-weight:600;transition:opacity .15s}
+.btn:hover{opacity:.88}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-brass{background:var(--brass);color:#fff}
+.btn-outline{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn-sm{padding:8px 16px;font-size:13.5px}
+.btn-full{width:100%}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
+/* Module pill */
+.mod-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:12px;color:#fff;font-weight:600}
+
+/* Callouts */
+.callout{border-left:3px solid;padding:12px 16px;border-radius:0 4px 4px 0;margin:12px 0}
+.callout.key{border-color:var(--brass);background:#fdf8ef}
+.callout.warn{border-color:var(--bad);background:var(--bad-bg)}
+.callout.rule{border-color:var(--navy);background:#eef1f7}
+.callout.data{border-color:var(--good);background:var(--good-bg)}
+.callout-title{font-weight:700;font-size:13px;margin-bottom:4px}
+.callout.key .callout-title{color:var(--brass)}
+.callout.warn .callout-title{color:var(--bad)}
+.callout.rule .callout-title{color:var(--navy)}
+.callout.data .callout-title{color:var(--good)}
+.callout p{font-size:14.5px;line-height:1.6;color:var(--ink)}
+
+/* Tables */
+.tbl{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0;overflow:auto;display:block}
+.tbl th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-weight:600;font-size:13px}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:nth-child(even) td{background:#fafaf8}
+
+/* Section headers */
+.section-title{font-size:20px;font-weight:700;color:var(--navy);margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+.lesson-title{font-size:17px;font-weight:700;color:var(--navy);margin:16px 0 8px}
+.body-p{font-size:15px;line-height:1.65;color:var(--ink);margin-bottom:10px}
+.term-row{padding:8px 0;border-bottom:1px solid var(--line);display:flex;gap:12px}
+.term-word{font-weight:700;min-width:120px;font-size:14px;color:var(--navy)}
+.term-def{font-size:14px;line-height:1.5;color:var(--soft)}
+
+/* Module cards grid */
+.mod-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:420px){.mod-grid{grid-template-columns:1fr}}
+.mod-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:16px;cursor:pointer;transition:transform .15s, box-shadow .15s;box-shadow:var(--shadow);border-top:3px solid}
+.mod-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.mod-icon{font-size:24px;margin-bottom:8px}
+.mod-name{font-size:14px;font-weight:700;color:var(--navy);line-height:1.3}
+.mod-meta{font-size:12px;color:var(--soft);margin-top:6px}
+.prog-bar{height:4px;background:var(--line);border-radius:2px;margin-top:8px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;transition:width .4s}
+
+/* Flashcard styles */
+.fc-shell{display:flex;flex-direction:column;min-height:60vh}
+.fc-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:32px;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:220px;cursor:pointer;box-shadow:var(--shadow);transition:box-shadow .15s}
+.fc-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.fc-front{font-size:18px;line-height:1.5;color:var(--navy);font-weight:600}
+.fc-back{font-size:16px;line-height:1.6;color:var(--ink);margin-top:0}
+.fc-hint{font-size:12px;color:var(--soft);margin-top:16px}
+.fc-divider{width:40px;height:2px;background:var(--line);margin:16px auto}
+.rating-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px}
+.rating-btn{padding:14px 8px;border-radius:var(--radius);font-size:13.5px;font-weight:600;border:1.5px solid;transition:all .15s}
+.rating-again{border-color:var(--bad);color:var(--bad);background:var(--bad-bg)}
+.rating-hard{border-color:var(--brass);color:var(--brass);background:#fdf8ef}
+.rating-easy{border-color:var(--good);color:var(--good);background:var(--good-bg)}
+.rating-btn:hover{filter:brightness(.92)}
+.fc-counter{text-align:center;font-size:13px;color:var(--soft);margin-bottom:12px}
+
+/* Quiz styles (from existing simulacro) */
+.qtext{font-size:19px;line-height:1.45;color:var(--navy);margin:0 0 20px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:12px;border:1px solid var(--line);border-radius:5px;padding:13px 15px;cursor:pointer;background:var(--paper);transition:border-color .12s}
+.opt:hover:not(.locked){border-color:var(--navy)}
+.opt .mark{flex:0 0 auto;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--soft)}
+.opt .otext{font-size:15px;line-height:1.45;padding-top:2px}
+.opt.correct{border-color:var(--good);background:var(--good-bg)}
+.opt.correct .mark{border-color:var(--good);color:var(--good)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt.wrong .mark{border-color:var(--bad);color:var(--bad)}
+.opt.dim{opacity:.5}
+.opt.locked{cursor:default}
+.explain-box{display:none;margin-top:16px;padding:14px 18px;border-left:3px solid var(--line);background:#fafaf8;font-size:14px;line-height:1.6}
+.explain-box.show{display:block}
+.explain-box.ok{border-left-color:var(--good)}
+.explain-box.bad{border-left-color:var(--bad)}
+.verdict{font-weight:700;display:block;margin-bottom:3px}
+.explain-box.ok .verdict{color:var(--good)}
+.explain-box.bad .verdict{color:var(--bad)}
+
+/* Progress bar quiz */
+.prog-track{height:3px;background:var(--line);border-radius:2px;margin-bottom:20px;overflow:hidden}
+.prog-fill-quiz{height:100%;background:var(--brass);transition:width .3s}
+
+/* Radar */
+.radar-wrap{display:flex;justify-content:center;margin:16px 0}
+
+/* Home stats */
+.stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.stat-box{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:14px 10px;text-align:center;box-shadow:var(--shadow)}
+.stat-num{font-size:26px;font-weight:700;color:var(--navy)}
+.stat-label{font-size:11px;color:var(--soft);margin-top:2px;line-height:1.3}
+
+/* Setup */
+.form-group{margin-bottom:20px}
+.form-label{font-size:13px;color:var(--soft);margin-bottom:8px;display:block}
+.form-input{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:var(--radius);font-size:15px;font-family:inherit;background:var(--paper);color:var(--ink)}
+.form-input:focus{outline:none;border-color:var(--brass)}
+
+/* Utility */
+.hidden{display:none!important}
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{border:1.5px solid var(--line);background:var(--paper);padding:8px 16px;border-radius:20px;font-size:13.5px;cursor:pointer;color:var(--ink);transition:all .15s}
+.chip:hover{border-color:var(--brass)}
+.chip.active{border-color:var(--brass);background:var(--brass-bg);font-weight:600}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.topbar h2{font-size:20px;font-weight:700;color:var(--navy)}
+.back-btn{background:none;font-size:14px;color:var(--soft);display:flex;align-items:center;gap:4px;padding:6px 0}
+.back-btn:hover{color:var(--navy)}
+.badge{display:inline-block;background:var(--brass);color:#fff;border-radius:20px;padding:2px 8px;font-size:11px;font-weight:700}
+.badge.new{background:var(--good)}
+.badge.due{background:var(--bad)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--soft)}
+.empty-state svg{opacity:.3;margin-bottom:12px}
+
+/* Match exercises */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
+.match-item{padding:11px 10px;border:2px solid var(--line);border-radius:var(--radius);font-size:13.5px;line-height:1.4;cursor:pointer;background:var(--paper);text-align:center;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.match-item:hover{border-color:#aaa}
+.match-item.selected{border-color:var(--brass);background:var(--brass-bg);font-weight:600}
+.match-item.correct{border-color:var(--good);background:var(--good-bg);color:var(--good);font-weight:600;cursor:default}
+.match-item.wrong{border-color:var(--bad);background:var(--bad-bg);animation:shake .3s}
+.match-item.used{opacity:.35;cursor:default;pointer-events:none}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.match-score{text-align:center;font-size:14px;color:var(--soft);margin:8px 0}
+.match-score b{color:var(--navy);font-size:18px}
+.ex-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ex-dots{display:flex;gap:6px}
+.ex-dot{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.ex-dot.done{background:var(--good)}
+.ex-dot.cur{background:var(--brass)}
+
+/* Video embed */
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius);background:#000;margin:12px 0}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:var(--radius)}
+.video-note{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5}
+
+/* PWA install banner */
+.pwa-banner{background:var(--navy);color:#fff;padding:12px 16px;border-radius:var(--radius);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pwa-banner p{font-size:13px;line-height:1.4;flex:1}
+.pwa-banner button{flex:0 0 auto;background:#fff;color:var(--navy);border:none;border-radius:4px;padding:7px 12px;font-weight:700;font-size:13px;cursor:pointer}
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<nav id="nav">
+  <button class="nav-btn" id="nb-home" onclick="go('home')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Inicio
+  </button>
+  <button class="nav-btn" id="nb-modules" onclick="go('modules')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    Módulos
+  </button>
+  <button class="nav-btn" id="nb-cards" onclick="go('cards','all')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+    Flashcards
+  </button>
+  <button class="nav-btn" id="nb-quiz" onclick="go('quiz','all')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+    Examen
+  </button>
+</nav>
+
+<script>
+/* ============================================================
+   DATOS — Módulos
+   ============================================================ */
+const M = {
+  mo:  {name:'Modelo Operativo',              short:'Mod. Operativo',    color:'#A9843F', icon:'🏛️'},
+  cfg: {name:'Gestión de la Configuración',   short:'Configuración',     color:'#3E7487', icon:'⚙️'},
+  cam: {name:'Gestión de Cambios',            short:'Cambios',           color:'#A0552B', icon:'🔄'},
+  inc: {name:'Gestión de Incidentes',         short:'Incidentes',        color:'#A6322C', icon:'🚨'},
+  prob:{name:'Gestión de Problemas',          short:'Problemas',         color:'#4F6E45', icon:'🧩'},
+  hym: {name:'Habilitar y Mantener Sol.',     short:'Hab. y Mantener',   color:'#3A4A73', icon:'🛠️'},
+};
+const MOD_KEYS = Object.keys(M);
+
+/* ============================================================
+   DATOS — Flashcards (72 tarjetas: 12 × 6 módulos)
+   ============================================================ */
+const FC = [
+// ── MÓDULO 1: Modelo Operativo ──────────────────────────────
+{id:'mo-1',  mod:'mo', f:'¿Cuál es la definición oficial de modelo operativo según Bancolombia?', b:'"La manera en que coordinamos áreas, procesos y funciones para entregar valor a nuestros clientes y a la organización."'},
+{id:'mo-2',  mod:'mo', f:'¿Cuáles son los 4 pilares del modelo operativo?', b:'Personas · Procesos · Servicios · Tecnología'},
+{id:'mo-3',  mod:'mo', f:'¿Qué representa el ciclo PHVA en el modelo operativo?', b:'Planear, Hacer, Verificar, Actuar. El modelo NO es fijo: debe evolucionar y adaptarse constantemente.'},
+{id:'mo-4',  mod:'mo', f:'¿Cuál es el modelo operativo actual de Bancolombia y hacia cuál transiciona?', b:'Hoy: Federal–State–Local. Aspiración: Hub and Spoke (centrado en plataformas).'},
+{id:'mo-5',  mod:'mo', f:'¿Qué hace el nivel Federal?', b:'Provee lineamientos, prácticas, capacidades y procesos. Son los Centros de Excelencia (gobierno normativo).'},
+{id:'mo-6',  mod:'mo', f:'¿Qué hace el nivel State?', b:'Habilita productos, estandariza la operación y entrega capacidades listas para que el Local consuma.'},
+{id:'mo-7',  mod:'mo', f:'¿Qué hace el nivel Local?', b:'Ejecuta y consume servicios con alta autonomía, generando el máximo valor de cara al cliente.'},
+{id:'mo-8',  mod:'mo', f:'¿El modelo centralizado da alta o baja alineación con el negocio?', b:'BAJA alineación con el negocio (a cambio de ALTO control).'},
+{id:'mo-9',  mod:'mo', f:'¿El modelo distribuido da alta o baja capacidad de control?', b:'BAJA capacidad de control (genera caos, aunque logra alta alineación con el producto).'},
+{id:'mo-10', mod:'mo', f:'¿Qué modelo operativo pone el producto o plataforma en el centro?', b:'Hub and Spoke — muy centralizado en plataformas; entrega capacidades para que otros equipos construyan sobre ellas.'},
+{id:'mo-11', mod:'mo', f:'¿Son lo mismo el modelo operativo y la estructura organizacional?', b:'NO. La estructura tiene mucho que ver con el modelo, pero no son lo mismo.'},
+{id:'mo-12', mod:'mo', f:'¿Cuántas personas deben certificarse en los procesos críticos?', b:'Aproximadamente 2,534 personas entre las dos vicepresidencias de tecnología.'},
+
+// ── MÓDULO 2: Gestión de la Configuración ───────────────────
+{id:'cfg-1',  mod:'cfg', f:'¿Qué es un Elemento de Configuración (CI)?', b:'Cualquier componente que requiera ser gestionado para habilitar un servicio de TI (servidores, aplicaciones, bases de datos, etc.).'},
+{id:'cfg-2',  mod:'cfg', f:'¿Qué es la CMDB?', b:'Configuration Management Data Base — repositorio central y autoritativo de todos los CIs, sus atributos y las relaciones entre ellos.'},
+{id:'cfg-3',  mod:'cfg', f:'¿Cuál es el atributo obligatorio que debe tener todo CI en la CMDB?', b:'El App Code (código de la aplicación) — identifica el responsable de cada componente.'},
+{id:'cfg-4',  mod:'cfg', f:'¿Cuántos elementos de configuración tiene la CMDB actualmente?', b:'Aproximadamente 250,000 de diferentes tipologías.'},
+{id:'cfg-5',  mod:'cfg', f:'¿Cuál es la jerarquía de la CMDB, de arriba hacia abajo?', b:'Servicio → Aplicaciones → Transacciones → Componentes técnicos'},
+{id:'cfg-6',  mod:'cfg', f:'¿Cuál es la herramienta ITCM oficial del Banco?', b:'BMC Helix, conocida internamente como "Hilix".'},
+{id:'cfg-7',  mod:'cfg', f:'¿Puede ciberseguridad escanear un componente que no está en la CMDB?', b:'NO. La CMDB es el insumo oficial y autoritativo para el escaneo — si no está registrado, no se escanea.'},
+{id:'cfg-8',  mod:'cfg', f:'¿Con qué frecuencia se valida la CMDB en ambientes on-premise?', b:'Trimestralmente, con los dueños de las aplicaciones y los dueños de clase.'},
+{id:'cfg-9',  mod:'cfg', f:'¿Cómo se garantiza la actualización de la CMDB en nube?', b:'Mediante el tag obligatorio de App Code en todos los despliegues — se carga automáticamente 3 veces al día.'},
+{id:'cfg-10', mod:'cfg', f:'¿Quién puede actualizar la información de un CI en Hilix?', b:'Solo los dueños de ese tipo de componente (segregación de funciones).'},
+{id:'cfg-11', mod:'cfg', f:'¿La CMDB es una herramienta de monitoreo?', b:'NO. Es para inventario y relacionamiento. El monitoreo lo hacen otras herramientas.'},
+{id:'cfg-12', mod:'cfg', f:'¿Qué consecuencia puede tener crear un CRQ con el CI incorrecto?', b:'No se identifica correctamente el impacto del cambio, lo que puede derivar en un incidente en producción.'},
+
+// ── MÓDULO 3: Gestión de Cambios ────────────────────────────
+{id:'cam-1',  mod:'cam', f:'¿Cuáles son los 4 tipos de cambio TI?', b:'Ágil · Estándar · Programado · Emergencia (aplica tanto a cambios manuales como automáticos)'},
+{id:'cam-2',  mod:'cam', f:'¿Qué tipo de cambio NO requiere encuesta de riesgos?', b:'El cambio ESTÁNDAR — ya está certificado como libre de indisponibilidad por la plataforma.'},
+{id:'cam-3',  mod:'cam', f:'¿Qué tipo de cambio se puede ejecutar y legalizar (registrar) después?', b:'El cambio de EMERGENCIA (y los cambios de aliados notificados tardíamente).'},
+{id:'cam-4',  mod:'cam', f:'¿Qué exige la Circular 028?', b:'Avisar a los clientes con mínimo 8 días calendario de anticipación ante cualquier indisponibilidad ≥30 min en servicios de cara al cliente.'},
+{id:'cam-5',  mod:'cam', f:'¿Con cuántos días de anticipación hay que presentar al Consejo un cambio con Circular 028?', b:'15 días de anticipación.'},
+{id:'cam-6',  mod:'cam', f:'¿Qué días y a qué hora sesiona el Consejo de Cambios?', b:'Martes y jueves a las 9:00 a.m.'},
+{id:'cam-7',  mod:'cam', f:'¿Cuáles son el control SOX y el control operativo en Gestión de Cambios?', b:'Control SOX = aprobación formal del cambio (antes de producción). Control operativo = cierre y validación del cambio ejecutado.'},
+{id:'cam-8',  mod:'cam', f:'¿Quién da la aprobación formal (control SOX) en Hilix?', b:'El Aprobador — el único rol que tiene los tres permisos: coordinador, gestor y aprobador.'},
+{id:'cam-9',  mod:'cam', f:'¿Se puede modificar manualmente un cambio automático en Hilix?', b:'NUNCA, excepto los cambios Git LFS. El resto se maneja 100% a través de la integración automática con Azure DevOps/SolMan.'},
+{id:'cam-10', mod:'cam', f:'¿Qué hacer si un cambio automático no se cierra correctamente en Hilix?', b:'Crear un ticket de soporte al equipo de Procesos TI DevEx — NUNCA modificarlo manualmente.'},
+{id:'cam-11', mod:'cam', f:'En una fecha de restricción, ¿quién debe aprobar para ejecutar un cambio ágil?', b:'El Director o Líder de Entorno (el cargo más alto del equipo).'},
+{id:'cam-12', mod:'cam', f:'¿Qué incumplimiento representa crear un cambio manual paralelo a un cambio automático de bajo riesgo?', b:'Es un incumplimiento del proceso. Si el riesgo ya es bajo/ágil automático, el nivel de aprobación definido ya es el correcto — el Consejo no reemplaza esa responsabilidad.'},
+
+// ── MÓDULO 4: Gestión de Incidentes ─────────────────────────
+{id:'inc-1',  mod:'inc', f:'¿Cuál es la diferencia principal entre incidente y problema?', b:'Incidente: actúa sobre el síntoma, urgente, reactivo → restablecer el servicio. Problema: actúa sobre la causa raíz, reduce recurrencia.'},
+{id:'inc-2',  mod:'inc', f:'¿Qué campos calculan automáticamente la prioridad de un ticket?', b:'El Impacto y la Urgencia.'},
+{id:'inc-3',  mod:'inc', f:'¿Cuál es el ANS para un incidente crítico de infraestructura?', b:'4 horas.'},
+{id:'inc-4',  mod:'inc', f:'¿Cuál es el ANS para un incidente medio de infraestructura?', b:'10 horas.'},
+{id:'inc-5',  mod:'inc', f:'¿Cuál es el ANS para los casos problema (cualquier criticidad)?', b:'40 días corridos (aproximadamente 60 días calendario).'},
+{id:'inc-6',  mod:'inc', f:'¿Cuáles son los 3 criterios de calidad de una causa raíz?', b:'Accionable (se puede corregir) · Prevenible (evita que se repita) · Verificable (se puede comprobar)'},
+{id:'inc-7',  mod:'inc', f:'¿Cuál es la ventana de garantía para reabrir un ticket y quién la gestiona?', b:'5 días corridos desde la resolución, gestionada únicamente a través de Mateo (mesa de servicio).'},
+{id:'inc-8',  mod:'inc', f:'¿Qué campo diferencia un incidente de un evento de infraestructura?', b:'El campo "Tipo de incidencia" — solo la opción "Evento de infraestructura" es un evento; cualquier otra opción es un incidente.'},
+{id:'inc-9',  mod:'inc', f:'¿Por qué todo grupo de soporte debe tener más de un integrante?', b:'Para evitar que los incidentes queden huérfanos cuando el único integrante está de vacaciones o incapacitado.'},
+{id:'inc-10', mod:'inc', f:'¿Qué es el HADA?', b:'Análisis de la Afectación de un incidente: qué pasó, por qué, RQs involucrados, planes de acción y línea de tiempo.'},
+{id:'inc-11', mod:'inc', f:'¿Un plan de acción real es igual a mejora continua? ¿Cuál es la diferencia?', b:'NO. Plan de acción real: implementación técnica que ELIMINA la causa raíz. Mejora continua: documentación, checklists, reuniones (válido pero no evita la recurrencia directamente).'},
+{id:'inc-12', mod:'inc', f:'Si "reinicié el servidor" ¿es una causa raíz de calidad?', b:'NO. Es solo el síntoma. Una causa raíz responde POR QUÉ pasó: ej. "Error en script automatizado que reinició el servicio fuera de ventana".'},
+
+// ── MÓDULO 5: Gestión de Problemas ──────────────────────────
+{id:'prob-1',  mod:'prob', f:'¿Cuáles son las 4 fases de Gartner para gestión de problemas?', b:'Identificación → Mitigación → Resolución → Optimización'},
+{id:'prob-2',  mod:'prob', f:'¿Qué es un error conocido (PKE)?', b:'Un problema ya analizado, con causa raíz documentada y una solución temporal (workaround), pero que no ha sido resuelto definitivamente.'},
+{id:'prob-3',  mod:'prob', f:'¿Qué es un workaround?', b:'Solución alternativa o temporal que reduce el impacto de un incidente/problema mientras no existe una solución definitiva.'},
+{id:'prob-4',  mod:'prob', f:'¿Cuándo se genera automáticamente un PKE en Hilix?', b:'Al pasar un caso problema a estado "Terminado" con el motivo de estatus "Error conocido".'},
+{id:'prob-5',  mod:'prob', f:'¿Cuál es la diferencia entre PKE y NKW en Hilix?', b:'PKE nace de un caso problema resuelto (hereda su documentación). NKW es una plantilla independiente del módulo Knowledge — no deben confundirse.'},
+{id:'prob-6',  mod:'prob', f:'¿Se puede cerrar un caso problema con solo un workaround, sin solución definitiva?', b:'SÍ. Si el workaround es efectivo, puede convertirse en la forma permanente (ej. aplicación próxima a jubilarse).'},
+{id:'prob-7',  mod:'prob', f:'¿Cuánto es el cumplimiento acumulado del proceso de problemas?', b:'84.9% (con meta del 60%).'},
+{id:'prob-8',  mod:'prob', f:'¿Cuántos días abierto debe tener un incidente para obligar la creación de un caso problema?', b:'Más de 20 días abierto.'},
+{id:'prob-9',  mod:'prob', f:'¿Qué hace el módulo de Gestión Proactiva de Problemas en Hilix?', b:'Usa IA para agrupar incidentes en mapas de calor y detectar patrones recurrentes ANTES de que se conviertan en recurrencia.'},
+{id:'prob-10', mod:'prob', f:'¿Cuándo es proactiva (no reactiva) la gestión de problemas?', b:'Cuando el equipo revisa periódicamente (idealmente mensual) sus incidentes para detectar patrones antes de que se repitan — sin esperar a "estar corchados".'},
+{id:'prob-11', mod:'prob', f:'¿Qué significa RCA?', b:'Root Cause Analysis — análisis formal y riguroso de la causa raíz.'},
+{id:'prob-12', mod:'prob', f:'¿Qué significa MTTR?', b:'Mean Time To Resolve — tiempo medio de resolución de un incidente. Reducirlo es uno de los beneficios principales del PKE.'},
+
+// ── MÓDULO 6: Habilitar y Mantener Soluciones ───────────────
+{id:'hym-1',  mod:'hym', f:'¿Cuáles son las 5 etapas del proceso Habilitar y Mantener Soluciones?', b:'1. Analizar y arquitectar · 2. Preparar · 3. Implementar (corazón) · 4. Desplegar · 5. Estabilizar'},
+{id:'hym-2',  mod:'hym', f:'¿A qué tipo de aplicaciones NO aplica el proceso?', b:'Aplicaciones SaaS — no están dentro de la infraestructura del Banco y no se gestiona su código fuente.'},
+{id:'hym-3',  mod:'hym', f:'¿Qué es el DoD (Definition of Done)?', b:'El insumo dentro de Azure DevOps que centraliza toda la evidencia y aprobaciones para certificar que una solución está lista para pasar a producción.'},
+{id:'hym-4',  mod:'hym', f:'¿Quién debe aprobar el DoD y cómo?', b:'El Dueño de Producto (PO), de forma PERSONAL — nunca delegada a otra persona.'},
+{id:'hym-5',  mod:'hym', f:'¿Cuáles son los 3 tipos de despliegue autorizados?', b:'Manual (Git LFS en Azure DevOps) · Automático (pipeline CI/CD) · SolMan (documento Charm para SAP)'},
+{id:'hym-6',  mod:'hym', f:'¿Qué exige la Circular 029 en el proceso de desarrollo?', b:'Segregación de funciones: aprobaciones par. Un desarrollador NO puede desarrollar, probar y desplegar a producción por sí mismo — el Pull Request es ese control.'},
+{id:'hym-7',  mod:'hym', f:'¿Los 3 tipos de despliegue qué representan desde el punto de vista regulatorio?', b:'Cada uno es en sí mismo un CONTROL SOX del proceso.'},
+{id:'hym-8',  mod:'hym', f:'En un despliegue manual (Git LFS), ¿de dónde debe obtener el instalador el artefacto?', b:'ÚNICAMENTE del correo automático generado por Azure DevOps — nunca por correo personal, Teams, OneDrive ni adjunto en la CRQ.'},
+{id:'hym-9',  mod:'hym', f:'¿Cuáles son los 5 pilares de DevOps?', b:'Continuous Integration · Continuous Testing · Despliegue Continuo · Release Management · Configuration Management'},
+{id:'hym-10', mod:'hym', f:'¿Qué pruebas están en la base de la pirámide de testing y quién es responsable?', b:'Pruebas unitarias — a cargo del equipo de desarrollo. JUnit para Java, PyTest para Python. Medidas en Sonar.'},
+{id:'hym-11', mod:'hym', f:'¿Qué es BoolTracker?', b:'La plataforma central de gestión de vulnerabilidades (DevSecOps) donde se consolidan todos los hallazgos de los escaneos de seguridad.'},
+{id:'hym-12', mod:'hym', f:'¿Sin qué no se puede crear un repositorio ni desplegar a producción?', b:'Sin un elemento de configuración (CI) creado en la CMDB — es la puerta de entrada al proceso.'},
+];
+
+/* ============================================================
+   DATOS — Banco de preguntas (60 preguntas × 6 módulos)
+   ============================================================ */
+const BANK = [
+  // ─── MODELO OPERATIVO ───
+  {mod:'mo',q:'Según la definición de Bancolombia, ¿qué es un modelo operativo?',o:['Un manual técnico de arquitectura de software','La manera en que coordinamos áreas, procesos y funciones para entregar valor a clientes y a la organización','El organigrama oficial de la Vicepresidencia de Tecnología','Un conjunto de reglas inmodificables de gobierno corporativo'],c:1,e:'Es la definición oficial de Bancolombia. Se compara con una hoja de ruta o un GPS que guía a la organización.'},
+  {mod:'mo',q:'Un equipo Local considera saltarse un lineamiento del Federal para avanzar más rápido. ¿Cuál es la acción correcta?',o:['Saltarse el lineamiento porque el modelo no es una camisa de fuerza','Coordinar y evaluar el cambio con el Federal bajo el ciclo PHVA, nunca decidirlo unilateralmente','Escalar directamente a la Superintendencia Financiera','Ignorarlo, ya que el nivel Local tiene jerarquía absoluta'],c:1,e:'Que el modelo sea adaptable no significa actuar unilateralmente: toda excepción a un lineamiento Federal debe coordinarse y aprobarse.'},
+  {mod:'mo',q:'¿Cuáles son los cuatro pilares del modelo operativo?',o:['Personas, procesos, servicios y tecnología','Presupuesto, riesgo, auditoría y cumplimiento','Cliente, producto, canal y marca','Federal, State, Local y Hub'],c:0,e:'Los cuatro pilares que soportan el modelo de operación son personas, procesos, servicios y tecnología.'},
+  {mod:'mo',q:'¿Qué modelo operativo usa hoy Bancolombia, en transición hacia otro?',o:['Centralizado puro','Distribuido puro','Federal – State – Local, transicionando hacia Hub and Spoke','Hub and Spoke puro'],c:2,e:'Bancolombia opera hoy en Federal-State-Local, combinando elementos con una aspiración progresiva hacia Hub and Spoke.'},
+  {mod:'mo',q:'¿Qué modelo genera alta capacidad de control pero baja alineación con el negocio?',o:['Centralizado','Distribuido','Federal-State-Local','Hub and Spoke'],c:0,e:'El modelo centralizado da mucho control, típico de organizaciones clásicas, pero con menor alineación al negocio.'},
+  {mod:'mo',q:'¿Qué modelo genera alta alineación con el producto pero puede caer en caos y bajo control?',o:['Centralizado','Distribuido','Federal-State-Local','Hub and Spoke'],c:1,e:'El modelo distribuido, con equipos tecnológicos independientes, mejora la alineación al producto pero reduce el control.'},
+  {mod:'mo',q:'En el modelo Hub and Spoke, ¿dónde está el centro de la conversación?',o:['En el cumplimiento normativo','En el producto / la plataforma','En el presupuesto anual','En la estructura jerárquica'],c:1,e:'El Hub and Spoke está muy centralizado en plataformas: entrega capacidades para que otros equipos construyan sobre ellas, con foco en el producto.'},
+  {mod:'mo',q:'¿La estructura organizacional de Bancolombia es lo mismo que el modelo operativo?',o:['Sí, son sinónimos','No, la estructura tiene mucho que ver con el modelo pero no es el modelo operativo en sí','Solo son iguales en el nivel Federal','Sí, siempre que estén documentadas en el mismo sitio'],c:1,e:'Se insiste en la sesión: muchas veces se confunde el modelo operativo con la estructura, pero no son lo mismo.'},
+  {mod:'mo',q:'¿Aproximadamente cuántas personas deben certificarse en el modelo operativo?',o:['Cerca de 250','Cerca de 2,534, entre las dos vicepresidencias','Solo los líderes técnicos','Únicamente el equipo de Modernización y Gobierno'],c:1,e:'Se mencionó una cifra aproximada de 2,534 personas entre las dos vicepresidencias de tecnología.'},
+  {mod:'mo',q:'¿Qué ciclo explica por qué el modelo operativo debe evolucionar constantemente?',o:['El ciclo PHVA (Planear, Hacer, Verificar, Actuar)','El ciclo de vida del producto','El ciclo contable trimestral','El ciclo de aprobación de cambios'],c:0,e:'El modelo operativo hace alusión al ciclo PHVA: no es una entidad fija, sino que se evalúa y ajusta constantemente.'},
+  // ─── GESTIÓN DE LA CONFIGURACIÓN ───
+  {mod:'cfg',q:'¿Qué es un Elemento de Configuración (CI)?',o:['Un usuario con permisos de administrador en Hilix','Cualquier componente que requiera ser gestionado para habilitar un servicio de TI','Un tipo de incidente crítico','Una categoría de resolución de problemas'],c:1,e:'Un CI es cualquier componente gestionado para habilitar un servicio de TI: servidores, bases de datos, aplicaciones, etc.'},
+  {mod:'cfg',q:'¿Qué atributo obligatorio identifica el código de la aplicación y su responsable en la CMDB?',o:['IP address','Service Tag','App Code','Ticket ID'],c:2,e:'El App Code es el atributo obligatorio que identifica el código de la aplicación y, a través de él, a su responsable.'},
+  {mod:'cfg',q:'¿Puede ciberseguridad escanear un componente que no está en la CMDB?',o:['Sí, siempre y cuando el líder lo autorice','No, la CMDB es el insumo oficial y autoritativo para el escaneo','Sí, usando una herramienta alterna','Solo si el componente es crítico'],c:1,e:'Ciberseguridad no escanea ningún componente ausente en la CMDB, por eso debe ser un inventario autoritativo y completo.'},
+  {mod:'cfg',q:'¿Cómo es la validación trimestral de la CMDB para componentes on-premise?',o:['Automática, tres veces al día','Manual, con los dueños de las aplicaciones y dueños de clase','No se valida','Solo ante una auditoría externa'],c:1,e:'La validación es semiautomática: automática en nube (vía tag) y manual/trimestral con los dueños en on-premise.'},
+  {mod:'cfg',q:'Más allá del inventario, ¿qué es lo más valioso que aporta la CMDB?',o:['El color con que se pintan los tickets','Las relaciones y dependencias entre los componentes','La cantidad de licencias de software','El historial de contraseñas'],c:1,e:'Lo valioso de la CMDB no es solo listar componentes, sino mapear cómo se relacionan y dependen entre sí.'},
+  {mod:'cfg',q:'¿Cuál es la jerarquía estructural típica de la CMDB, de arriba hacia abajo?',o:['Componente técnico → Transacción → Aplicación → Servicio','Servicio → Aplicaciones → Transacciones → Componentes técnicos','Usuario → Grupo → Aplicación → Servicio','Incidente → Problema → Cambio → Servicio'],c:1,e:'La jerarquía parte del Servicio, que se relaciona con Aplicaciones, que consumen Transacciones, soportadas por Componentes técnicos.'},
+  {mod:'cfg',q:'¿Cuál es la herramienta ITCM oficial definida en el Banco?',o:['BMC Helix (Hilix)','Jira Service Desk','ServiceNow','Power BI'],c:0,e:'BMC Helix (conocida como Hilix) es la herramienta ITCM oficial para la gestión de los procesos.'},
+  {mod:'cfg',q:'Un CRQ se crea sin CI asociado o con el CI incorrecto. ¿Qué consecuencia real puede tener?',o:['Ninguna, es solo un campo informativo','No se identifica correctamente el impacto, lo que puede derivar en un incidente en producción','Se cancela automáticamente el cambio','Mejora la velocidad del despliegue'],c:1,e:'Es uno de los ejemplos reales del proceso: sin el CI correcto no se identifica el impacto, aumentando el riesgo de incidentes.'},
+  {mod:'cfg',q:'¿Quién puede actualizar la información de un CI en Hilix?',o:['Cualquier persona con acceso a Hilix','Solo los dueños de ese tipo de componente, por segregación de funciones','Solo el equipo de auditoría','Nadie, la CMDB es de solo lectura'],c:1,e:'Existe segregación de funciones: solo los dueños de cada tipo de componente pueden actualizarlo en Hilix.'},
+  {mod:'cfg',q:'¿Aproximadamente cuántos elementos de configuración hay hoy en la CMDB del Banco?',o:['Cerca de 2,500','Cerca de 25,000','Cerca de 250,000','Cerca de 2.5 millones'],c:2,e:'Se mencionó una cifra aproximada de 250,000 elementos de configuración de distintas tipologías.'},
+  // ─── GESTIÓN DE CAMBIOS ───
+  {mod:'cam',q:'Un cambio va a generar indisponibilidad de cara al cliente por 45 minutos. ¿Qué exige la Circular 028?',o:['Nada, 45 minutos no es significativo','Avisar con 8 días calendario de anticipación y pasar por el Consejo con 15 días','Solo notificar internamente a arquitectura','Cancelar el cambio automáticamente'],c:1,e:'Si la indisponibilidad de cara al cliente es de 30 minutos o más, se activa la Circular 028.'},
+  {mod:'cam',q:'¿Qué días de la semana se realiza el Consejo de Cambios?',o:['Lunes y viernes','Martes y jueves','Todos los días hábiles','Solo los miércoles'],c:1,e:'El Consejo sesiona los martes y jueves a las 9:00 a.m.'},
+  {mod:'cam',q:'Un cambio automático quedó con riesgo bajo (ágil), pero el equipo igual crea un cambio manual para "ir tranquilos" al Consejo. ¿Es correcto?',o:['Sí, siempre es mejor ir al Consejo por precaución','No, es un incumplimiento: un cambio automático no debe generar un cambio manual paralelo','Sí, si el líder lo aprueba verbalmente','Depende del día de la semana'],c:1,e:'El nivel de aprobación definido por el riesgo ya es el correcto; crear un cambio manual paralelo es un incumplimiento del proceso.'},
+  {mod:'cam',q:'¿Cuáles son los cuatro tipos de cambio?',o:['Crítico, alto, medio y bajo','Ágil, estándar, programado y emergencia','Manual, automático, híbrido y legado','SOX, operativo, regulatorio y técnico'],c:1,e:'Los cuatro tipos, tanto en manuales como en automáticos, son: ágil, estándar, programado y emergencia.'},
+  {mod:'cam',q:'¿Cuál es la diferencia entre el control SOX y el control operativo en Gestión de Cambios?',o:['Son lo mismo','El SOX es la aprobación del cambio; el operativo es su cierre y validación','El SOX aplica solo a cambios manuales','El operativo lo hace la Superintendencia'],c:1,e:'El control SOX es la aprobación formal; el operativo es cerrar y validar el resultado del cambio ejecutado.'},
+  {mod:'cam',q:'¿Qué tipo de cambio es el ÚNICO que no requiere diligenciar la encuesta de riesgos?',o:['Ágil','Estándar','Programado','Emergencia'],c:1,e:'Los cambios estándar ya están certificados como libres de indisponibilidad por cada plataforma, por eso están exentos.'},
+  {mod:'cam',q:'¿Qué tipo de cambio se puede ejecutar primero y "legalizar" (crear el registro) después?',o:['Ágil','Estándar','Programado','Emergencia (y cambios de aliados notificados tarde)'],c:3,e:'Por la premura de resolver un incidente, las emergencias (y ciertos cambios de aliados) son la excepción que se puede legalizar después.'},
+  {mod:'cam',q:'Si es absolutamente necesario ejecutar un cambio en una fecha de restricción, ¿quién debe aprobarlo adicionalmente?',o:['El mismo desarrollador que lo crea','El Director o Líder de Entorno (el cargo más alto del equipo)','La Superintendencia Financiera','No se requiere aprobación adicional'],c:1,e:'Se exige la aprobación del Director o Líder de Entorno para cambios ágiles/programados en fechas restringidas.'},
+  {mod:'cam',q:'En Hilix, ¿qué rol tiene la capacidad de dar el visto bueno formal (control SOX)?',o:['El aprobador','El instalador','El auditor externo','El usuario final'],c:0,e:'El aprobador tiene los tres roles (coordinador, gestor y aprobador) y es quien da la aprobación formal del cambio.'},
+  {mod:'cam',q:'Un cambio automático de software de negocio no se cerró correctamente. ¿Qué se debe hacer?',o:['Cambiar el estado manualmente en Hilix','Crear un ticket de soporte al equipo de Procesos TI DevEx para que lo cierren automáticamente','Ignorarlo, se cierra solo en 30 días','Crear un cambio manual duplicado'],c:1,e:'Nunca se debe intervenir manualmente un cambio automático; se solicita soporte al equipo de Procesos TI DevEx.'},
+  // ─── GESTIÓN DE INCIDENTES ───
+  {mod:'inc',q:'Al resolver un incidente, se documenta la causa raíz como "se reinició el servidor". ¿Es correcto?',o:['Sí, describe exactamente qué pasó','No, es apenas el síntoma; responde "qué pasó" pero no "por qué pasó"','Sí, si se documenta en el campo correcto','No aplica documentar causa raíz aquí'],c:1,e:'Una causa raíz correcta responde POR QUÉ pasó (ej. "error en script que reinició el servicio fuera de ventana").'},
+  {mod:'inc',q:'¿Cuáles son los 3 criterios que debe cumplir una causa raíz de calidad?',o:['Rápida, económica y documentada','Accionable, prevenible y verificable','Aprobada, publicada y archivada','Técnica, funcional y regulatoria'],c:1,e:'Debe ser accionable (se puede corregir), prevenible (evita que se repita) y verificable (se puede comprobar).'},
+  {mod:'inc',q:'Un usuario no está de acuerdo con la solución de su incidente, resuelto hace 3 días. ¿Qué debe hacer?',o:['Nada, ya no se puede hacer nada','Solicitar garantía y reapertura a través de Mateo, dentro de los 5 días corridos','Crear un caso problema directamente','Esperar 30 días para volver a reportar'],c:1,e:'La ventana de garantía es de 5 días corridos y la reapertura solo la gestiona Mateo (mesa de servicio).'},
+  {mod:'inc',q:'¿Por qué todo grupo de soporte debe tener más de un integrante?',o:['Es un requisito estético de Hilix','Para evitar que un incidente quede huérfano si la única persona está de vacaciones o incapacitada','Porque lo exige la Circular 028','Para repartir el bono de cumplimiento de ANS'],c:1,e:'Con un solo integrante, si esa persona no está disponible, el incidente queda sin atención.'},
+  {mod:'inc',q:'¿Cuál de las siguientes SÍ es un plan de acción válido para evitar la recurrencia?',o:['Actualizar la documentación del proceso','Implementar una automatización en el aprovisionamiento','Crear un checklist','Definir roles de atención de incidentes'],c:1,e:'Un plan de acción real elimina la causa raíz con implementación técnica; documentación y checklists son mejora continua.'},
+  {mod:'inc',q:'¿Para qué sirve el campo "tipo de incidencia" en el ticket?',o:['Para calcular automáticamente el ANS','Para diferenciar un incidente de un evento de infraestructura','Para asignar el grupo de soporte','Para definir el elemento de configuración'],c:1,e:'Cualquier opción distinta a "Evento de infraestructura" en ese campo indica que se trata de un incidente.'},
+  {mod:'inc',q:'¿Qué campos determinan automáticamente la prioridad de un ticket?',o:['Categoría operacional y de resolución','Impacto y urgencia','Elemento de configuración y servicio','Grupo de soporte y responsable'],c:1,e:'El impacto y la urgencia se combinan para calcular la prioridad del ticket.'},
+  {mod:'inc',q:'¿Se puede cambiar la prioridad calculada de un ticket?',o:['No, nunca','Sí, siempre y cuando se justifique el cambio','Sí, sin ninguna justificación','Solo lo puede hacer un auditor externo'],c:1,e:'Se puede cambiar, pero debe justificarse siempre — cambiarla sin razón puede generar una glosa de auditoría.'},
+  {mod:'inc',q:'¿Cuál es el ANS para un incidente crítico de infraestructura?',o:['1 hora','4 horas','10 horas','18 horas'],c:1,e:'Para infraestructura: críticos 4 horas, medios 10 horas, bajos 18 horas.'},
+  {mod:'inc',q:'¿Cuál es el ANS para los problemas, sin importar su criticidad?',o:['10 días hábiles','20 días hábiles','40 días corridos (aprox. 60 días calendario)','No tienen ANS definido'],c:2,e:'Los problemas (críticos, medios y bajos) manejan un ANS de 40 días corridos, aproximadamente 60 días calendario.'},
+  // ─── GESTIÓN DE PROBLEMAS ───
+  {mod:'prob',q:'¿Qué es un error conocido (Known Error / PKE)?',o:['Un incidente que nunca se pudo resolver','Un problema ya analizado, con causa raíz documentada y una solución temporal (workaround)','Un tipo de vulnerabilidad crítica en BoolTracker','Un cambio rechazado por el Consejo'],c:1,e:'Combina causa raíz documentada + solución temporal, aunque aún no exista una solución definitiva.'},
+  {mod:'prob',q:'¿Cuándo se genera automáticamente un artículo PKE en Hilix?',o:['Al crear cualquier incidente nuevo','Al pasar un caso problema a estado "Terminado" con motivo "Error conocido"','Automáticamente cada lunes','Cuando un incidente supera los 60 días abierto'],c:1,e:'El PKE nace al cerrar un caso problema con causa temporal, heredando su documentación.'},
+  {mod:'prob',q:'¿Cuál es la diferencia entre gestión reactiva y proactiva de problemas?',o:['No hay diferencia','La reactiva espera estar "corchado"; la proactiva revisa periódicamente para detectar patrones antes de la recurrencia','La proactiva solo aplica a incidentes críticos','La reactiva la hace el proceso, la proactiva la Superintendencia'],c:1,e:'La meta es migrar hacia la revisión periódica (proactiva), apoyada en mapas de calor con IA.'},
+  {mod:'prob',q:'¿Se puede cerrar un caso problema únicamente con un workaround, sin solución definitiva?',o:['No, siempre se requiere solución definitiva','Sí, si el workaround es efectivo puede convertirse en la forma permanente','Solo con aprobación de la Superintendencia','No, violaría la Ley SOX'],c:1,e:'Es válido especialmente cuando no es rentable implementar una solución definitiva (ej. app próxima a jubilarse).'},
+  {mod:'prob',q:'¿Cuáles son las 4 fases de Gartner para la gestión de problemas?',o:['Planear, hacer, verificar, actuar','Identificación, mitigación, resolución, optimización','Registro, análisis, cierre, auditoría','Diseño, desarrollo, pruebas, despliegue'],c:1,e:'Gartner propone: identificación, mitigación (donde se enfoca la gestión de errores conocidos), resolución y optimización.'},
+  {mod:'prob',q:'¿Cuál era la meta de cumplimiento del proceso de problemas?',o:['30%','60% (con un cumplimiento real de 84.9%)','90%','100%'],c:1,e:'La meta era 60%, con un cumplimiento acumulado real reportado de 84.9%.'},
+  {mod:'prob',q:'Según el lineamiento del proceso, si un incidente lleva abierto más de cierto número de días, se debe crear caso problema. ¿Cuántos días?',o:['5 días','20 días','60 días','100 días'],c:1,e:'El lineamiento indica: incidente con más de 20 días abierto debe generar un caso problema.'},
+  {mod:'prob',q:'¿Cuál es la diferencia entre el PKE y el artículo "error conocido" (NKW) del módulo Knowledge?',o:['Son exactamente lo mismo','El PKE nace de un caso problema resuelto; el NKW es una plantilla independiente del módulo Knowledge','El NKW solo aplica a incidentes críticos','El PKE lo crea la Superintendencia'],c:1,e:'Tienen orígenes distintos, aunque ambos pueden aparecer relacionados en el panel de recursos de un ticket.'},
+  {mod:'prob',q:'¿Qué hace el módulo de Gestión Proactiva de Problemas en Hilix?',o:['Cierra automáticamente los incidentes vencidos','Agrupa incidentes con IA en mapas de calor para identificar patrones recurrentes','Calcula el bono trimestral del equipo','Reemplaza la necesidad de crear casos problema'],c:1,e:'Usa IA para agrupar incidentes por patrones y mostrarlos en mapas de calor, ayudando a crear casos problema proactivamente.'},
+  {mod:'prob',q:'Una causa raíz de calidad debe responder principalmente...',o:['Qué pasó','Por qué pasó','Quién lo causó','Cuándo se resolverá'],c:1,e:'El énfasis constante del proceso es que la causa raíz explique el "por qué", no solo describir el síntoma ("qué pasó").'},
+  // ─── HABILITAR Y MANTENER SOLUCIONES ───
+  {mod:'hym',q:'¿Cuáles son las 5 etapas del proceso Habilitar y Mantener Soluciones?',o:['Planear, ejecutar, verificar, actuar y cerrar','Analizar y arquitectar, preparar, implementar, desplegar y estabilizar','Diseñar, codificar, probar, aprobar y monitorear','Federal, State, Local, Hub y Spoke'],c:1,e:'Las 5 etapas son: analizar/arquitectar, preparar, implementar (el corazón), desplegar y estabilizar.'},
+  {mod:'hym',q:'¿Por qué es obligatorio el Pull Request antes de integrar código a una rama protegida?',o:['Es una recomendación opcional','Garantiza la segregación de funciones exigida por la Circular 029','Solo sirve para métricas de productividad','Es exclusivo de aplicaciones SaaS'],c:1,e:'La Circular 029 exige aprobaciones par: un desarrollador no puede desplegar solo lo que él mismo construyó.'},
+  {mod:'hym',q:'En un despliegue manual (Git LFS), ¿de dónde debe obtener el instalador el artefacto y la documentación?',o:['De cualquier medio: correo personal, Teams o OneDrive compartido','Únicamente del correo automático generado por Azure DevOps','Directamente adjunto en la CRQ','Se lo pasa verbalmente el coordinador'],c:1,e:'Regla estricta: nunca instalar algo recibido fuera del correo automático de Azure DevOps — mitiga el riesgo de fraude interno.'},
+  {mod:'hym',q:'Una solución obtiene nivel de riesgo ALTO en la encuesta de riesgos. ¿Qué implica?',o:['Se cancela automáticamente el despliegue','La herramienta obliga a generar una CRQ programada que debe pasar por el Consejo de Cambios','Se puede desplegar igual de forma ágil','Solo requiere aprobación del líder de línea de conocimiento'],c:1,e:'Riesgo alto obliga a CRQ programada, con doble validación: Consejo de Cambios + líder técnico de EBC.'},
+  {mod:'hym',q:'¿Quién debe aprobar personalmente el Definition of Done (DoD) antes de pasar a producción?',o:['Cualquier integrante, incluso delegando la aprobación','El dueño de producto, de forma personal, nunca delegada','Solo el equipo de auditoría','El instalador que ejecuta el despliegue'],c:1,e:'La aprobación del DoD debe ser personal del dueño de producto — no se puede delegar.'},
+  {mod:'hym',q:'En la pirámide de pruebas del Banco, ¿dónde se concentra la MAYOR cobertura?',o:['En la cúspide, con pruebas end-to-end','En la base, con pruebas unitarias','En el nivel medio, con pruebas de integración','No hay diferencia de cobertura entre niveles'],c:1,e:'La base de la pirámide (pruebas unitarias) es la más grande, buscando una cobertura superior y bases sólidas de código.'},
+  {mod:'hym',q:'¿Qué framework de pruebas unitarias se usa para proyectos en Java?',o:['PyTest','JUnit','Playwright','Robot Framework'],c:1,e:'JUnit es el framework definido para pruebas unitarias en Java; PyTest se usa para Python.'},
+  {mod:'hym',q:'¿Cuál es la herramienta oficial del Banco para pruebas de performance?',o:['Selenium','Postman','JMeter','SiteSpeed en solitario'],c:2,e:'JMeter es la herramienta oficial de performance en la compañía (a veces complementada con SiteSpeed).'},
+  {mod:'hym',q:'En la estrategia de ramas GitFlow del Banco, ¿qué se requiere siempre para integrar una rama a otra?',o:['Un Pull Request aprobado','Un correo al líder técnico','Nada, se puede hacer push directo','Una aprobación verbal del PO'],c:0,e:'Cada integración (feature→develop→release) requiere un Pull Request; no se permite push directo a ramas protegidas.'},
+  {mod:'hym',q:'Los 3 tipos de despliegue (manual, automático y SolMan), ¿qué representan en sí mismos?',o:['Simples preferencias técnicas de cada equipo','Controles SOX','Tareas opcionales de documentación','Un tipo de prueba de performance'],c:1,e:'Cada uno de los 3 tipos de despliegue es, en sí mismo, un control SOX del proceso.'},
+];
+
+/* ============================================================
+   DATOS — Contenido de lectura por módulo
+   ============================================================ */
+const CONTENT = {
+mo:`
+<h3 class="section-title">¿Qué es un modelo operativo?</h3>
+<p class="body-p">Un modelo operativo es, en esencia, la manera en que una organización coordina sus esfuerzos para generar valor. Dentro de Bancolombia, esto se formaliza en la siguiente definición oficial:</p>
+<div class="callout key"><div class="callout-title">Definición oficial Bancolombia</div><p>"La manera en que coordinamos áreas, procesos y funciones para entregar valor a nuestros clientes y a la organización." — comparable a una partitura, un GPS o una hoja de ruta organizacional.</p></div>
+<h3 class="lesson-title">Los 4 pilares del modelo operativo</h3>
+<table class="tbl"><thead><tr><th>Pilar</th><th>Rol dentro del modelo</th></tr></thead><tbody>
+<tr><td><b>Personas</b></td><td>Ejecutan y sostienen la operación día a día.</td></tr>
+<tr><td><b>Procesos</b></td><td>Dan la línea de ejecución, el "cómo" se opera.</td></tr>
+<tr><td><b>Servicios</b></td><td>Lo que finalmente se entrega y consume.</td></tr>
+<tr><td><b>Tecnología</b></td><td>Habilita, automatiza y escala la operación.</td></tr>
+</tbody></table>
+
+<h3 class="section-title">El ciclo PHVA — por qué el modelo evoluciona</h3>
+<p class="body-p">El modelo operativo NO es una entidad fija. Se relaciona directamente con el ciclo <b>Planear – Hacer – Verificar – Actuar</b>:</p>
+<table class="tbl"><thead><tr><th>Etapa</th><th>Qué implica</th></tr></thead><tbody>
+<tr><td><b>Planear</b></td><td>Planeación fundamental en torno al modelo operativo.</td></tr>
+<tr><td><b>Hacer</b></td><td>Se ejecuta lo planeado en el día a día.</td></tr>
+<tr><td><b>Verificar</b></td><td>Se valida si lo ejecutado genera el valor esperado.</td></tr>
+<tr><td><b>Actuar</b></td><td>Si no se logran los resultados, se corrige el rumbo.</td></tr>
+</tbody></table>
+<div class="callout rule"><div class="callout-title">Punto clave para el examen</div><p>El modelo operativo debe <b>evaluarse y adaptarse constantemente</b>. Idealmente, se vive tan conectado al día a día que se aplica de forma natural, no memorizado paso a paso.</p></div>
+
+<h3 class="section-title">Los 4 tipos de modelos operativos</h3>
+<table class="tbl"><thead><tr><th>#</th><th>Modelo</th><th>Características</th><th>Trade-off</th></tr></thead><tbody>
+<tr><td>1</td><td><b>Centralizado</b></td><td>Control central de tecnología, típico de organizaciones clásicas.</td><td>Alto control · Baja alineación con el negocio</td></tr>
+<tr><td>2</td><td><b>Distribuido</b></td><td>Unidades tecnológicas independientes con equipo propio embebido.</td><td>Alta alineación al producto · Genera caos, bajo control</td></tr>
+<tr><td>3</td><td><b>Federal – State – Local</b></td><td>Modelo actual de Bancolombia: normativo (Federal), habilitador (State) y ejecutor (Local).</td><td>Buen equilibrio: control + alineación al negocio</td></tr>
+<tr><td>4</td><td><b>Hub and Spoke</b></td><td>Centralizado en plataformas; entrega capacidades para que otros equipos construyan sobre ellas.</td><td>El centro de la conversación es el producto/plataforma</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Federal, State y Local en detalle</h3>
+<table class="tbl"><thead><tr><th>Nivel</th><th>Función principal</th><th>Detalle</th></tr></thead><tbody>
+<tr><td><b>Federal</b></td><td>Gobierno y normatividad</td><td>Provee lineamientos, prácticas, capacidades y procesos. Son los Centros de Excelencia.</td></tr>
+<tr><td><b>State</b></td><td>Habilitación y estandarización</td><td>Habilita productos, estandariza la operación, apoya adopción de lineamientos y garantiza cumplimiento. Entrega capacidades listas para consumir.</td></tr>
+<tr><td><b>Local</b></td><td>Ejecución y consumo (BUs)</td><td>Consume los servicios/lineamientos con alta autonomía; ejecuta las acciones que generan el máximo valor. Incluye soporte, cercano al cliente final.</td></tr>
+</tbody></table>
+<div class="callout warn"><div class="callout-title">⚠️ Punto de atención para el examen</div><p>Un equipo Local <b>NO puede decidir unilateralmente</b> saltarse un lineamiento Federal. Que el modelo no sea "una camisa de fuerza" significa que es adaptable, pero toda excepción debe <b>coordinarse y aprobarse</b> bajo el ciclo PHVA.</p></div>
+<div class="callout data"><div class="callout-title">Dato clave</div><p>Aproximadamente <b>2,534 personas</b> entre las dos vicepresidencias deben certificarse. El examen se lanzó el 17 de julio y queda abierto 1 mes.</p></div>
+
+<h3 class="section-title">Glosario rápido</h3>
+<div class="term-row"><span class="term-word">PHVA</span><span class="term-def">Planear, Hacer, Verificar, Actuar — ciclo de mejora continua del modelo operativo.</span></div>
+<div class="term-row"><span class="term-word">Federal</span><span class="term-def">Nivel normativo: gobierno, lineamientos y centros de excelencia.</span></div>
+<div class="term-row"><span class="term-word">State</span><span class="term-def">Nivel habilitador: estandariza y automatiza para que Local consuma.</span></div>
+<div class="term-row"><span class="term-word">Local</span><span class="term-def">Nivel ejecutor (BUs): consume servicios y genera valor de cara al cliente.</span></div>
+<div class="term-row"><span class="term-word">Hub and Spoke</span><span class="term-def">Modelo centrado en plataforma/producto; visión futura del Banco.</span></div>
+`,
+
+cfg:`
+<h3 class="section-title">¿Qué es el proceso de Gestión de la Configuración?</h3>
+<p class="body-p">Es el proceso que gestiona —identifica, registra y controla— todos los componentes de infraestructura tecnológica del Banco. También se conoce como <b>ITCM</b> (IT Configuration Management) o, más comúnmente, como la <b>CMDB</b>.</p>
+<div class="callout key"><div class="callout-title">Los 3 pilares del proceso</div><p><b>CI</b> (Elemento de Configuración) + <b>CMDB</b> (repositorio) + <b>Herramienta</b> (BMC Helix / Hilix) = el ecosistema completo de gestión de la configuración.</p></div>
+
+<h3 class="section-title">El Elemento de Configuración (CI)</h3>
+<p class="body-p">Un CI es <b>cualquier componente que requiera ser gestionado para habilitar un servicio de TI</b>: servidores, bases de datos, aplicaciones, componentes de red, estaciones de trabajo, cajeros electrónicos, etc.</p>
+<div class="callout data"><div class="callout-title">Dato de escala</div><p>La CMDB tiene actualmente alrededor de <b>250,000 elementos de configuración</b> de diferentes tipologías.</p></div>
+
+<h3 class="section-title">Estructura jerárquica de la CMDB</h3>
+<table class="tbl"><thead><tr><th>Nivel</th><th>Descripción</th></tr></thead><tbody>
+<tr><td><b>Servicio</b></td><td>En la cabeza de la jerarquía. Un servicio puede relacionarse con una o varias aplicaciones.</td></tr>
+<tr><td><b>Aplicaciones</b></td><td>Se relacionan con el servicio que soportan.</td></tr>
+<tr><td><b>Transacciones</b></td><td>Modelamiento en curso de las transacciones críticas del Banco.</td></tr>
+<tr><td><b>Componentes técnicos</b></td><td>El detalle de qué componentes soportan cada transacción.</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Relación con otros procesos</h3>
+<table class="tbl"><thead><tr><th>Proceso</th><th>Cómo se relaciona con la CMDB</th></tr></thead><tbody>
+<tr><td><b>Incidentes y Problemas</b></td><td>El CI es campo obligatorio — permite identificar el impacto real y el equipo responsable.</td></tr>
+<tr><td><b>Habilitar y Mantener</b></td><td>El App Code (CI) es el primer dato solicitado. Entrada obligatoria al proceso.</td></tr>
+<tr><td><b>Cambios (CRQ)</b></td><td>El CI identifica qué se va a afectar, qué servicios se impactan y qué conflictos pueden existir.</td></tr>
+<tr><td><b>Escaneo de vulnerabilidades</b></td><td>Ciberseguridad <b>NO escanea</b> ningún componente que no esté en la CMDB.</td></tr>
+<tr><td><b>Continuidad de negocio</b></td><td>Identifica componentes de aplicaciones VIA (vitales) y sus responsables.</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Políticas y herramientas clave</h3>
+<div class="callout rule"><div class="callout-title">App Code — el atributo obligatorio</div><p>Todo componente en la CMDB tiene un atributo clave y obligatorio: el <b>App Code</b>. A través de este código se identifica el responsable de cada componente.</p></div>
+<div class="callout warn"><div class="callout-title">⚠️ Segregación de funciones</div><p>En Hilix, <b>solo los dueños de cada tipo de componente</b> pueden actualizarlo. No cualquiera puede modificar la CMDB.</p></div>
+
+<h3 class="section-title">Validación periódica</h3>
+<table class="tbl"><thead><tr><th>Tipo</th><th>Cómo funciona</th></tr></thead><tbody>
+<tr><td><b>Automática (Nube)</b></td><td>El tag obligatorio de App Code en despliegues garantiza el relacionamiento. Se carga 3 veces al día.</td></tr>
+<tr><td><b>Manual (On-premise)</b></td><td>Trimestralmente con los dueños de las aplicaciones y los dueños de clase.</td></tr>
+</tbody></table>
+<div class="callout warn"><div class="callout-title">Errores comunes</div><p>• No actualizar la CMDB después de un cambio de SO. • No actualizar responsables tras cambios de estructura. • Relacionamiento incorrecto o faltante entre CIs. • No validar periódicamente como dueño qué componentes tengo asociados.</p></div>
+
+<h3 class="section-title">Glosario rápido</h3>
+<div class="term-row"><span class="term-word">CI</span><span class="term-def">Configuration Item — cualquier componente gestionado para habilitar un servicio de TI.</span></div>
+<div class="term-row"><span class="term-word">CMDB</span><span class="term-def">Configuration Management Data Base — repositorio central y autoritativo de CIs, atributos y relaciones.</span></div>
+<div class="term-row"><span class="term-word">App Code</span><span class="term-def">Atributo obligatorio que identifica el código de la aplicación y su responsable.</span></div>
+<div class="term-row"><span class="term-word">BMC Helix</span><span class="term-def">Herramienta ITCM oficial del Banco (conocida internamente como Hilix).</span></div>
+<div class="term-row"><span class="term-word">Dueño de clase</span><span class="term-def">Responsable de una tipología completa de componentes (ej. todos los servidores x86).</span></div>
+<div class="term-row"><span class="term-word">Aplicaciones VIA</span><span class="term-def">Aplicaciones vitales para la continuidad del negocio.</span></div>
+`,
+
+cam:`
+<h3 class="section-title">¿Por qué es crítico este proceso? — Ley SOX</h3>
+<p class="body-p">El proceso de Gestión de Cambios responde a tres razones fundamentales: mantener la imagen del Banco, garantizar disponibilidad de servicios, y cumplir con la <b>Ley SOX (Sarbanes-Oxley)</b> que rige a todas las empresas que cotizan en la Bolsa de Nueva York — como Bancolombia.</p>
+<div class="callout rule"><div class="callout-title">Control SOX del proceso</div><p>La <b>aprobación del cambio</b> es el control SOX. Cada año el Banco se certifica ante auditorías internas y externas. La aprobación NO puede ser "a la carrera" — es la certificación formal de que el equipo está listo para producción.</p></div>
+
+<h3 class="section-title">¿Qué es un cambio TI?</h3>
+<p class="body-p">Cualquier <b>adición, modificación o eliminación</b> de componentes de software, infraestructura o TI en producción. El foco siempre es el <b>ambiente de producción</b>.</p>
+<div class="callout data"><div class="callout-title">Dato de volumen</div><p>El proceso genera entre <b>5,000 y 6,000 cambios mensuales</b> de todos los tipos. Aprox. 52-53% son automáticos.</p></div>
+
+<h3 class="section-title">Tipos de cambio</h3>
+<table class="tbl"><thead><tr><th>Tipo</th><th>Características clave</th></tr></thead><tbody>
+<tr><td><b>Ágil</b></td><td>No genera afectación. A demanda, sin coordinación. Encuesta de riesgos obligatoria. Cierre manual.</td></tr>
+<tr><td><b>Estándar</b></td><td>Plantillas ya certificadas como libres de indisponibilidad. <b>ÚNICO tipo exento</b> de encuesta de riesgos.</td></tr>
+<tr><td><b>Programado</b></td><td>Va al Consejo de Cambios. Genera afectación. Requiere fecha y coordinación. Encuesta de riesgos obligatoria.</td></tr>
+<tr><td><b>Emergencia</b></td><td>Resuelve incidente o riesgo inminente. <b>ÚNICO tipo que se puede ejecutar y legalizar después.</b> Requiere coordinación con GIOTI.</td></tr>
+</tbody></table>
+
+<h3 class="section-title">La Circular 028 — norma regulatoria clave</h3>
+<div class="callout warn"><div class="callout-title">⚠️ Circular 028 — Superintendencia Financiera</div><p>Si un servicio de cara al cliente tendrá indisponibilidad de <b>30 minutos o más</b>: comunicar a los clientes con <b>mínimo 8 días calendario de anticipación</b> y presentar al Consejo con <b>15 días de anticipación</b>. Incumplir implica sanciones económicas significativas.</p></div>
+
+<h3 class="section-title">El Consejo de Cambios</h3>
+<table class="tbl"><thead><tr><th>Día</th><th>Actividad</th></tr></thead><tbody>
+<tr><td><b>Lunes y miércoles (tarde)</b></td><td>Se genera el Acta. Los cambios deben estar creados y APROBADOS antes del mediodía.</td></tr>
+<tr><td><b>Martes y jueves (9:00 a.m.)</b></td><td>Se realiza el Consejo: se revisan, discuten y aprueban o rechazan los cambios.</td></tr>
+<tr><td><b>Martes y jueves (tarde)</b></td><td>Se envían las notas del Acta en firme, reflejadas en Hilix.</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Roles y controles en Hilix</h3>
+<table class="tbl"><thead><tr><th>Rol</th><th>Función</th></tr></thead><tbody>
+<tr><td><b>Coordinador</b></td><td>Responsable de principio a fin: crea el cambio, asigna tareas y está pendiente del cierre.</td></tr>
+<tr><td><b>Gestor</b></td><td>Técnicamente el mismo rol que coordinador dentro de Hilix.</td></tr>
+<tr><td><b>Aprobador</b></td><td>Tiene los 3 roles y da el visto bueno formal — el <b>control SOX</b>.</td></tr>
+</tbody></table>
+<table class="tbl"><thead><tr><th>Control</th><th>Descripción</th></tr></thead><tbody>
+<tr><td><b>Control SOX</b></td><td>Aprobación formal del cambio antes de producción.</td></tr>
+<tr><td><b>Control operativo</b></td><td>Cierre y validación del cambio ejecutado (con éxito / sin éxito / con problemas).</td></tr>
+</tbody></table>
+<div class="callout warn"><div class="callout-title">⚠️ Reglas de oro para cambios automáticos</div><p>• NUNCA se modifican manualmente en Hilix (excepto Git LFS).<br>• Si no se cerró correctamente: crear ticket a Procesos TI DevEx, NUNCA intervenir manualmente.</p></div>
+
+<h3 class="section-title">Glosario rápido</h3>
+<div class="term-row"><span class="term-word">CRQ</span><span class="term-def">Change Request — solicitud de cambio registrada en Hilix.</span></div>
+<div class="term-row"><span class="term-word">Circular 028</span><span class="term-def">Norma Superintendencia Financiera: aviso obligatorio con 8 días ante indisponibilidad ≥30 min.</span></div>
+<div class="term-row"><span class="term-word">Afectación</span><span class="term-def">Interrupción, degradación, lentitud o intermitencia de un servicio o componente TI.</span></div>
+<div class="term-row"><span class="term-word">GIOTI</span><span class="term-def">Ente que aprueba y valida cambios de emergencia.</span></div>
+<div class="term-row"><span class="term-word">Control SOX</span><span class="term-def">Aprobación formal del cambio antes de producción — requisito regulatorio.</span></div>
+`,
+
+inc:`
+<h3 class="section-title">Incidente vs. Problema — diferencias clave</h3>
+<table class="tbl"><thead><tr><th></th><th>Incidente</th><th>Problema</th></tr></thead><tbody>
+<tr><td><b>Actúa sobre</b></td><td>El síntoma</td><td>La causa raíz</td></tr>
+<tr><td><b>Propósito</b></td><td>Restablecer el servicio lo antes posible</td><td>Reducir la recurrencia</td></tr>
+<tr><td><b>Enfoque</b></td><td>Reactivo</td><td>Reactivo y proactivo</td></tr>
+<tr><td><b>Prioriza</b></td><td>Continuidad del negocio</td><td>Estabilizar y mejorar continuamente</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Registro y clasificación — campos clave</h3>
+<table class="tbl"><thead><tr><th>Campo</th><th>Para qué sirve</th></tr></thead><tbody>
+<tr><td><b>Impacto y Urgencia</b></td><td>Calculan automáticamente la <b>prioridad</b> del ticket. Se puede ajustar pero siempre con justificación.</td></tr>
+<tr><td><b>Tipo de incidencia</b></td><td>Solo "Evento de infraestructura" es un evento; <b>cualquier otra opción = incidente</b>.</td></tr>
+<tr><td><b>CI (Elemento de config.)</b></td><td>El servicio o aplicación afectada. Trae automáticamente el campo "Servicio" relacionado.</td></tr>
+<tr><td><b>Categoría operacional</b></td><td>Qué actividad se hizo para resolver. Hasta 3 niveles (Tier).</td></tr>
+<tr><td><b>Categoría de resolución</b></td><td>Obligatoria solo al resolver el incidente.</td></tr>
+</tbody></table>
+
+<h3 class="section-title">ANS (Acuerdos de Nivel de Servicio)</h3>
+<table class="tbl"><thead><tr><th>Tipo</th><th>Criticidad</th><th>ANS</th></tr></thead><tbody>
+<tr><td rowspan="3"><b>Incidentes infraestructura</b></td><td>Crítico</td><td><b>4 horas</b></td></tr>
+<tr><td>Medio</td><td><b>10 horas</b></td></tr>
+<tr><td>Bajo</td><td><b>18 horas</b></td></tr>
+<tr><td><b>Problemas</b></td><td>Todas las criticidades</td><td><b>40 días corridos</b> (~60 días calendario)</td></tr>
+</tbody></table>
+
+<h3 class="section-title">La calidad de la causa raíz</h3>
+<div class="callout rule"><div class="callout-title">Los 3 criterios de calidad</div><p><b>Accionable:</b> existe algo concreto que puedo hacer para corregirla.<br><b>Prevenible:</b> actuar sobre ella evita que el incidente vuelva a ocurrir.<br><b>Verificable:</b> puedo comprobar (logs, configuración) que esa causa es real.</p></div>
+<table class="tbl"><thead><tr><th>Causa raíz CORRECTA ✔</th><th>Causa raíz INCORRECTA ✘</th></tr></thead><tbody>
+<tr><td>Error en script que reinició el servicio fuera de ventana</td><td>Se reinició el servidor</td></tr>
+<tr><td>Configuración incorrecta que causó consumo de memoria</td><td>Hubo un error</td></tr>
+<tr><td>Certificado expiró por falta de monitoreo</td><td>El servicio se cayó</td></tr>
+</tbody></table>
+<div class="callout warn"><div class="callout-title">⚠️ Error muy común</div><p>Nunca borrar la pregunta de causa raíz al cerrar un incidente. Si no se conoce: responder "no se ha identificado la causa raíz" y <b>crear inmediatamente un caso problema</b>.</p></div>
+
+<h3 class="section-title">Garantías, grupos y reglas clave</h3>
+<div class="callout key"><div class="callout-title">Ventana de garantía</div><p><b>5 días corridos</b> desde la resolución. La reapertura la gestiona únicamente <b>Mateo</b> (mesa de servicio). Pasado ese plazo, se debe crear un incidente nuevo.</p></div>
+<div class="callout rule"><div class="callout-title">Grupos de soporte</div><p>Todo grupo debe tener <b>MÁS de un integrante</b>. Con uno solo, si esa persona no está disponible, el incidente queda huérfano.</p></div>
+
+<h3 class="section-title">Plan de acción real vs. mejora continua</h3>
+<table class="tbl"><thead><tr><th>Plan de acción VÁLIDO ✔</th><th>NO es plan de acción ✘</th></tr></thead><tbody>
+<tr><td>Implementar automatización en el aprovisionamiento</td><td>Actualizar la documentación del proceso</td></tr>
+<tr><td>Configurar conexión segura (SSL/TLS)</td><td>Crear un checklist</td></tr>
+<tr><td>Cargar versión actualizada del componente</td><td>Reunirnos para encontrar la causa raíz</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Glosario rápido</h3>
+<div class="term-row"><span class="term-word">HADA</span><span class="term-def">Análisis de la afectación: qué pasó, por qué, planes de acción, causa raíz.</span></div>
+<div class="term-row"><span class="term-word">PKE</span><span class="term-def">ID de Error Conocido (Known Error) generado en Hilix.</span></div>
+<div class="term-row"><span class="term-word">Workaround</span><span class="term-def">Solución temporal que reduce el impacto mientras no hay solución definitiva.</span></div>
+<div class="term-row"><span class="term-word">ANS / SLA</span><span class="term-def">Acuerdo de Nivel de Servicio — tiempos de atención según criticidad.</span></div>
+<div class="term-row"><span class="term-word">Garantía</span><span class="term-def">Ventana de 5 días corridos para solicitar reapertura tras la resolución.</span></div>
+`,
+
+prob:`
+<h3 class="section-title">Las 4 fases de Gartner</h3>
+<table class="tbl"><thead><tr><th>Fase</th><th>Objetivo</th></tr></thead><tbody>
+<tr><td><b>1. Identificación</b></td><td>Saber dónde buscar problemas y cuáles son elegibles para crear un caso problema.</td></tr>
+<tr><td><b>2. Mitigación</b></td><td>Reducir el impacto de incidentes por errores ya conocidos — aquí se enfoca la actualización con PKE.</td></tr>
+<tr><td><b>3. Resolución</b></td><td>Comprender el problema y las posibles soluciones para proceder de la mejor manera.</td></tr>
+<tr><td><b>4. Optimización</b></td><td>Evaluación continua de la mejora y el impacto de la práctica de gestión de problemas.</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Problema, Error Conocido y Workaround</h3>
+<table class="tbl"><thead><tr><th>Concepto</th><th>Definición</th></tr></thead><tbody>
+<tr><td><b>Problema</b></td><td>Causa o causa potencial de uno o más incidentes.</td></tr>
+<tr><td><b>Error conocido (PKE)</b></td><td>Problema ya analizado, con causa raíz documentada + workaround. Aún sin solución definitiva.</td></tr>
+<tr><td><b>Workaround</b></td><td>Solución alternativa o temporal que reduce el impacto mientras no existe solución completa.</td></tr>
+</tbody></table>
+<div class="callout key"><div class="callout-title">¿Se puede cerrar un problema solo con workaround?</div><p>SÍ. Si el workaround es efectivo, puede convertirse en la forma permanente — especialmente cuando la aplicación está próxima a jubilarse o no es rentable implementar una solución definitiva.</p></div>
+
+<h3 class="section-title">El nuevo flujo del PKE</h3>
+<div class="callout rule"><div class="callout-title">¿Cómo se crea un PKE?</div><p>1. Tener el caso problema bien documentado (causa raíz y resolución completas).<br>2. Cambiar estado a "Terminado" → motivo: <b>"Error conocido"</b>.<br>3. Hilix genera automáticamente un artículo con ID <b>PKE</b>, heredando toda la documentación del caso problema.</p></div>
+<div class="callout warn"><div class="callout-title">⚠️ PKE ≠ NKW</div><p><b>PKE:</b> nace de un caso problema cerrado — hereda su documentación.<br><b>NKW:</b> plantilla independiente del módulo Knowledge de Hilix.<br>Ambos pueden aparecer en el panel de recursos de un ticket, pero NO son lo mismo.</p></div>
+
+<h3 class="section-title">Gestión reactiva vs. proactiva</h3>
+<table class="tbl"><thead><tr><th>Camino</th><th>Cuándo aplica</th></tr></thead><tbody>
+<tr><td><b>Reactivo</b></td><td>Se actúa cuando ya se está "corchado" con incidentes repetitivos o de alto impacto.</td></tr>
+<tr><td><b>Proactivo</b></td><td>Revisión mensual obligatoria del equipo: detectar patrones ANTES de que se conviertan en recurrencia.</td></tr>
+</tbody></table>
+<div class="callout data"><div class="callout-title">Módulo Gestión Proactiva en Hilix</div><p>Usa <b>IA</b> para agrupar incidentes en <b>mapas de calor</b>. Muestra patrones, tendencias y permite crear casos problema directamente desde el mapa. Tan bueno como la calidad de la información que se le da.</p></div>
+
+<h3 class="section-title">Lineamientos del proceso</h3>
+<table class="tbl"><thead><tr><th>Lineamiento</th><th>Qué exige</th></tr></thead><tbody>
+<tr><td>Incidente con más de <b>20 días</b> abierto</td><td>Se debe crear el caso problema automáticamente.</td></tr>
+<tr><td>Plan de acción = "encontrar la causa raíz"</td><td>Señal de que no hay causa raíz — el proceso crea el caso problema.</td></tr>
+<tr><td>Incidente muy repetitivo (3-4 veces/semana)</td><td>El proceso crea directamente el caso problema si el equipo no lo hizo.</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Cifras del proceso</h3>
+<table class="tbl"><thead><tr><th>Indicador</th><th>Dato</th></tr></thead><tbody>
+<tr><td>Problemas creados en total</td><td>~750</td></tr>
+<tr><td>Cumplimiento acumulado</td><td><b>84.9%</b> (meta: 60%)</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Glosario rápido</h3>
+<div class="term-row"><span class="term-word">PKE</span><span class="term-def">Artículo de Error Conocido creado desde un caso problema con causa temporal.</span></div>
+<div class="term-row"><span class="term-word">NKW</span><span class="term-def">Artículo "error conocido" del módulo Knowledge — distinto al PKE.</span></div>
+<div class="term-row"><span class="term-word">RCA</span><span class="term-def">Root Cause Analysis — análisis formal y riguroso de causa raíz.</span></div>
+<div class="term-row"><span class="term-word">MTTR</span><span class="term-def">Mean Time To Resolve — tiempo medio de resolución de un incidente.</span></div>
+`,
+
+hym:`
+<h3 class="section-title">¿Qué es y por qué existe el proceso?</h3>
+<p class="body-p">Habilitar y Mantener Soluciones define las <b>buenas prácticas para ejecutar el ciclo de vida de desarrollo</b> en la organización. Garantiza un estándar único que protege la calidad y el cumplimiento regulatorio.</p>
+<div class="callout rule"><div class="callout-title">¿Por qué es un proceso SOX?</div><p>Hace parte de la certificación de la <b>Ley SOX</b>, requisito para que el Grupo opere y cotice en la Bolsa de Nueva York. Aplica a todos los cambios de software — desde el incidente más pequeño hasta el proyecto más grande.</p></div>
+<div class="callout warn"><div class="callout-title">⚠️ Excepción importante</div><p>El proceso <b>NO aplica a aplicaciones SaaS</b> — no están dentro de la infraestructura del Banco.</p></div>
+
+<h3 class="section-title">Las 5 etapas del proceso</h3>
+<table class="tbl"><thead><tr><th>Etapa</th><th>En qué consiste</th></tr></thead><tbody>
+<tr><td><b>1. Analizar y arquitectar</b></td><td>Se recibe la necesidad y se define el diseño de arquitectura de alto nivel. Participan: arquitecto, diseñador de ciberseguridad, analista de integración.</td></tr>
+<tr><td><b>2. Preparar</b></td><td>Refinamientos con el PO, análisis de seguridad, diseño técnico, plan de pruebas (Test Plan).</td></tr>
+<tr><td><b>3. Implementar</b></td><td><b>El corazón del proceso:</b> se codifica, se garantiza la calidad y se ejecutan los primeros controles SOX.</td></tr>
+<tr><td><b>4. Desplegar</b></td><td>Preparación e instalación en producción mediante uno de los 3 tipos de despliegue autorizados.</td></tr>
+<tr><td><b>5. Estabilizar</b></td><td>Seguimiento post-producción, conectado con incidentes y gestión de vulnerabilidades.</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Los 5 pilares DevOps y sus controles</h3>
+<table class="tbl"><thead><tr><th>Pilar</th><th>Qué cubre</th></tr></thead><tbody>
+<tr><td><b>Continuous Integration</b></td><td>Pipeline que compila, analiza y publica artefactos automáticamente.</td></tr>
+<tr><td><b>Continuous Testing</b></td><td>Pruebas unitarias y análisis estático de código dentro del pipeline.</td></tr>
+<tr><td><b>Despliegue Continuo</b></td><td>Automatización de despliegues a los diferentes ambientes.</td></tr>
+<tr><td><b>Release Management</b></td><td>Cómo se promueven los cambios entre ambientes.</td></tr>
+<tr><td><b>Configuration Management</b></td><td>Rastreo de cambios: repositorios, branching, dependencias y versiones.</td></tr>
+</tbody></table>
+<div class="callout rule"><div class="callout-title">Pull Request — políticas obligatorias</div><p>• Mínimo <b>un aprobador</b> responsable de revisar todo el cambio.<br>• Pipeline de CI ejecutado exitosamente.<br>• Work items permitidos: historia de usuario, habilitador, incidente.<br>• Todos los comentarios del PR deben quedar resueltos antes del merge.</p></div>
+
+<h3 class="section-title">Pirámide de pruebas</h3>
+<table class="tbl"><thead><tr><th>Nivel</th><th>Tipo</th><th>Herramientas</th></tr></thead><tbody>
+<tr><td><b>Base (mayor cobertura)</b></td><td>Pruebas unitarias</td><td>JUnit (Java), PyTest (Python). Medidas en Sonar.</td></tr>
+<tr><td><b>Media</b></td><td>Pruebas de aceptación funcional</td><td>Serenity, RestAssured, Playwright, Robot Framework.</td></tr>
+<tr><td><b>Media</b></td><td>Pruebas de performance modulares</td><td>JMeter (herramienta oficial).</td></tr>
+<tr><td><b>Cúspide</b></td><td>Pruebas End-to-End (E2E)</td><td>Serenity BDD, JMeter + SiteSpeed, Appium (mobile).</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Los 3 tipos de despliegue — Controles SOX</h3>
+<table class="tbl"><thead><tr><th>Tipo</th><th>Herramienta</th><th>Descripción</th></tr></thead><tbody>
+<tr><td><b>Manual (Git LFS)</b></td><td>Azure DevOps</td><td>Cambios manuales ejecutados por persona con altos privilegios. El instalador descarga el artefacto <b>SOLO</b> desde el correo automático de Azure DevOps.</td></tr>
+<tr><td><b>Automático (CI/CD)</b></td><td>Azure DevOps</td><td>Despliegue 100% automático sin intervención humana.</td></tr>
+<tr><td><b>SolMan</b></td><td>SolMan — Charm</td><td>Despliegue automatizado para SAP mediante documento Charm asociado a la CRQ.</td></tr>
+</tbody></table>
+<div class="callout warn"><div class="callout-title">⚠️ Regla estricta — despliegue manual</div><p>El instalador <b>NUNCA</b> debe recibir instrucciones por correo personal, Teams, OneDrive ni adjunto directo en la CRQ. Solo desde el correo automático de Azure DevOps. Esto mitiga el riesgo de fraude interno y ha causado incumplimientos SOX.</p></div>
+
+<h3 class="section-title">El DoD y la encuesta de riesgos</h3>
+<div class="callout key"><div class="callout-title">Definition of Done (DoD)</div><p>Centraliza toda la evidencia en Azure DevOps. Requiere: Test Plan, documentación, encuesta de riesgos, y <b>aprobación PERSONAL del Dueño de Producto</b> — nunca delegada.</p></div>
+<table class="tbl"><thead><tr><th>Nivel de riesgo</th><th>Tipo de CRQ</th><th>Quién aprueba</th></tr></thead><tbody>
+<tr><td>Bajo</td><td>Ágil</td><td>Líder de línea de conocimiento.</td></tr>
+<tr><td>Medio</td><td>Ágil (más análisis)</td><td>Líder técnico de EBC.</td></tr>
+<tr><td>Alto</td><td>Programada</td><td>Consejo de Cambios + Líder técnico de EBC.</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Glosario rápido</h3>
+<div class="term-row"><span class="term-word">DoD</span><span class="term-def">Definition of Done — centraliza evidencia y aprobaciones para pasar a producción.</span></div>
+<div class="term-row"><span class="term-word">Git LFS</span><span class="term-def">Extensión de Azure DevOps para despliegues manuales controlados.</span></div>
+<div class="term-row"><span class="term-word">Charm</span><span class="term-def">Módulo de SolMan para gestionar despliegues SAP mediante documentos asociados a la CRQ.</span></div>
+<div class="term-row"><span class="term-word">BoolTracker</span><span class="term-def">Plataforma central de gestión de vulnerabilidades (DevSecOps).</span></div>
+<div class="term-row"><span class="term-word">Circular 029</span><span class="term-def">Norma que exige segregación de funciones (aprobaciones par) en el proceso de desarrollo.</span></div>
+<div class="term-row"><span class="term-word">RNF</span><span class="term-def">Requisito No Funcional — definido y liderado por el arquitecto de la solución.</span></div>
+`
+};
+
+/* ============================================================
+   DATOS — Videos de sesiones de difusión por módulo
+   (agrega la URL de embed de SharePoint para cada módulo)
+   ============================================================ */
+const VIDEOS = {
+  mo: {
+    title: 'Conozcamos nuestro modelo operativo',
+    src: 'https://bancolombia.sharepoint.com/teams/PortaldeconocimientosTI/_layouts/15/embed.aspx?UniqueId=98cd9e66-1154-4ac3-814a-2e7612052403&embed=%7B%22ust%22%3Afalse%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create',
+    link: 'https://bancolombia.sharepoint.com/teams/PortaldeconocimientosTI/_layouts/15/stream.aspx?UniqueId=98cd9e66-1154-4ac3-814a-2e7612052403'
+  },
+  // cfg: { title: 'Gestión de la Configuración', src: '...' },
+  // cam: { title: 'Gestión de Cambios',           src: '...' },
+  // inc: { title: 'Gestión de Incidentes',        src: '...' },
+  // prob:{ title: 'Gestión de Problemas',         src: '...' },
+  // hym: { title: 'Habilitar y Mantener Sol.',    src: '...' },
+};
+
+/* ============================================================
+   DATOS — Ejercicios de emparejar (2 ejercicios × 6 módulos)
+   ============================================================ */
+const MATCH = {
+mo:[
+  { title:'Nivel del modelo → Función principal',
+    pairs:[
+      {l:'Federal',           r:'Gobierno y normatividad — lineamientos y Centros de Excelencia'},
+      {l:'State',             r:'Habilitación — estandariza, automatiza y entrega capacidades'},
+      {l:'Local',             r:'Ejecución — consume servicios con autonomía, genera valor al cliente'},
+    ]},
+  { title:'Modelo operativo → Trade-off principal',
+    pairs:[
+      {l:'Centralizado',          r:'Alto control · Baja alineación con el negocio'},
+      {l:'Distribuido',           r:'Alta alineación al producto · Genera caos'},
+      {l:'Federal–State–Local',   r:'Equilibrio: buen control + alineación al negocio'},
+      {l:'Hub and Spoke',         r:'Centrado en el producto/plataforma'},
+    ]},
+],
+cfg:[
+  { title:'Causa → Consecuencia en la CMDB',
+    pairs:[
+      {l:'CI sin responsable',         r:'Demora en atender vulnerabilidades — amplía la brecha de seguridad'},
+      {l:'CRQ con CI incorrecto',      r:'No se identifica el impacto — puede derivar en incidente en producción'},
+      {l:'Incidente sin CI asociado',  r:'No se identifican dependencias — se subestima el incidente'},
+    ]},
+  { title:'Herramienta CMDB → Para qué sirve',
+    pairs:[
+      {l:'BMC Helix (Hilix)',      r:'Herramienta ITCM oficial — CMDB, Dashboard y API'},
+      {l:'Power BI',               r:'Reportes de inventario y métricas del proceso'},
+      {l:'Automatización nube',    r:'Carga automática de componentes AWS, 3 veces al día'},
+      {l:'Portal de configuración',r:'Módulo de certificación trimestral y documentación (en construcción)'},
+    ]},
+],
+cam:[
+  { title:'Tipo de cambio → Característica única',
+    pairs:[
+      {l:'Estándar',    r:'Único exento de encuesta de riesgos'},
+      {l:'Emergencia',  r:'Único que se puede ejecutar y legalizar después'},
+      {l:'Programado',  r:'Va al Consejo de Cambios los martes o jueves'},
+      {l:'Ágil',        r:'A demanda, sin coordinación, no genera afectación'},
+    ]},
+  { title:'Control / norma → Descripción',
+    pairs:[
+      {l:'Control SOX',          r:'Aprobación formal del cambio antes de producción'},
+      {l:'Control operativo',    r:'Cierre y validación del cambio ejecutado'},
+      {l:'Circular 028',         r:'Aviso al cliente con 8 días ante indisponibilidad ≥30 min'},
+      {l:'Fecha de restricción', r:'No ejecutar cambios salvo urgencia — requiere aprobación del Director'},
+    ]},
+],
+inc:[
+  { title:'ANS → Tiempo de resolución',
+    pairs:[
+      {l:'Incidente crítico infraestructura',  r:'4 horas'},
+      {l:'Incidente medio infraestructura',    r:'10 horas'},
+      {l:'Incidente bajo infraestructura',     r:'18 horas'},
+      {l:'Problemas (cualquier criticidad)',   r:'40 días corridos (~60 días calendario)'},
+    ]},
+  { title:'Concepto del proceso → Definición',
+    pairs:[
+      {l:'HADA',       r:'Análisis de la afectación: qué pasó, por qué, planes de acción'},
+      {l:'Garantía',   r:'5 días corridos para reabrir un ticket — solo gestionada por Mateo'},
+      {l:'PKE',        r:'ID de Error Conocido generado automáticamente en Hilix'},
+      {l:'Workaround', r:'Solución temporal que reduce el impacto mientras no hay solución definitiva'},
+    ]},
+],
+prob:[
+  { title:'Fase de Gartner → Objetivo',
+    pairs:[
+      {l:'Identificación', r:'Saber dónde buscar y cómo registrar casos problema elegibles'},
+      {l:'Mitigación',     r:'Reducir impacto de incidentes por errores ya conocidos (PKE)'},
+      {l:'Resolución',     r:'Comprender el problema y proceder con la mejor solución'},
+      {l:'Optimización',   r:'Evaluación continua de la mejora de la práctica'},
+    ]},
+  { title:'Artículo → Origen en Hilix',
+    pairs:[
+      {l:'PKE',        r:'Nace al cerrar caso problema con motivo "Error conocido" — hereda documentación'},
+      {l:'NKW',        r:'Plantilla independiente del módulo Knowledge de Hilix'},
+      {l:'Workaround', r:'Solución temporal documentada en el PKE'},
+      {l:'RCA',        r:'Root Cause Analysis — análisis formal y riguroso de causa raíz'},
+    ]},
+],
+hym:[
+  { title:'Tipo de despliegue → Herramienta',
+    pairs:[
+      {l:'Manual (Git LFS)', r:'Azure DevOps — artefacto llega SOLO por correo automático'},
+      {l:'Automático CI/CD', r:'Azure DevOps — despliegue 100% sin intervención humana'},
+      {l:'SolMan',           r:'Módulo Charm — documento asociado a la CRQ para SAP'},
+    ]},
+  { title:'Nivel de riesgo → Tipo de CRQ + Aprobador',
+    pairs:[
+      {l:'Riesgo Bajo',  r:'CRQ Ágil → Líder de línea de conocimiento'},
+      {l:'Riesgo Medio', r:'CRQ Ágil → Líder técnico de EBC'},
+      {l:'Riesgo Alto',  r:'CRQ Programada → Consejo de Cambios + Líder técnico EBC (dos validaciones)'},
+    ]},
+],
+};
+
+/* ============================================================
+   ESTADO — localStorage
+   ============================================================ */
+const TODAY = new Date().toISOString().split('T')[0];
+let ST = {};
+
+function loadST() {
+  try { ST = JSON.parse(localStorage.getItem('vsti_v1') || '{}'); } catch(e){ ST = {}; }
+  ST.srs        = ST.srs        || {};
+  ST.read       = ST.read       || {};
+  ST.quizHist   = ST.quizHist   || [];
+  ST.setup      = ST.setup      || null;
+  ST.lastStudy  = ST.lastStudy  || null;
+  ST.streak     = ST.streak     || 0;
+}
+
+function saveST() {
+  localStorage.setItem('vsti_v1', JSON.stringify(ST));
+}
+
+function exportST() {
+  const a = document.createElement('a');
+  a.href = 'data:application/json,' + encodeURIComponent(JSON.stringify(ST, null, 2));
+  a.download = 'progreso_vsti.json';
+  a.click();
+}
+
+function importST() {
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = '.json';
+  inp.onchange = e => {
+    const fr = new FileReader();
+    fr.onload = ev => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        ST = { ...ST, ...data };
+        saveST();
+        go('home');
+        alert('Progreso importado correctamente.');
+      } catch(err) { alert('Archivo inválido.'); }
+    };
+    fr.readAsText(e.target.files[0]);
+  };
+  inp.click();
+}
+
+/* ============================================================
+   ALGORITMO SM-2
+   ============================================================ */
+function getCard(id) {
+  return ST.srs[id] || { ease: 2.5, interval: 0, reps: 0, dueDate: TODAY };
+}
+
+function reviewCard(id, rating) {
+  // rating: 0=Otra vez, 1=Difícil, 2=Fácil
+  let { ease, interval, reps } = getCard(id);
+  if (rating === 0) {
+    reps = 0; interval = 1;
+  } else if (rating === 1) {
+    ease = Math.max(1.3, ease - 0.15);
+    reps = Math.max(1, reps + 1);
+    interval = reps <= 1 ? 1 : reps === 2 ? 3 : Math.max(1, Math.round(interval * 1.2));
+  } else {
+    reps += 1;
+    interval = reps === 1 ? 1 : reps === 2 ? 6 : Math.round(interval * ease);
+    ease = Math.min(3.0, ease + 0.1);
+  }
+  const due = new Date(); due.setDate(due.getDate() + interval);
+  ST.srs[id] = { ease: +ease.toFixed(2), interval, reps, dueDate: due.toISOString().split('T')[0] };
+  saveST();
+}
+
+function cardsForMod(modId) {
+  return FC.filter(c => !modId || modId === 'all' || c.mod === modId);
+}
+
+function dueCards(modId) {
+  return cardsForMod(modId).filter(c => getCard(c.id).dueDate <= TODAY);
+}
+
+function newCards(modId) {
+  return cardsForMod(modId).filter(c => !ST.srs[c.id]);
+}
+
+function buildSession(modId) {
+  const due = dueCards(modId);
+  const nc  = newCards(modId).slice(0, Math.max(0, 15 - due.length));
+  return shuffle([...due, ...nc]);
+}
+
+function maturityPct(modId) {
+  const cards = cardsForMod(modId);
+  if (!cards.length) return 0;
+  const mature = cards.filter(c => (ST.srs[c.id]?.interval || 0) >= 7).length;
+  return Math.round(mature / cards.length * 100);
+}
+
+function quizPctForMod(modId) {
+  const hist = ST.quizHist.filter(h => h.mod === modId);
+  if (!hist.length) return 0;
+  return Math.round(hist.filter(h => h.ok).length / hist.length * 100);
+}
+
+function domainPct(modId) {
+  const srs  = maturityPct(modId);
+  const quiz = quizPctForMod(modId);
+  return quiz ? Math.round(srs * 0.5 + quiz * 0.5) : srs;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function totalDue() { return dueCards('all').length; }
+function totalNew() { return newCards('all').length; }
+
+/* ============================================================
+   NAVEGACIÓN
+   ============================================================ */
+let _curScreen = '';
+function go(screen, arg) {
+  _curScreen = screen;
+  window.scrollTo(0, 0);
+  const app = document.getElementById('app');
+  const btns = document.querySelectorAll('.nav-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  const nbMap = { home:'nb-home', modules:'nb-modules', module:'nb-modules',
+                  cards:'nb-cards', quiz:'nb-quiz', results:'nb-quiz', setup:'nb-home' };
+  const nb = document.getElementById(nbMap[screen]);
+  if (nb) nb.classList.add('active');
+
+  if (screen === 'home')    { app.innerHTML = renderHome(); }
+  else if (screen === 'setup')   { app.innerHTML = renderSetup(); }
+  else if (screen === 'modules') { app.innerHTML = renderModules(); }
+  else if (screen === 'module')  { app.innerHTML = renderModule(arg); }
+  else if (screen === 'read')    { app.innerHTML = renderRead(arg); }
+  else if (screen === 'video')   { app.innerHTML = renderVideo(arg); }
+  else if (screen === 'cards')   { startCards(arg); }
+  else if (screen === 'match')   { startMatch(arg); }
+  else if (screen === 'quiz')    { startQuiz(arg); }
+}
+
+/* ============================================================
+   RADAR SVG
+   ============================================================ */
+function drawRadar(values, size) {
+  // values: {mo:0..100, cfg:.., ...}
+  const sz = size || 280, cx = sz/2, cy = sz/2, maxR = sz/2 - 50;
+  const keys = MOD_KEYS;
+  const n = keys.length;
+  const angle = i => (-90 + i * (360 / n)) * Math.PI / 180;
+  const ns = 'http://www.w3.org/2000/svg';
+
+  const svg = document.createElementNS(ns, 'svg');
+  svg.setAttribute('width', sz); svg.setAttribute('height', sz);
+  svg.setAttribute('viewBox', `0 0 ${sz} ${sz}`);
+
+  // rings
+  [20,40,60,80,100].forEach(s => {
+    const r = s / 100 * maxR;
+    const pts = keys.map((k,i) => { const a = angle(i); return `${cx + r*Math.cos(a)},${cy + r*Math.sin(a)}`; }).join(' ');
+    const poly = document.createElementNS(ns,'polygon');
+    poly.setAttribute('points', pts);
+    poly.setAttribute('fill','none');
+    poly.setAttribute('stroke', s===100 ? '#D8D7D1' : '#EBEAE5');
+    poly.setAttribute('stroke-width','1');
+    svg.appendChild(poly);
+  });
+
+  // axes + labels
+  keys.forEach((k, i) => {
+    const a = angle(i);
+    const x2 = cx + maxR * Math.cos(a), y2 = cy + maxR * Math.sin(a);
+    const line = document.createElementNS(ns, 'line');
+    line.setAttribute('x1',cx); line.setAttribute('y1',cy);
+    line.setAttribute('x2',x2); line.setAttribute('y2',y2);
+    line.setAttribute('stroke','#D8D7D1'); line.setAttribute('stroke-width','1');
+    svg.appendChild(line);
+
+    const lx = cx + (maxR + 30) * Math.cos(a);
+    const ly = cy + (maxR + 30) * Math.sin(a);
+    const text = document.createElementNS(ns, 'text');
+    text.setAttribute('x', lx); text.setAttribute('y', ly);
+    text.setAttribute('text-anchor','middle'); text.setAttribute('dominant-baseline','middle');
+    text.setAttribute('font-size', sz < 300 ? '9' : '10.5');
+    text.setAttribute('font-family','-apple-system,sans-serif');
+    text.setAttribute('fill', M[k].color); text.setAttribute('font-weight','600');
+    const words = M[k].short.split(' ');
+    const mid = Math.ceil(words.length / 2);
+    const t1 = document.createElementNS(ns,'tspan'); t1.setAttribute('x',lx); t1.setAttribute('dy','-5'); t1.textContent = words.slice(0,mid).join(' ');
+    const t2 = document.createElementNS(ns,'tspan'); t2.setAttribute('x',lx); t2.setAttribute('dy','13'); t2.textContent = words.slice(mid).join(' ');
+    text.appendChild(t1); if(words.slice(mid).join('')) text.appendChild(t2);
+    svg.appendChild(text);
+  });
+
+  // data polygon
+  const dataPts = keys.map((k,i) => {
+    const a = angle(i); const r = (values[k] || 0) / 100 * maxR;
+    return { x: cx + r*Math.cos(a), y: cy + r*Math.sin(a) };
+  });
+  const poly = document.createElementNS(ns,'polygon');
+  poly.setAttribute('points', dataPts.map(p=>`${p.x},${p.y}`).join(' '));
+  poly.setAttribute('fill','rgba(169,132,63,0.25)'); poly.setAttribute('stroke','#A9843F'); poly.setAttribute('stroke-width','2');
+  svg.appendChild(poly);
+  dataPts.forEach(p => {
+    const c = document.createElementNS(ns,'circle');
+    c.setAttribute('cx',p.x); c.setAttribute('cy',p.y); c.setAttribute('r','4');
+    c.setAttribute('fill','#A9843F'); svg.appendChild(c);
+  });
+  return svg.outerHTML;
+}
+
+/* ============================================================
+   PANTALLA: HOME
+   ============================================================ */
+function renderHome() {
+  const due = totalDue(), nw = totalNew();
+  const scores = {};
+  MOD_KEYS.forEach(k => scores[k] = domainPct(k));
+  const hasAny = Object.values(scores).some(v => v > 0);
+
+  const today = new Date().toLocaleDateString('es-CO', { weekday:'long', day:'numeric', month:'long' });
+  const todayBig = today.charAt(0).toUpperCase() + today.slice(1);
+
+  const examDays = ST.setup?.examDate ? Math.max(0, Math.ceil((new Date(ST.setup.examDate + 'T00:00:00') - new Date()) / 86400000)) : null;
+
+  return `
+  <div style="margin-bottom:6px">
+    <div style="font-size:22px;font-weight:700;color:var(--navy);margin-bottom:2px" class="serif">Plataforma de Estudio</div>
+    <div style="font-size:13px;color:var(--soft)">Certificación · Procesos Críticos VSTI</div>
+  </div>
+  ${!window.matchMedia('(display-mode: standalone)').matches ? showInstallBanner() : ''}
+
+  ${examDays !== null ? `<div class="card card-sm" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <div>
+      <div style="font-size:12px;color:var(--soft)">Días para el examen</div>
+      <div style="font-size:24px;font-weight:700;color:${examDays <= 3 ? 'var(--bad)' : 'var(--navy)'}">${examDays}</div>
+    </div>
+    <button class="btn btn-outline btn-sm" onclick="go('setup')">⚙ Configurar</button>
+  </div>` : `<div class="card card-sm" style="margin-bottom:12px">
+    <p style="font-size:14px;color:var(--soft);margin-bottom:10px">Configura tu plan de estudio para ver el conteo de días.</p>
+    <button class="btn btn-brass btn-sm" onclick="go('setup')">Configurar plan</button>
+  </div>`}
+
+  <div class="stats-row">
+    <div class="stat-box" onclick="go('cards','all')" style="cursor:pointer">
+      <div class="stat-num" style="color:${due>0?'var(--bad)':'var(--good)'}">${due}</div>
+      <div class="stat-label">Tarjetas para hoy</div>
+    </div>
+    <div class="stat-box" onclick="go('cards','all')" style="cursor:pointer">
+      <div class="stat-num" style="color:var(--navy)">${nw}</div>
+      <div class="stat-label">Tarjetas nuevas</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">${FC.filter(c => (ST.srs[c.id]?.interval||0) >= 7).length}</div>
+      <div class="stat-label">Tarjetas maduras</div>
+    </div>
+  </div>
+
+  ${due > 0 ? `<button class="btn btn-primary btn-full" style="margin-bottom:16px" onclick="go('cards','all')">
+    Estudiar ${due} tarjeta${due!==1?'s':''} de hoy →
+  </button>` : `<button class="btn btn-outline btn-full" style="margin-bottom:16px" onclick="go('cards','all')">
+    Repasar tarjetas nuevas
+  </button>`}
+
+  <div class="card">
+    <div style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:4px">Dominio por módulo</div>
+    <div style="font-size:12px;color:var(--soft);margin-bottom:10px">${hasAny ? 'Combinación de SRS (50%) + quiz (50%)' : 'Completa flashcards o el simulacro para ver tu progreso'}</div>
+    <div class="radar-wrap" id="radarWrap"></div>
+  </div>
+
+  ${MOD_KEYS.map(k => {
+    const pct = domainPct(k);
+    const due_k = dueCards(k).length;
+    return `<div class="card card-sm" style="border-left:3px solid ${M[k].color};margin-bottom:10px;cursor:pointer" onclick="go('module','${k}')">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">${M[k].icon} ${M[k].name}</div>
+        <div style="font-size:13px;color:var(--soft)">${pct}%${due_k > 0 ? ` · <span style="color:var(--bad);font-weight:600">${due_k} pendiente${due_k!==1?'s':''}</span>` : ''}</div>
+      </div>
+      <div class="prog-bar" style="margin-top:8px"><div class="prog-fill" style="width:${pct}%;background:${M[k].color}"></div></div>
+    </div>`;
+  }).join('')}
+
+  <div style="text-align:center;margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <button class="btn btn-outline btn-sm" onclick="exportST()">↓ Exportar progreso</button>
+    <button class="btn btn-outline btn-sm" onclick="importST()">↑ Importar progreso</button>
+  </div>
+  `;
+}
+
+function afterHomeRender() {
+  const wrap = document.getElementById('radarWrap');
+  if (!wrap) return;
+  const scores = {};
+  MOD_KEYS.forEach(k => scores[k] = domainPct(k));
+  wrap.innerHTML = drawRadar(scores, Math.min(320, window.innerWidth - 40));
+}
+
+/* ============================================================
+   PANTALLA: SETUP
+   ============================================================ */
+function renderSetup() {
+  const s = ST.setup || {};
+  return `
+  <div class="topbar">
+    <button class="back-btn" onclick="go('home')">← Inicio</button>
+    <h2>Configuración</h2>
+  </div>
+  <div class="card">
+    <div class="form-group">
+      <label class="form-label">Fecha del examen</label>
+      <input class="form-input" type="date" id="examDate" value="${s.examDate||''}">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Minutos disponibles por día</label>
+      <input class="form-input" type="number" id="minsDay" value="${s.minutesPerDay||20}" min="5" max="180">
+    </div>
+    <button class="btn btn-primary btn-full" onclick="saveSetup()">Guardar</button>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:8px">¿Cuánto tiempo necesitas?</div>
+    <p style="font-size:13.5px;color:var(--soft);line-height:1.6">El temario completo requiere aproximadamente <b>~230 min</b> de estudio activo (lectura + primeros repasos de flashcards). A 20 min/día necesitas ~12 días.<br><br>Los últimos 1-2 días reservarlos para repaso general y el simulacro completo (60 preguntas).</p>
+  </div>
+  `;
+}
+
+function saveSetup() {
+  ST.setup = {
+    examDate: document.getElementById('examDate')?.value || '',
+    minutesPerDay: parseInt(document.getElementById('minsDay')?.value) || 20,
+  };
+  saveST();
+  go('home');
+}
+
+/* ============================================================
+   PANTALLA: MÓDULOS
+   ============================================================ */
+function renderModules() {
+  return `
+  <div class="topbar" style="margin-bottom:16px">
+    <h2 class="serif">Módulos</h2>
+    <button class="btn btn-outline btn-sm" onclick="go('quiz','all')">Examen completo</button>
+  </div>
+  <div class="mod-grid">
+    ${MOD_KEYS.map(k => {
+      const pct = domainPct(k); const due_k = dueCards(k).length;
+      return `<div class="mod-card" style="border-top-color:${M[k].color}" onclick="go('module','${k}')">
+        <div class="mod-icon">${M[k].icon}</div>
+        <div class="mod-name">${M[k].name}</div>
+        <div class="mod-meta">${FC.filter(c=>c.mod===k).length} tarjetas · ${quizPctForMod(k)||'—'}% quiz</div>
+        <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${M[k].color}"></div></div>
+        ${due_k > 0 ? `<div style="margin-top:6px"><span class="badge due">${due_k} para hoy</span></div>` : ''}
+      </div>`;
+    }).join('')}
+  </div>
+  `;
+}
+
+/* ============================================================
+   PANTALLA: MÓDULO INDIVIDUAL
+   ============================================================ */
+function renderModule(id) {
+  const mod = M[id];
+  const pct = domainPct(id);
+  const due_k = dueCards(id).length;
+  const new_k = newCards(id).length;
+  const isRead = ST.read[id];
+
+  const quizCorrect = ST.quizHist.filter(h=>h.mod===id && h.ok).length;
+  const quizTotal   = ST.quizHist.filter(h=>h.mod===id).length;
+
+  return `
+  <button class="back-btn" onclick="go('modules')">← Módulos</button>
+  <div style="margin:12px 0 16px;padding-bottom:12px;border-bottom:2px solid ${mod.color}">
+    <div style="font-size:26px">${mod.icon}</div>
+    <div style="font-size:20px;font-weight:700;color:var(--navy);margin:4px 0">${mod.name}</div>
+    <div style="font-size:13px;color:var(--soft)">Dominio actual: <b>${pct}%</b></div>
+    <div class="prog-bar" style="margin-top:8px"><div class="prog-fill" style="width:${pct}%;background:${mod.color}"></div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">
+    <div class="stat-box"><div class="stat-num">${maturityPct(id)}%</div><div class="stat-label">SRS maduro</div></div>
+    <div class="stat-box"><div class="stat-num">${quizTotal ? Math.round(quizCorrect/quizTotal*100)+'%' : '—'}</div><div class="stat-label">Quiz aciertos</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:${due_k>0?'var(--bad)':'var(--good)'}">${due_k}</div><div class="stat-label">Tarjetas hoy</div></div>
+  </div>
+
+  ${VIDEOS[id] ? `<div class="card card-sm" style="margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">🎬 Ver sesión de difusión</div>
+        <div style="font-size:12px;color:var(--soft);margin-top:2px">${VIDEOS[id].title}</div>
+      </div>
+      <a href="${VIDEOS[id].link || VIDEOS[id].src}" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="text-decoration:none">Ver →</a>
+    </div>
+  </div>` : ''}
+
+  <div class="card card-sm" style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <div style="font-size:14px;font-weight:600;color:var(--navy)">📖 Leer contenido</div>
+      <div style="font-size:12px;color:var(--soft);margin-top:2px">${isRead ? '✔ Completado' : 'Repasa los conceptos clave del módulo'}</div>
+    </div>
+    <button class="btn btn-outline btn-sm" onclick="go('read','${id}')">Abrir →</button>
+  </div>
+
+  <div class="card card-sm" style="margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">🃏 Flashcards</div>
+        <div style="font-size:12px;color:var(--soft);margin-top:2px">
+          ${due_k > 0 ? `<span style="color:var(--bad);font-weight:600">${due_k} para hoy</span>` : '0 vencidas'}
+          · ${new_k} nuevas · 12 totales
+        </div>
+      </div>
+      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('cards','${id}')">Estudiar →</button>
+    </div>
+  </div>
+
+  <div class="card card-sm" style="margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">🔗 Ejercicios de emparejar</div>
+        <div style="font-size:12px;color:var(--soft);margin-top:2px">${MATCH[id].length} ejercicios · Toca y conecta los conceptos</div>
+      </div>
+      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('match','${id}')">Jugar →</button>
+    </div>
+  </div>
+
+  <div class="card card-sm">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">📝 Quiz del módulo</div>
+        <div style="font-size:12px;color:var(--soft);margin-top:2px">10 preguntas · ${quizTotal} respondidas</div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="go('quiz','${id}')">Practicar →</button>
+    </div>
+  </div>
+  `;
+}
+
+/* ============================================================
+   PANTALLA: LECTURA
+   ============================================================ */
+function renderRead(id) {
+  const mod = M[id];
+  return `
+  <button class="back-btn" onclick="go('module','${id}')">← ${mod.name}</button>
+  <div style="margin:10px 0 16px">
+    <span style="font-size:20px">${mod.icon}</span>
+    <span style="font-size:18px;font-weight:700;color:var(--navy);margin-left:8px">${mod.name}</span>
+  </div>
+  <div class="card">
+    ${CONTENT[id] || '<p class="body-p">Contenido próximamente.</p>'}
+  </div>
+  <button class="btn btn-primary btn-full" style="margin-top:12px" onclick="markRead('${id}')">
+    ✔ Marcar como leído y continuar
+  </button>
+  `;
+}
+
+function markRead(id) {
+  ST.read[id] = TODAY;
+  saveST();
+  go('module', id);
+}
+
+/* ============================================================
+   PANTALLA: VIDEO
+   ============================================================ */
+function renderVideo(id) {
+  const v = VIDEOS[id];
+  const mod = M[id];
+  if (!v) return `<button class="back-btn" onclick="go('module','${id}')">← Volver</button><p style="margin-top:20px">Video no disponible.</p>`;
+  const link = v.link || v.src;
+  return `
+  <button class="back-btn" onclick="go('module','${id}')">← ${mod.name}</button>
+  <div style="margin:10px 0 20px">
+    <span style="font-size:20px">${mod.icon}</span>
+    <span style="font-size:17px;font-weight:700;color:var(--navy);margin-left:8px">${v.title}</span>
+  </div>
+  <div class="card" style="text-align:center;padding:32px 20px">
+    <div style="font-size:48px;margin-bottom:12px">🎬</div>
+    <div style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:6px">${v.title}</div>
+    <div style="font-size:13px;color:var(--soft);margin-bottom:20px">
+      El video está disponible en SharePoint / Microsoft Stream.<br>
+      Haz clic para abrirlo en tu navegador.
+    </div>
+    <a href="${link}" target="_blank" rel="noopener" class="btn btn-primary" style="display:inline-block;text-decoration:none;padding:12px 28px;font-size:15px">
+      Abrir video en SharePoint →
+    </a>
+    <div style="font-size:11px;color:var(--soft);margin-top:14px">Requiere sesión activa en Microsoft 365 / Bancolombia</div>
+  </div>
+  <button class="btn btn-outline btn-full" style="margin-top:12px" onclick="go('module','${id}')">← Volver al módulo</button>
+  `;
+}
+
+/* ============================================================
+   PANTALLA: FLASHCARDS (sesión SRS)
+   ============================================================ */
+let _fcSession = [], _fcIdx = 0, _fcFlipped = false, _fcMod = '';
+let _fcCorrect = 0, _fcTotal = 0;
+
+function startCards(modId) {
+  _fcMod = modId;
+  _fcSession = buildSession(modId);
+  _fcIdx = 0; _fcFlipped = false; _fcCorrect = 0; _fcTotal = _fcSession.length;
+  if (!_fcTotal) {
+    document.getElementById('app').innerHTML = `
+      <button class="back-btn" onclick="go('modules')">← Módulos</button>
+      <div class="empty-state" style="margin-top:60px">
+        <div style="font-size:48px">🎉</div>
+        <div style="font-size:18px;font-weight:700;color:var(--navy);margin:12px 0">¡Todo al día!</div>
+        <p style="font-size:14px;color:var(--soft)">No tienes tarjetas vencidas ni nuevas por ahora.<br>Vuelve mañana para continuar tu racha.</p>
+        <button class="btn btn-outline" style="margin-top:20px" onclick="go('quiz','${modId}')">Practicar con el quiz</button>
+      </div>`;
+    return;
+  }
+  renderFCScreen();
+}
+
+function renderFCScreen() {
+  const app = document.getElementById('app');
+  if (_fcIdx >= _fcSession.length) {
+    app.innerHTML = renderFCResults();
+    return;
+  }
+  const card = _fcSession[_fcIdx];
+  const cs = getCard(card.id);
+  const mod = M[card.mod];
+  app.innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <button class="back-btn" onclick="go('modules')">← Salir</button>
+    <span class="mod-pill" style="background:${mod.color}">${mod.icon} ${mod.short}</span>
+  </div>
+  <div class="fc-counter">${_fcIdx + 1} / ${_fcSession.length} · ${_fcIdx - (_fcTotal - _fcSession.length)} nuevas respondidas</div>
+  <div class="fc-shell">
+    <div class="fc-card" id="fcCard" onclick="flipCard()">
+      <div class="fc-front">${card.f}</div>
+      ${_fcFlipped ? `<div class="fc-divider"></div><div class="fc-back">${card.b}</div>` : '<div class="fc-hint">Toca para revelar la respuesta</div>'}
+    </div>
+    ${_fcFlipped ? `
+    <div class="rating-btns">
+      <button class="rating-btn rating-again" onclick="rateCard(0)">🔄 Otra vez</button>
+      <button class="rating-btn rating-hard" onclick="rateCard(1)">🤔 Difícil</button>
+      <button class="rating-btn rating-easy" onclick="rateCard(2)">✔ Fácil</button>
+    </div>
+    <div style="text-align:center;font-size:11px;color:var(--soft);margin-top:8px">
+      Intervalo actual: ${cs.interval} día${cs.interval!==1?'s':''} · Repeticiones: ${cs.reps}
+    </div>` : ''}
+  </div>`;
+}
+
+function flipCard() {
+  if (_fcFlipped) return;
+  _fcFlipped = true;
+  renderFCScreen();
+}
+
+function rateCard(rating) {
+  const card = _fcSession[_fcIdx];
+  reviewCard(card.id, rating);
+  // Update streak
+  if (ST.lastStudy !== TODAY) {
+    ST.streak = (ST.lastStudy === yesterday()) ? ST.streak + 1 : 1;
+    ST.lastStudy = TODAY;
+    saveST();
+  }
+  _fcIdx++;
+  _fcFlipped = false;
+  renderFCScreen();
+}
+
+function renderFCResults() {
+  const mod = _fcMod && _fcMod !== 'all' ? M[_fcMod] : null;
+  const dueNow = dueCards(_fcMod).length;
+  return `
+  <div class="card" style="text-align:center;padding:36px 24px">
+    <div style="font-size:48px">⭐</div>
+    <div style="font-size:22px;font-weight:700;color:var(--navy);margin:10px 0" class="serif">¡Sesión completada!</div>
+    <div style="font-size:15px;color:var(--soft);margin-bottom:20px">Repasaste <b>${_fcTotal}</b> tarjeta${_fcTotal!==1?'s':''}</div>
+    ${dueNow > 0 ? `<div style="font-size:13px;color:var(--bad);margin-bottom:16px">${dueNow} tarjeta${dueNow!==1?'s':''} siguen pendientes</div>` : '<div style="font-size:13px;color:var(--good);margin-bottom:16px">✔ Sin tarjetas pendientes por hoy</div>'}
+    <div class="btn-row" style="justify-content:center">
+      ${dueNow > 0 ? `<button class="btn btn-primary" onclick="startCards('${_fcMod}')">Continuar repasando</button>` : ''}
+      <button class="btn btn-outline" onclick="go(${mod ? `'module','${_fcMod}'` : `'home'`})">Volver</button>
+    </div>
+  </div>`;
+}
+
+function yesterday() {
+  const d = new Date(); d.setDate(d.getDate() - 1);
+  return d.toISOString().split('T')[0];
+}
+
+/* ============================================================
+   PANTALLA: EJERCICIOS DE EMPAREJAR
+   ============================================================ */
+let _mMod = '', _mExIdx = 0;
+let _mLeft = [], _mRight = [], _mDoneL = [], _mDoneR = [];
+let _mSel = null, _mOk = 0;
+
+function startMatch(modId, exIdx) {
+  _mMod = modId; _mExIdx = exIdx || 0;
+  _mOk = 0; _mSel = null;
+  const ex = MATCH[modId][_mExIdx];
+  _mLeft  = shuffle(ex.pairs.map((_,i) => i));
+  _mRight = shuffle(ex.pairs.map((_,i) => i));
+  _mDoneL = []; _mDoneR = [];
+  renderMatch();
+}
+
+function renderMatch() {
+  const mod = M[_mMod];
+  const ex  = MATCH[_mMod][_mExIdx];
+  const total = ex.pairs.length;
+  const dots = MATCH[_mMod].map((_, i) => {
+    const cls = i < _mExIdx ? 'ex-dot done' : i === _mExIdx ? 'ex-dot cur' : 'ex-dot';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+
+  const leftItems = _mLeft.map((pairIdx, pos) => {
+    const done = _mDoneL.includes(pos);
+    const sel  = _mSel === pos;
+    const cls  = done ? 'match-item correct' : sel ? 'match-item selected' : 'match-item';
+    return `<div class="${cls}" id="ml${pos}" onclick="selectLeft(${pos})">${ex.pairs[pairIdx].l}</div>`;
+  }).join('');
+
+  const rightItems = _mRight.map((pairIdx, pos) => {
+    const done = _mDoneR.includes(pos);
+    const cls  = done ? 'match-item correct' : 'match-item';
+    return `<div class="${cls}" id="mr${pos}" onclick="selectRight(${pos})">${ex.pairs[pairIdx].r}</div>`;
+  }).join('');
+
+  document.getElementById('app').innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <button class="back-btn" onclick="go('module','${_mMod}')">← ${mod.name}</button>
+    <div class="ex-dots">${dots}</div>
+  </div>
+  <div class="card" style="border-top:3px solid ${mod.color}">
+    <div style="font-size:13px;color:var(--soft);margin-bottom:4px">Ejercicio ${_mExIdx+1} de ${MATCH[_mMod].length}</div>
+    <div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px">${ex.title}</div>
+    <div style="font-size:12px;color:var(--soft)">Toca un término de la izquierda y luego su definición correcta a la derecha</div>
+    <div class="match-score">Aciertos: <b>${_mOk}</b> / ${total}</div>
+    <div class="match-grid">
+      <div style="display:flex;flex-direction:column;gap:8px">${leftItems}</div>
+      <div style="display:flex;flex-direction:column;gap:8px">${rightItems}</div>
+    </div>
+    ${_mOk === total ? `
+    <div style="text-align:center;margin-top:16px">
+      <div style="font-size:32px">🎉</div>
+      <div style="font-size:16px;font-weight:700;color:var(--good);margin:6px 0">¡Perfecto!</div>
+      ${_mExIdx + 1 < MATCH[_mMod].length
+        ? `<button class="btn btn-primary" onclick="startMatch('${_mMod}', ${_mExIdx+1})">Siguiente ejercicio →</button>`
+        : `<div class="btn-row" style="justify-content:center">
+             <button class="btn btn-brass" onclick="startMatch('${_mMod}', 0)">Repetir ejercicios</button>
+             <button class="btn btn-outline" onclick="go('module','${_mMod}')">Volver al módulo</button>
+           </div>`
+      }
+    </div>` : ''}
+  </div>`;
+}
+
+function selectLeft(pos) {
+  if (_mDoneL.includes(pos)) return;
+  _mSel = (_mSel === pos) ? null : pos;
+  renderMatch();
+}
+
+function selectRight(pos) {
+  if (_mDoneR.includes(pos) || _mSel === null) return;
+  const leftPair  = _mLeft[_mSel];
+  const rightPair = _mRight[pos];
+  if (leftPair === rightPair) {
+    _mDoneL.push(_mSel);
+    _mDoneR.push(pos);
+    _mOk++;
+    _mSel = null;
+
+    // Track match result
+    ST.quizHist.push({ mod: _mMod, ok: true, date: TODAY, type: 'match' });
+    saveST();
+    renderMatch();
+  } else {
+    // Wrong — flash animation
+    const el = document.getElementById('mr' + pos);
+    if (el) { el.classList.add('wrong'); setTimeout(() => renderMatch(), 400); }
+  }
+}
+
+/* ============================================================
+   PANTALLA: QUIZ (simulacro)
+   ============================================================ */
+let _qSession = [], _qIdx = 0, _qScores = {}, _qAnswered = false, _qMod = '';
+
+function startQuiz(modId) {
+  _qMod = modId;
+  const pool = modId === 'all'
+    ? shuffle(BANK)
+    : BANK.filter(q => q.mod === modId);
+  _qSession = pool.map(q => {
+    const opts = q.o.map((text,i) => ({ text, correct: i === q.c }));
+    return { ...q, shuffled: shuffle(opts) };
+  });
+  _qIdx = 0; _qAnswered = false;
+  _qScores = {};
+  MOD_KEYS.forEach(k => _qScores[k] = { ok: 0, total: 0 });
+  renderQuizScreen();
+}
+
+function renderQuizScreen() {
+  const app = document.getElementById('app');
+  if (_qIdx >= _qSession.length) {
+    renderQuizResults();
+    return;
+  }
+  const q = _qSession[_qIdx];
+  const mod = M[q.mod];
+  const pct = _qSession.length ? Math.round(_qIdx / _qSession.length * 100) : 0;
+  app.innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+    <button class="back-btn" onclick="go('modules')">← Salir</button>
+    <span class="mod-pill" style="background:${mod.color}">${mod.icon} ${mod.short}</span>
+  </div>
+  <div class="prog-track"><div class="prog-fill-quiz" style="width:${pct}%"></div></div>
+  <div style="font-size:12px;color:var(--soft);margin-bottom:12px">Pregunta ${_qIdx+1} de ${_qSession.length}</div>
+  <div class="qtext serif">${q.q}</div>
+  <div class="opts" id="opts">
+    ${q.shuffled.map((opt,i) => `<div class="opt" id="opt${i}" onclick="selectOpt(${i})">
+      <span class="mark">${'ABCD'[i]}</span>
+      <span class="otext">${opt.text}</span>
+    </div>`).join('')}
+  </div>
+  <div class="explain-box" id="explain">
+    <span class="verdict" id="verdict"></span>
+    <span id="explainText"></span>
+  </div>
+  <div style="display:flex;justify-content:flex-end;margin-top:20px;min-height:40px">
+    <button class="btn btn-primary hidden" id="btnNext" onclick="nextQ()">
+      ${_qIdx === _qSession.length - 1 ? 'Ver resultados' : 'Siguiente →'}
+    </button>
+  </div>`;
+}
+
+function selectOpt(i) {
+  if (_qAnswered) return;
+  _qAnswered = true;
+  const q = _qSession[_qIdx];
+  const chosen = q.shuffled[i];
+  _qScores[q.mod].total++;
+  if (chosen.correct) _qScores[q.mod].ok++;
+
+  // Record in history
+  ST.quizHist.push({ mod: q.mod, ok: chosen.correct, date: TODAY });
+  saveST();
+
+  // Style options
+  for (let j = 0; j < q.shuffled.length; j++) {
+    const el = document.getElementById('opt' + j);
+    el.classList.add('locked');
+    if (q.shuffled[j].correct) el.classList.add('correct');
+    else if (j === i) el.classList.add('wrong');
+    else el.classList.add('dim');
+  }
+  const box = document.getElementById('explain');
+  box.classList.add('show', chosen.correct ? 'ok' : 'bad');
+  document.getElementById('verdict').textContent = chosen.correct ? '✔ Correcta — ' : '✘ Incorrecta — ';
+  document.getElementById('explainText').textContent = q.e;
+  document.getElementById('btnNext').classList.remove('hidden');
+  _qAnswered = true;
+}
+
+function nextQ() {
+  _qIdx++;
+  _qAnswered = false;
+  renderQuizScreen();
+}
+
+function renderQuizResults() {
+  const app = document.getElementById('app');
+  let totalOk = 0, totalQ = 0;
+  MOD_KEYS.forEach(k => { totalOk += _qScores[k].ok; totalQ += _qScores[k].total; });
+  const pct = totalQ ? Math.round(totalOk / totalQ * 100) : 0;
+  let headline = pct >= 85 ? 'Listo para certificarte' : pct >= 65 ? 'Vas bien, afina detalles' : 'Toca reforzar antes del examen';
+
+  const breakdown = MOD_KEYS
+    .filter(k => _qScores[k].total > 0)
+    .map(k => {
+      const p = Math.round(_qScores[k].ok / _qScores[k].total * 100);
+      const msg = p < 60 ? 'Prioridad de repaso. Vuelve al contenido del módulo.' : p < 85 ? 'Vas bien, repasa donde fallaste.' : 'Dominado. Solo un vistazo antes del examen.';
+      return `<div style="padding:12px 0;border-top:1px solid var(--line)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+          <span style="font-size:14px;font-weight:700;color:var(--navy)">${M[k].icon} ${M[k].name}</span>
+          <span style="font-size:13px;color:var(--soft)">${_qScores[k].ok}/${_qScores[k].total} · ${p}%</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="width:${p}%;background:${M[k].color}"></div></div>
+        <div style="font-size:12.5px;color:var(--soft);margin-top:4px">${msg}</div>
+      </div>`;
+    }).join('');
+
+  const scores = {};
+  MOD_KEYS.forEach(k => scores[k] = _qScores[k].total ? Math.round(_qScores[k].ok/_qScores[k].total*100) : 0);
+
+  app.innerHTML = `
+  <div class="card">
+    <div style="font-size:12px;color:var(--soft);margin-bottom:4px">Resultado del simulacro</div>
+    <div style="font-size:22px;font-weight:700;color:var(--navy)" class="serif">${headline}</div>
+    <div style="font-size:48px;font-weight:700;color:var(--navy);margin:6px 0" class="serif">${totalOk}<span style="font-size:22px;color:var(--soft)">/${totalQ} · ${pct}%</span></div>
+    <div class="radar-wrap" id="radarWrap2"></div>
+    ${breakdown}
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="startQuiz('${_qMod}')">Repetir quiz</button>
+      <button class="btn btn-outline" onclick="go('home')">Inicio</button>
+    </div>
+  </div>`;
+
+  const wrap2 = document.getElementById('radarWrap2');
+  if (wrap2) wrap2.innerHTML = drawRadar(scores, Math.min(280, window.innerWidth - 60));
+}
+
+/* ============================================================
+   PWA — Manifest + Service Worker (funciona desde HTTP/HTTPS)
+   ============================================================ */
+function setupPWA() {
+  // Manifest dinámico
+  const manifest = {
+    name: 'Estudio · Certificación VSTI',
+    short_name: 'VSTI',
+    description: 'Plataforma de estudio para los 6 procesos críticos VSTI de Bancolombia',
+    start_url: location.href,
+    scope: location.href,
+    display: 'standalone',
+    orientation: 'portrait',
+    background_color: '#F4F4F1',
+    theme_color: '#16233F',
+    icons: [{
+      src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='24' fill='%2316233F'/%3E%3Ctext x='96' y='128' font-size='100' text-anchor='middle' fill='%23A9843F'%3E📚%3C/text%3E%3C/svg%3E",
+      sizes: '192x192', type: 'image/svg+xml', purpose: 'any maskable'
+    }]
+  };
+  const mBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+  const link = document.createElement('link');
+  link.rel = 'manifest'; link.href = URL.createObjectURL(mBlob);
+  document.head.appendChild(link);
+
+  // Service Worker para caché offline
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    const sw = `
+const C='vsti-cache-v1',U='${location.href}';
+self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.add(U)));self.skipWaiting();});
+self.addEventListener('activate',e=>{e.waitUntil(clients.claim());});
+self.addEventListener('fetch',e=>{if(e.request.url===U)e.respondWith(caches.match(U).then(r=>r||fetch(U)));});`;
+    const swURL = URL.createObjectURL(new Blob([sw], { type: 'application/javascript' }));
+    navigator.serviceWorker.register(swURL).catch(() => {});
+  }
+}
+
+// Banner de instalación en home si aún no está instalado
+let _deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault(); _deferredPrompt = e;
+});
+
+function showInstallBanner() {
+  return `<div class="pwa-banner" id="pwaBanner">
+    <p>📱 <b>Instalar en tu celular</b> para usarlo sin internet y con ícono en la pantalla de inicio.</p>
+    <button onclick="installPWA()">Instalar</button>
+  </div>`;
+}
+
+function installPWA() {
+  if (_deferredPrompt) {
+    _deferredPrompt.prompt();
+    _deferredPrompt.userChoice.then(() => { _deferredPrompt = null; go('home'); });
+  } else {
+    alert('Para instalar:\n• Android Chrome: menú ⋮ → "Agregar a pantalla de inicio"\n• iPhone Safari: botón compartir → "En la pantalla de inicio"');
+  }
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+loadST();
+setupPWA();
+
+if (!ST.setup) {
+  go('setup');
+} else {
+  go('home');
+}
+
+// After home renders, draw the radar (needs DOM to be ready)
+const _origGo = go;
+window.go = function(screen, arg) {
+  _origGo(screen, arg);
+  if (screen === 'home') {
+    // Let DOM settle then draw radar
+    requestAnimationFrame(() => afterHomeRender());
+  }
+};
+// Call go again now that we overrode window.go
+// (the first go() above used the inner reference, so radar was drawn via direct call)
+requestAnimationFrame(() => { if (_curScreen === 'home') afterHomeRender(); });
+</script>
+</body>
+</html>
