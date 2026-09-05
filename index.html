@@ -803,6 +803,145 @@ hym:[
 };
 
 /* ============================================================
+   DATOS — Verdadero o Falso (7 afirmaciones × 6 módulos)
+   ============================================================ */
+const TF = {
+mo:[
+  {s:'El modelo operativo se define como la manera en que coordinamos áreas, procesos y funciones para entregar valor a clientes y a la organización.', a:true, e:'Es la definición oficial de Bancolombia.'},
+  {s:'El modelo operativo es una estructura fija que no debe cambiar una vez aprobada.', a:false, e:'Debe evolucionar constantemente bajo el ciclo PHVA.'},
+  {s:'Los 4 pilares del modelo operativo son personas, procesos, servicios y tecnología.', a:true, e:'Correcto, son los 4 pilares.'},
+  {s:'Bancolombia opera hoy bajo un modelo Hub and Spoke puro.', a:false, e:'Opera Federal-State-Local, transicionando hacia Hub and Spoke.'},
+  {s:'Un equipo Local puede saltarse un lineamiento Federal si eso le permite avanzar más rápido.', a:false, e:'Toda excepción debe coordinarse y aprobarse con el Federal.'},
+  {s:'El modelo centralizado ofrece alto control pero baja alineación con el negocio.', a:true, e:'Es el trade-off característico del modelo centralizado.'},
+  {s:'La estructura organizacional y el modelo operativo son exactamente lo mismo.', a:false, e:'Están relacionados pero no son lo mismo.'},
+],
+cfg:[
+  {s:'Un CI es cualquier componente que deba gestionarse para habilitar un servicio de TI.', a:true, e:'Esa es la definición de Elemento de Configuración.'},
+  {s:'Ciberseguridad puede escanear componentes que no están registrados en la CMDB.', a:false, e:'La CMDB es el insumo autoritativo — sin registro no hay escaneo.'},
+  {s:'El App Code es un atributo opcional en la CMDB.', a:false, e:'Es un atributo obligatorio.'},
+  {s:'La CMDB tiene aproximadamente 250,000 elementos de configuración.', a:true, e:'Cifra mencionada como dato de escala.'},
+  {s:'Cualquier persona con acceso a Hilix puede actualizar cualquier CI.', a:false, e:'Solo los dueños de cada tipo de componente pueden actualizarlo.'},
+  {s:'La validación de CIs on-premise se realiza trimestralmente con los dueños de las aplicaciones.', a:true, e:'Correcto, validación manual trimestral.'},
+  {s:'La jerarquía de la CMDB inicia en los componentes técnicos y termina en el servicio.', a:false, e:'Es al revés: Servicio → Aplicaciones → Transacciones → Componentes técnicos.'},
+],
+cam:[
+  {s:'Los cambios estándar requieren siempre diligenciar la encuesta de riesgos.', a:false, e:'Son el único tipo exento de la encuesta.'},
+  {s:'Los cambios de emergencia se pueden ejecutar y legalizar (registrar) después.', a:true, e:'Es la excepción por la premura de resolver un incidente.'},
+  {s:'La Circular 028 exige avisar a los clientes con mínimo 8 días calendario de anticipación ante indisponibilidad ≥30 minutos.', a:true, e:'Correcto, es la norma de la Superintendencia Financiera.'},
+  {s:'El Consejo de Cambios sesiona los lunes y miércoles a las 9:00 a.m.', a:false, e:'Sesiona martes y jueves a las 9:00 a.m.'},
+  {s:'Un cambio automático puede modificarse manualmente en Hilix sin ningún problema.', a:false, e:'Nunca, excepto los cambios Git LFS.'},
+  {s:'El control SOX en Gestión de Cambios corresponde a la aprobación formal antes de producción.', a:true, e:'Correcto; el control operativo es el cierre y validación.'},
+  {s:'Crear un cambio manual paralelo a uno automático de bajo riesgo, "para ir tranquilos", es una buena práctica.', a:false, e:'Es un incumplimiento del proceso.'},
+],
+inc:[
+  {s:'Un incidente actúa sobre el síntoma; un problema actúa sobre la causa raíz.', a:true, e:'Es la diferencia clave entre ambos procesos.'},
+  {s:'El impacto y la urgencia calculan automáticamente la prioridad del ticket.', a:true, e:'Correcto, ambos campos determinan la prioridad.'},
+  {s:'El ANS para un incidente crítico de infraestructura es de 4 horas.', a:true, e:'Correcto: crítico 4h, medio 10h, bajo 18h.'},
+  {s:'"Se reinició el servidor" es una causa raíz de calidad.', a:false, e:'Es solo el síntoma; falta explicar POR QUÉ pasó.'},
+  {s:'La ventana de garantía para solicitar reapertura de un ticket es de 30 días corridos.', a:false, e:'Es de 5 días corridos, gestionada solo por Mateo.'},
+  {s:'Un grupo de soporte puede tener un único integrante sin ningún problema.', a:false, e:'Debe tener más de uno para evitar incidentes huérfanos.'},
+  {s:'Actualizar la documentación del proceso cuenta como un plan de acción real.', a:false, e:'Es mejora continua, no elimina la causa raíz.'},
+],
+prob:[
+  {s:'Un error conocido (PKE) tiene causa raíz documentada y un workaround, pero no una solución definitiva.', a:true, e:'Correcto, esa es la definición de error conocido.'},
+  {s:'Un caso problema puede cerrarse solo con un workaround si este es efectivo.', a:true, e:'Sí, puede convertirse en la forma permanente.'},
+  {s:'Las 4 fases de Gartner son planear, hacer, verificar y actuar.', a:false, e:'Son identificación, mitigación, resolución y optimización.'},
+  {s:'El PKE y el NKW son exactamente lo mismo.', a:false, e:'Tienen orígenes distintos, aunque ambos aparecen en el panel de recursos.'},
+  {s:'Un incidente con más de 20 días abierto debe generar un caso problema.', a:true, e:'Es el lineamiento del proceso.'},
+  {s:'La gestión proactiva de problemas espera a estar "corchado" antes de actuar.', a:false, e:'Eso describe la gestión reactiva; la proactiva revisa periódicamente.'},
+  {s:'La meta de cumplimiento del proceso de problemas era 60%, con un cumplimiento real de 84.9%.', a:true, e:'Correcto, superó ampliamente la meta.'},
+],
+hym:[
+  {s:'El proceso Habilitar y Mantener Soluciones aplica también a aplicaciones SaaS.', a:false, e:'No aplica — las SaaS no están dentro de la infraestructura del Banco.'},
+  {s:'El Pull Request garantiza la segregación de funciones exigida por la Circular 029.', a:true, e:'Correcto, evita que alguien despliegue solo lo que él mismo construyó.'},
+  {s:'El instalador de un despliegue manual puede recibir el artefacto por Teams si es urgente.', a:false, e:'Solo debe recibirlo del correo automático de Azure DevOps.'},
+  {s:'El Dueño de Producto puede delegar la aprobación del DoD a otro integrante del equipo.', a:false, e:'Debe ser una aprobación personal, nunca delegada.'},
+  {s:'Las pruebas unitarias están en la base de la pirámide de pruebas, con la mayor cobertura.', a:true, e:'Correcto, JUnit/PyTest, medidas en Sonar.'},
+  {s:'JMeter es la herramienta oficial del Banco para pruebas de performance.', a:true, e:'Correcto, a veces complementada con SiteSpeed.'},
+  {s:'Sin un elemento de configuración (CI) creado en la CMDB no se puede desplegar a producción.', a:true, e:'Es la puerta de entrada obligatoria al proceso.'},
+],
+};
+
+/* ============================================================
+   DATOS — Ordenar pasos (1-2 ejercicios × 6 módulos)
+   ============================================================ */
+const ORDER = {
+mo:[
+  {title:'Ordena el ciclo PHVA', items:['Planear','Hacer','Verificar','Actuar']},
+],
+cfg:[
+  {title:'Ordena la jerarquía de la CMDB (de arriba hacia abajo)', items:['Servicio','Aplicaciones','Transacciones','Componentes técnicos']},
+],
+cam:[
+  {title:'Ordena el ciclo del Consejo de Cambios', items:['Lunes/miércoles en la tarde: se genera el Acta','Martes/jueves 9:00 a.m.: sesión del Consejo','Martes/jueves en la tarde: se envían las notas del Acta en firme']},
+],
+inc:[
+  {title:'Ordena los ANS de infraestructura, de menor a mayor tiempo', items:['Crítico — 4 horas','Medio — 10 horas','Bajo — 18 horas']},
+],
+prob:[
+  {title:'Ordena las 4 fases de Gartner para gestión de problemas', items:['Identificación','Mitigación','Resolución','Optimización']},
+],
+hym:[
+  {title:'Ordena las 5 etapas de Habilitar y Mantener Soluciones', items:['Analizar y arquitectar','Preparar','Implementar','Desplegar','Estabilizar']},
+  {title:'Ordena la pirámide de pruebas (de mayor a menor cobertura)', items:['Pruebas unitarias (base)','Pruebas de aceptación funcional / performance','Pruebas end-to-end (cúspide)']},
+],
+};
+
+/* ============================================================
+   DATOS — Completa la palabra (6 frases × 6 módulos)
+   ============================================================ */
+const FILL = {
+mo:[
+  {q:'El modelo operativo se resume como la manera en que coordinamos áreas, procesos y funciones para entregar ___ a clientes y a la organización.', o:['valor','presupuesto','riesgo','auditoría'], c:0, e:'Es la palabra clave de la definición oficial.'},
+  {q:'Los 4 pilares del modelo operativo son personas, procesos, servicios y ___.', o:['tecnología','marca','cliente','canal'], c:0, e:'Tecnología habilita, automatiza y escala la operación.'},
+  {q:'El ciclo ___ explica por qué el modelo operativo debe evolucionar constantemente.', o:['PHVA','SCRUM','DevOps','ITIL'], c:0, e:'Planear, Hacer, Verificar, Actuar.'},
+  {q:'Bancolombia transiciona hacia un modelo operativo llamado ___.', o:['Hub and Spoke','Centralizado puro','Distribuido puro','Matricial'], c:0, e:'Es la aspiración progresiva del Banco.'},
+  {q:'El nivel ___ provee lineamientos, prácticas y procesos como Centro de Excelencia.', o:['Federal','State','Local','Hub'], c:0, e:'El Federal es el nivel normativo.'},
+  {q:'El nivel ___ ejecuta y consume servicios con alta autonomía, cerca del cliente final.', o:['Local','Federal','State','Central'], c:0, e:'El Local es el nivel ejecutor.'},
+],
+cfg:[
+  {q:'Cualquier componente que deba gestionarse para habilitar un servicio de TI se llama Elemento de ___.', o:['Configuración','Riesgo','Cambio','Incidente'], c:0, e:'Es la definición de CI.'},
+  {q:'El repositorio central y autoritativo de todos los CIs se llama ___.', o:['CMDB','ANS','DoD','PKE'], c:0, e:'Configuration Management Data Base.'},
+  {q:'El atributo obligatorio que identifica el responsable de un CI es el ___.', o:['App Code','Service Tag','IP Address','Ticket ID'], c:0, e:'A través del App Code se identifica el responsable.'},
+  {q:'La herramienta ITCM oficial del Banco, conocida internamente como "Hilix", es en realidad ___.', o:['BMC Helix','ServiceNow','Jira','ProactivaNet'], c:0, e:'BMC Helix es la herramienta oficial.'},
+  {q:'Ciberseguridad NO puede escanear un componente que no esté registrado en la ___.', o:['CMDB','nómina','red social','nube'], c:0, e:'La CMDB es el insumo autoritativo para el escaneo.'},
+  {q:'En la jerarquía de la CMDB, el nivel más alto es el ___.', o:['Servicio','Componente técnico','Transacción','Usuario'], c:0, e:'El Servicio está en la cabeza de la jerarquía.'},
+],
+cam:[
+  {q:'Los cuatro tipos de cambio son ágil, estándar, programado y ___.', o:['emergencia','urgente','crítico','planeado'], c:0, e:'Los cuatro tipos aplican a cambios manuales y automáticos.'},
+  {q:'El único tipo de cambio exento de la encuesta de riesgos es el cambio ___.', o:['estándar','ágil','programado','de emergencia'], c:0, e:'Ya está certificado como libre de indisponibilidad.'},
+  {q:'La norma que exige avisar a los clientes con 8 días de anticipación ante indisponibilidad ≥30 minutos es la Circular ___.', o:['028','029','SOX','ITIL'], c:0, e:'Circular 028 de la Superintendencia Financiera.'},
+  {q:'El Consejo de Cambios sesiona los días ___ a las 9:00 a.m.', o:['martes y jueves','lunes y miércoles','miércoles y viernes','todos los días'], c:0, e:'Correcto horario del Consejo.'},
+  {q:'En Hilix, el rol que da el visto bueno formal (control SOX) es el ___.', o:['aprobador','coordinador','gestor','instalador'], c:0, e:'El aprobador tiene los tres roles.'},
+  {q:'Si un cambio automático no se cierra correctamente, se debe crear un ticket al equipo de ___.', o:['Procesos TI DevEx','Auditoría Interna','Mesa de Ayuda','Ciberseguridad'], c:0, e:'Nunca se interviene manualmente un cambio automático.'},
+],
+inc:[
+  {q:'La gestión que actúa sobre el síntoma y busca restablecer el servicio lo antes posible es la de ___.', o:['incidentes','problemas','cambios','configuración'], c:0, e:'Los incidentes priorizan la continuidad del negocio.'},
+  {q:'La prioridad de un ticket se calcula automáticamente a partir del impacto y la ___.', o:['urgencia','categoría','fecha','ubicación'], c:0, e:'Impacto + urgencia = prioridad.'},
+  {q:'El ANS para un incidente crítico de infraestructura es de ___ horas.', o:['4','10','18','24'], c:0, e:'Crítico 4h, medio 10h, bajo 18h.'},
+  {q:'Una causa raíz de calidad debe ser accionable, verificable y ___.', o:['prevenible','económica','rápida','anónima'], c:0, e:'Los 3 criterios: accionable, prevenible, verificable.'},
+  {q:'La ventana de garantía para solicitar reapertura de un ticket es de ___ días corridos.', o:['5','10','15','30'], c:0, e:'Gestionada únicamente a través de Mateo.'},
+  {q:'El análisis de la afectación de un incidente (qué pasó, por qué, planes de acción) se llama ___.', o:['HADA','PKE','DoD','RCA'], c:0, e:'HADA documenta la afectación completa.'},
+],
+prob:[
+  {q:'Un problema ya analizado, con causa raíz documentada y un workaround, se llama error ___.', o:['conocido (PKE)','crítico','abierto','residual'], c:0, e:'Error conocido = causa raíz + workaround, sin solución definitiva.'},
+  {q:'Las 4 fases de Gartner son identificación, mitigación, resolución y ___.', o:['optimización','planeación','ejecución','cierre'], c:0, e:'Optimización evalúa la mejora continua de la práctica.'},
+  {q:'Una solución alternativa que reduce el impacto mientras no hay solución definitiva se llama ___.', o:['workaround','rollback','hotfix','parche'], c:0, e:'Es la definición de workaround.'},
+  {q:'Un incidente con más de ___ días abierto debe generar un caso problema.', o:['20','5','60','100'], c:0, e:'Lineamiento del proceso de problemas.'},
+  {q:'El módulo que usa IA para agrupar incidentes en mapas de calor es el de Gestión ___ de Problemas.', o:['Proactiva','Reactiva','Manual','Externa'], c:0, e:'Detecta patrones antes de la recurrencia.'},
+  {q:'MTTR significa tiempo medio de ___.', o:['resolución','detección','respuesta','escalamiento'], c:0, e:'Mean Time To Resolve.'},
+],
+hym:[
+  {q:'El insumo en Azure DevOps que centraliza toda la evidencia y aprobaciones para pasar a producción se llama ___.', o:['Definition of Done (DoD)','Pull Request','Sprint Backlog','Test Plan'], c:0, e:'El DoD certifica que la solución está lista.'},
+  {q:'El Dueño de Producto debe aprobar el DoD de forma ___, nunca delegada.', o:['personal','automática','grupal','anual'], c:0, e:'La aprobación personal es obligatoria.'},
+  {q:'En un despliegue manual, el instalador debe obtener el artefacto únicamente del correo automático generado por ___.', o:['Azure DevOps','Teams','OneDrive','SolMan'], c:0, e:'Mitiga el riesgo de fraude interno.'},
+  {q:'La Circular ___ exige segregación de funciones (aprobaciones par) en el proceso de desarrollo.', o:['029','028','SOX','027'], c:0, e:'El Pull Request es ese control.'},
+  {q:'Las pruebas unitarias, en la base de la pirámide de pruebas, se miden en la herramienta ___.', o:['Sonar','JMeter','Postman','Selenium'], c:0, e:'JMeter es para performance, no unitarias.'},
+  {q:'La plataforma central de gestión de vulnerabilidades (DevSecOps) se llama ___.', o:['BoolTracker','Hilix','CMDB','SolMan'], c:0, e:'Consolida todos los hallazgos de escaneos de seguridad.'},
+],
+};
+
+/* ============================================================
    ESTADO — localStorage
    ============================================================ */
 const TODAY = new Date().toISOString().split('T')[0];
@@ -816,10 +955,24 @@ function loadST() {
   ST.setup      = ST.setup      || null;
   ST.lastStudy  = ST.lastStudy  || null;
   ST.streak     = ST.streak     || 0;
+  ST.drills        = ST.drills        || {};
+  ST.drills.match  = ST.drills.match  || {};
+  ST.drills.order  = ST.drills.order  || {};
 }
 
 function saveST() {
   localStorage.setItem('vsti_v1', JSON.stringify(ST));
+}
+
+// Marca un ejercicio de "drill" (emparejar/ordenar) como completado — no afecta el % de quiz.
+function markDrillDone(kind, modId, exIdx) {
+  ST.drills[kind][modId] = ST.drills[kind][modId] || [];
+  if (!ST.drills[kind][modId].includes(exIdx)) ST.drills[kind][modId].push(exIdx);
+  saveST();
+}
+
+function drillDoneCount(kind, modId) {
+  return (ST.drills[kind][modId] || []).length;
 }
 
 function exportST() {
@@ -899,8 +1052,14 @@ function maturityPct(modId) {
   return Math.round(mature / cards.length * 100);
 }
 
+// Solo cuentan las actividades calificadas (quiz, verdadero/falso, completar) — emparejar y ordenar
+// son ejercicios de práctica libre y se rastrean aparte (ver ST.drills), no inflan este porcentaje.
+function histForMod(modId, type) {
+  return ST.quizHist.filter(h => h.mod === modId && (type ? h.type === type || (type==='quiz' && !h.type) : (h.type !== 'match' && h.type !== 'order')));
+}
+
 function quizPctForMod(modId) {
-  const hist = ST.quizHist.filter(h => h.mod === modId);
+  const hist = histForMod(modId);
   if (!hist.length) return 0;
   return Math.round(hist.filter(h => h.ok).length / hist.length * 100);
 }
@@ -946,6 +1105,9 @@ function go(screen, arg) {
   else if (screen === 'video')   { app.innerHTML = renderVideo(arg); }
   else if (screen === 'cards')   { startCards(arg); }
   else if (screen === 'match')   { startMatch(arg); }
+  else if (screen === 'order')   { startOrder(arg, 0); }
+  else if (screen === 'tf')      { startTF(arg); }
+  else if (screen === 'fill')    { startFill(arg); }
   else if (screen === 'quiz')    { startQuiz(arg); }
 }
 
@@ -1130,6 +1292,21 @@ function renderSetup() {
     <div style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:8px">¿Cuánto tiempo necesitas?</div>
     <p style="font-size:13.5px;color:var(--soft);line-height:1.6">El temario completo requiere aproximadamente <b>~230 min</b> de estudio activo (lectura + primeros repasos de flashcards). A 20 min/día necesitas ~12 días.<br><br>Los últimos 1-2 días reservarlos para repaso general y el simulacro completo (60 preguntas).</p>
   </div>
+
+  <div class="card" style="margin-top:16px">
+    <div style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:8px">↺ Reiniciar progreso</div>
+    <p style="font-size:13px;color:var(--soft);margin-bottom:14px;line-height:1.5">Borra el avance guardado (flashcards, lectura, quiz y juegos) de un módulo o de todo el temario. Tu plan de estudio (fecha del examen) no se ve afectado. Esta acción no se puede deshacer.</p>
+    <div class="form-group">
+      <label class="form-label">Reiniciar un módulo</label>
+      <select class="form-input" id="resetModSel">
+        ${MOD_KEYS.map(k=>`<option value="${k}">${M[k].icon} ${M[k].name}</option>`).join('')}
+      </select>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="resetModule()">Reiniciar módulo seleccionado</button>
+      <button class="btn" style="background:var(--bad);color:#fff" onclick="resetAll()">Reiniciar todo el progreso</button>
+    </div>
+  </div>
   `;
 }
 
@@ -1139,6 +1316,31 @@ function saveSetup() {
     minutesPerDay: parseInt(document.getElementById('minsDay')?.value) || 20,
   };
   saveST();
+  go('home');
+}
+
+function resetModule() {
+  const modId = document.getElementById('resetModSel')?.value;
+  if (!modId) return;
+  if (!confirm(`¿Reiniciar todo el progreso de "${M[modId].name}"? Esta acción no se puede deshacer.`)) return;
+  FC.filter(c => c.mod === modId).forEach(c => delete ST.srs[c.id]);
+  delete ST.read[modId];
+  ST.quizHist = ST.quizHist.filter(h => h.mod !== modId);
+  delete ST.drills.match[modId];
+  delete ST.drills.order[modId];
+  saveST();
+  alert(`Progreso de "${M[modId].name}" reiniciado.`);
+  go('setup');
+}
+
+function resetAll() {
+  if (!confirm('¿Reiniciar TODO tu progreso (flashcards, lectura, quiz, juegos y racha)? Tu fecha de examen configurada se mantiene. Esta acción no se puede deshacer.')) return;
+  const keepSetup = ST.setup;
+  localStorage.removeItem('vsti_v1');
+  loadST();
+  ST.setup = keepSetup;
+  saveST();
+  alert('Todo el progreso ha sido reiniciado.');
   go('home');
 }
 
@@ -1176,8 +1378,14 @@ function renderModule(id) {
   const new_k = newCards(id).length;
   const isRead = ST.read[id];
 
-  const quizCorrect = ST.quizHist.filter(h=>h.mod===id && h.ok).length;
-  const quizTotal   = ST.quizHist.filter(h=>h.mod===id).length;
+  const quizHistOnly = histForMod(id, 'quiz');
+  const quizCorrect = quizHistOnly.filter(h=>h.ok).length;
+  const quizTotal   = quizHistOnly.length;
+
+  const tfHist    = histForMod(id, 'tf');
+  const fillHist  = histForMod(id, 'fill');
+  const matchDone = drillDoneCount('match', id);
+  const orderDone = drillDoneCount('order', id);
 
   return `
   <button class="back-btn" onclick="go('modules')">← Módulos</button>
@@ -1229,9 +1437,39 @@ function renderModule(id) {
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div>
         <div style="font-size:14px;font-weight:600;color:var(--navy)">🔗 Ejercicios de emparejar</div>
-        <div style="font-size:12px;color:var(--soft);margin-top:2px">${MATCH[id].length} ejercicios · Toca y conecta los conceptos</div>
+        <div style="font-size:12px;color:var(--soft);margin-top:2px">${matchDone}/${MATCH[id].length} completados · Toca y conecta los conceptos</div>
       </div>
       <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('match','${id}')">Jugar →</button>
+    </div>
+  </div>
+
+  <div class="card card-sm" style="margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">🔢 Ordenar pasos</div>
+        <div style="font-size:12px;color:var(--soft);margin-top:2px">${orderDone}/${ORDER[id].length} completados · Ubica la secuencia correcta</div>
+      </div>
+      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('order','${id}')">Jugar →</button>
+    </div>
+  </div>
+
+  <div class="card card-sm" style="margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">✅ Verdadero o Falso</div>
+        <div style="font-size:12px;color:var(--soft);margin-top:2px">${TF[id].length} afirmaciones · ${tfHist.length} respondidas</div>
+      </div>
+      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('tf','${id}')">Jugar →</button>
+    </div>
+  </div>
+
+  <div class="card card-sm" style="margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">✏️ Completa la palabra</div>
+        <div style="font-size:12px;color:var(--soft);margin-top:2px">${FILL[id].length} frases · ${fillHist.length} respondidas</div>
+      </div>
+      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('fill','${id}')">Jugar →</button>
     </div>
   </div>
 
@@ -1484,15 +1722,304 @@ function selectRight(pos) {
     _mOk++;
     _mSel = null;
 
-    // Track match result
-    ST.quizHist.push({ mod: _mMod, ok: true, date: TODAY, type: 'match' });
-    saveST();
+    // Al completar el ejercicio, se marca como "drill" hecho — no cuenta para el % de quiz.
+    if (_mOk === MATCH[_mMod][_mExIdx].pairs.length) markDrillDone('match', _mMod, _mExIdx);
     renderMatch();
   } else {
     // Wrong — flash animation
     const el = document.getElementById('mr' + pos);
     if (el) { el.classList.add('wrong'); setTimeout(() => renderMatch(), 400); }
   }
+}
+
+/* ============================================================
+   PANTALLA: ORDENAR PASOS
+   ============================================================ */
+let _ordMod = '', _ordExIdx = 0, _ordShuffled = [], _ordPicked = [], _ordChecked = false, _ordCorrect = false;
+
+function startOrder(modId, exIdx) {
+  _ordMod = modId; _ordExIdx = exIdx || 0;
+  _ordChecked = false; _ordCorrect = false; _ordPicked = [];
+  const ex = ORDER[_ordMod][_ordExIdx];
+  _ordShuffled = shuffle(ex.items.map((_, i) => i));
+  renderOrder();
+}
+
+function renderOrder() {
+  const mod = M[_ordMod];
+  const ex = ORDER[_ordMod][_ordExIdx];
+  const dots = ORDER[_ordMod].map((_, i) => {
+    const cls = i < _ordExIdx ? 'ex-dot done' : i === _ordExIdx ? 'ex-dot cur' : 'ex-dot';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+
+  const availOrder = _ordShuffled.filter(i => !_ordPicked.includes(i));
+  const availHtml = availOrder.length
+    ? availOrder.map(i => `<div class="match-item" onclick="pickOrder(${i})">${ex.items[i]}</div>`).join('')
+    : `<div style="font-size:13px;color:var(--soft);text-align:center;padding:12px">Todos los elementos ubicados</div>`;
+
+  const pickedHtml = _ordPicked.length
+    ? _ordPicked.map((i, pos) => {
+        let cls = 'match-item selected';
+        if (_ordChecked) cls = 'match-item ' + (i === pos ? 'correct' : 'wrong');
+        const click = _ordChecked ? '' : `onclick="unpickOrder(${pos})"`;
+        return `<div class="${cls}" ${click}>${pos + 1}. ${ex.items[i]}</div>`;
+      }).join('')
+    : `<div style="font-size:13px;color:var(--soft);text-align:center;padding:12px">Toca los elementos en el orden correcto</div>`;
+
+  const allPicked = _ordPicked.length === ex.items.length;
+
+  document.getElementById('app').innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <button class="back-btn" onclick="go('module','${_ordMod}')">← ${mod.name}</button>
+    <div class="ex-dots">${dots}</div>
+  </div>
+  <div class="card" style="border-top:3px solid ${mod.color}">
+    <div style="font-size:13px;color:var(--soft);margin-bottom:4px">Ejercicio ${_ordExIdx + 1} de ${ORDER[_ordMod].length}</div>
+    <div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:12px">${ex.title}</div>
+    <div style="font-size:12px;color:var(--soft);margin-bottom:6px">Tu secuencia</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">${pickedHtml}</div>
+    <div style="font-size:12px;color:var(--soft);margin-bottom:6px">Elementos disponibles</div>
+    <div style="display:flex;flex-direction:column;gap:8px">${availHtml}</div>
+    ${_ordChecked
+      ? (_ordCorrect
+          ? `<div style="text-align:center;margin-top:16px">
+               <div style="font-size:32px">🎉</div>
+               <div style="font-size:16px;font-weight:700;color:var(--good);margin:6px 0">¡Orden correcto!</div>
+               ${_ordExIdx + 1 < ORDER[_ordMod].length
+                  ? `<button class="btn btn-primary" onclick="startOrder('${_ordMod}', ${_ordExIdx + 1})">Siguiente ejercicio →</button>`
+                  : `<div class="btn-row" style="justify-content:center">
+                       <button class="btn btn-brass" onclick="startOrder('${_ordMod}', 0)">Repetir ejercicios</button>
+                       <button class="btn btn-outline" onclick="go('module','${_ordMod}')">Volver al módulo</button>
+                     </div>`}
+             </div>`
+          : `<div style="text-align:center;margin-top:16px">
+               <div style="font-size:14px;color:var(--bad);font-weight:600;margin-bottom:10px">Algunos elementos no están en el orden correcto.</div>
+               <button class="btn btn-outline" onclick="startOrder('${_ordMod}', ${_ordExIdx})">Reintentar</button>
+             </div>`)
+      : (allPicked ? `<button class="btn btn-primary btn-full" style="margin-top:16px" onclick="checkOrder()">Verificar orden</button>` : '')}
+  </div>`;
+}
+
+function pickOrder(i) {
+  if (_ordChecked) return;
+  _ordPicked.push(i);
+  renderOrder();
+}
+
+function unpickOrder(pos) {
+  if (_ordChecked) return;
+  _ordPicked.splice(pos, 1);
+  renderOrder();
+}
+
+function checkOrder() {
+  _ordChecked = true;
+  _ordCorrect = _ordPicked.every((v, i) => v === i);
+  if (_ordCorrect) markDrillDone('order', _ordMod, _ordExIdx);
+  renderOrder();
+}
+
+/* ============================================================
+   PANTALLA: VERDADERO O FALSO
+   ============================================================ */
+let _tfSession = [], _tfIdx = 0, _tfMod = '', _tfAnswered = false, _tfScores = {};
+
+function startTF(modId) {
+  _tfMod = modId;
+  const pool = modId === 'all'
+    ? shuffle(MOD_KEYS.flatMap(k => TF[k].map(t => ({ ...t, mod: k }))))
+    : shuffle(TF[modId].map(t => ({ ...t, mod: modId })));
+  _tfSession = pool;
+  _tfIdx = 0; _tfAnswered = false;
+  _tfScores = {}; MOD_KEYS.forEach(k => _tfScores[k] = { ok: 0, total: 0 });
+  renderTFScreen();
+}
+
+function renderTFScreen() {
+  const app = document.getElementById('app');
+  if (_tfIdx >= _tfSession.length) { renderTFResults(); return; }
+  const item = _tfSession[_tfIdx];
+  const mod = M[item.mod];
+  const pct = _tfSession.length ? Math.round(_tfIdx / _tfSession.length * 100) : 0;
+  app.innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+    <button class="back-btn" onclick="go('modules')">← Salir</button>
+    <span class="mod-pill" style="background:${mod.color}">${mod.icon} ${mod.short}</span>
+  </div>
+  <div class="prog-track"><div class="prog-fill-quiz" style="width:${pct}%"></div></div>
+  <div style="font-size:12px;color:var(--soft);margin-bottom:12px">Afirmación ${_tfIdx + 1} de ${_tfSession.length}</div>
+  <div class="qtext serif">${item.s}</div>
+  <div class="opts">
+    <div class="opt" id="tfTrue" onclick="answerTF(true)"><span class="mark">V</span><span class="otext">Verdadero</span></div>
+    <div class="opt" id="tfFalse" onclick="answerTF(false)"><span class="mark">F</span><span class="otext">Falso</span></div>
+  </div>
+  <div class="explain-box" id="tfExplain"><span class="verdict" id="tfVerdict"></span><span id="tfExplainText"></span></div>
+  <div style="display:flex;justify-content:flex-end;margin-top:20px;min-height:40px">
+    <button class="btn btn-primary hidden" id="tfNext" onclick="nextTF()">${_tfIdx === _tfSession.length - 1 ? 'Ver resultados' : 'Siguiente →'}</button>
+  </div>`;
+}
+
+function answerTF(val) {
+  if (_tfAnswered) return;
+  _tfAnswered = true;
+  const item = _tfSession[_tfIdx];
+  const ok = val === item.a;
+  _tfScores[item.mod].total++;
+  if (ok) _tfScores[item.mod].ok++;
+  ST.quizHist.push({ mod: item.mod, ok, date: TODAY, type: 'tf' });
+  saveST();
+
+  const trueEl = document.getElementById('tfTrue'), falseEl = document.getElementById('tfFalse');
+  [trueEl, falseEl].forEach(e => e.classList.add('locked'));
+  const correctEl = item.a ? trueEl : falseEl;
+  correctEl.classList.add('correct');
+  if (!ok) (val ? trueEl : falseEl).classList.add('wrong');
+
+  const box = document.getElementById('tfExplain');
+  box.classList.add('show', ok ? 'ok' : 'bad');
+  document.getElementById('tfVerdict').textContent = ok ? '✔ Correcto — ' : '✘ Incorrecto — ';
+  document.getElementById('tfExplainText').textContent = item.e;
+  document.getElementById('tfNext').classList.remove('hidden');
+}
+
+function nextTF() {
+  _tfIdx++;
+  _tfAnswered = false;
+  renderTFScreen();
+}
+
+function renderTFResults() {
+  const app = document.getElementById('app');
+  let totalOk = 0, totalQ = 0;
+  MOD_KEYS.forEach(k => { totalOk += _tfScores[k].ok; totalQ += _tfScores[k].total; });
+  const pct = totalQ ? Math.round(totalOk / totalQ * 100) : 0;
+
+  const breakdown = MOD_KEYS
+    .filter(k => _tfScores[k].total > 0)
+    .map(k => {
+      const p = Math.round(_tfScores[k].ok / _tfScores[k].total * 100);
+      return `<div style="padding:10px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:14px;font-weight:600;color:var(--navy)">${M[k].icon} ${M[k].name}</span>
+        <span style="font-size:13px;color:var(--soft)">${_tfScores[k].ok}/${_tfScores[k].total} · ${p}%</span>
+      </div>`;
+    }).join('');
+
+  app.innerHTML = `
+  <div class="card" style="text-align:center;padding:32px 24px">
+    <div style="font-size:48px">✅</div>
+    <div style="font-size:22px;font-weight:700;color:var(--navy);margin:10px 0" class="serif">Verdadero o Falso</div>
+    <div style="font-size:44px;font-weight:700;color:var(--navy);margin:6px 0" class="serif">${totalOk}<span style="font-size:20px;color:var(--soft)">/${totalQ} · ${pct}%</span></div>
+    ${breakdown}
+    <div class="btn-row" style="justify-content:center;margin-top:16px">
+      <button class="btn btn-primary" onclick="startTF('${_tfMod}')">Repetir</button>
+      <button class="btn btn-outline" onclick="go(${_tfMod !== 'all' ? `'module','${_tfMod}'` : `'home'`})">Volver</button>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PANTALLA: COMPLETA LA PALABRA
+   ============================================================ */
+let _fiSession = [], _fiIdx = 0, _fiMod = '', _fiAnswered = false, _fiScores = {};
+
+function startFill(modId) {
+  _fiMod = modId;
+  const pool = modId === 'all'
+    ? shuffle(MOD_KEYS.flatMap(k => FILL[k].map(f => ({ ...f, mod: k }))))
+    : shuffle(FILL[modId].map(f => ({ ...f, mod: modId })));
+  _fiSession = pool.map(f => {
+    const opts = f.o.map((text, i) => ({ text, correct: i === f.c }));
+    return { ...f, shuffled: shuffle(opts) };
+  });
+  _fiIdx = 0; _fiAnswered = false;
+  _fiScores = {}; MOD_KEYS.forEach(k => _fiScores[k] = { ok: 0, total: 0 });
+  renderFillScreen();
+}
+
+function renderFillScreen() {
+  const app = document.getElementById('app');
+  if (_fiIdx >= _fiSession.length) { renderFillResults(); return; }
+  const item = _fiSession[_fiIdx];
+  const mod = M[item.mod];
+  const pct = _fiSession.length ? Math.round(_fiIdx / _fiSession.length * 100) : 0;
+  app.innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+    <button class="back-btn" onclick="go('modules')">← Salir</button>
+    <span class="mod-pill" style="background:${mod.color}">${mod.icon} ${mod.short}</span>
+  </div>
+  <div class="prog-track"><div class="prog-fill-quiz" style="width:${pct}%"></div></div>
+  <div style="font-size:12px;color:var(--soft);margin-bottom:12px">Frase ${_fiIdx + 1} de ${_fiSession.length}</div>
+  <div class="qtext serif">${item.q.replace('___', '<u>_____</u>')}</div>
+  <div class="opts" id="fiOpts">
+    ${item.shuffled.map((opt, i) => `<div class="opt" id="fiOpt${i}" onclick="answerFill(${i})">
+      <span class="mark">${'ABCD'[i]}</span>
+      <span class="otext">${opt.text}</span>
+    </div>`).join('')}
+  </div>
+  <div class="explain-box" id="fiExplain"><span class="verdict" id="fiVerdict"></span><span id="fiExplainText"></span></div>
+  <div style="display:flex;justify-content:flex-end;margin-top:20px;min-height:40px">
+    <button class="btn btn-primary hidden" id="fiNext" onclick="nextFill()">${_fiIdx === _fiSession.length - 1 ? 'Ver resultados' : 'Siguiente →'}</button>
+  </div>`;
+}
+
+function answerFill(i) {
+  if (_fiAnswered) return;
+  _fiAnswered = true;
+  const item = _fiSession[_fiIdx];
+  const chosen = item.shuffled[i];
+  _fiScores[item.mod].total++;
+  if (chosen.correct) _fiScores[item.mod].ok++;
+  ST.quizHist.push({ mod: item.mod, ok: chosen.correct, date: TODAY, type: 'fill' });
+  saveST();
+
+  for (let j = 0; j < item.shuffled.length; j++) {
+    const el = document.getElementById('fiOpt' + j);
+    el.classList.add('locked');
+    if (item.shuffled[j].correct) el.classList.add('correct');
+    else if (j === i) el.classList.add('wrong');
+    else el.classList.add('dim');
+  }
+  const box = document.getElementById('fiExplain');
+  box.classList.add('show', chosen.correct ? 'ok' : 'bad');
+  document.getElementById('fiVerdict').textContent = chosen.correct ? '✔ Correcto — ' : '✘ Incorrecto — ';
+  document.getElementById('fiExplainText').textContent = item.e;
+  document.getElementById('fiNext').classList.remove('hidden');
+}
+
+function nextFill() {
+  _fiIdx++;
+  _fiAnswered = false;
+  renderFillScreen();
+}
+
+function renderFillResults() {
+  const app = document.getElementById('app');
+  let totalOk = 0, totalQ = 0;
+  MOD_KEYS.forEach(k => { totalOk += _fiScores[k].ok; totalQ += _fiScores[k].total; });
+  const pct = totalQ ? Math.round(totalOk / totalQ * 100) : 0;
+
+  const breakdown = MOD_KEYS
+    .filter(k => _fiScores[k].total > 0)
+    .map(k => {
+      const p = Math.round(_fiScores[k].ok / _fiScores[k].total * 100);
+      return `<div style="padding:10px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:14px;font-weight:600;color:var(--navy)">${M[k].icon} ${M[k].name}</span>
+        <span style="font-size:13px;color:var(--soft)">${_fiScores[k].ok}/${_fiScores[k].total} · ${p}%</span>
+      </div>`;
+    }).join('');
+
+  app.innerHTML = `
+  <div class="card" style="text-align:center;padding:32px 24px">
+    <div style="font-size:48px">✏️</div>
+    <div style="font-size:22px;font-weight:700;color:var(--navy);margin:10px 0" class="serif">Completa la palabra</div>
+    <div style="font-size:44px;font-weight:700;color:var(--navy);margin:6px 0" class="serif">${totalOk}<span style="font-size:20px;color:var(--soft)">/${totalQ} · ${pct}%</span></div>
+    ${breakdown}
+    <div class="btn-row" style="justify-content:center;margin-top:16px">
+      <button class="btn btn-primary" onclick="startFill('${_fiMod}')">Repetir</button>
+      <button class="btn btn-outline" onclick="go(${_fiMod !== 'all' ? `'module','${_fiMod}'` : `'home'`})">Volver</button>
+    </div>
+  </div>`;
 }
 
 /* ============================================================
