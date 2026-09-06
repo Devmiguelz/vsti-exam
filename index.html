@@ -1032,7 +1032,11 @@ function cardsForMod(modId) {
 }
 
 function dueCards(modId) {
-  return cardsForMod(modId).filter(c => getCard(c.id).dueDate <= TODAY);
+  // Solo cuentan tarjetas ya repasadas al menos una vez; las nuevas se
+  // manejan aparte en newCards() — si no, cada tarjeta nueva contaba como
+  // "vencida" Y "nueva" a la vez, duplicándola en la sesión y dando la
+  // impresión de que la calificación anterior no se había guardado.
+  return cardsForMod(modId).filter(c => ST.srs[c.id] && getCard(c.id).dueDate <= TODAY);
 }
 
 function newCards(modId) {
