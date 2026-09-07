@@ -380,6 +380,42 @@ const BANK = [
   {mod:'hym',q:'¿Cuál es la herramienta oficial del Banco para pruebas de performance?',o:['Selenium','Postman','JMeter','SiteSpeed en solitario'],c:2,e:'JMeter es la herramienta oficial de performance en la compañía (a veces complementada con SiteSpeed).'},
   {mod:'hym',q:'En la estrategia de ramas GitFlow del Banco, ¿qué se requiere siempre para integrar una rama a otra?',o:['Un Pull Request aprobado','Un correo al líder técnico','Nada, se puede hacer push directo','Una aprobación verbal del PO'],c:0,e:'Cada integración (feature→develop→release) requiere un Pull Request; no se permite push directo a ramas protegidas.'},
   {mod:'hym',q:'Los 3 tipos de despliegue (manual, automático y SolMan), ¿qué representan en sí mismos?',o:['Simples preferencias técnicas de cada equipo','Controles SOX','Tareas opcionales de documentación','Un tipo de prueba de performance'],c:1,e:'Cada uno de los 3 tipos de despliegue es, en sí mismo, un control SOX del proceso.'},
+  // ─── MODELO OPERATIVO — preguntas adicionales ───
+  {mod:'mo',q:'¿Cómo se define una Plataforma en el contexto del Modelo Operativo de Ingeniería de TI?',o:['Un servidor de alta disponibilidad con redundancia geográfica','Un framework de metodologías ágiles','Un conjunto de APIs y microservicios del núcleo bancario','Una base digital integral de Componentes Tecnológicos que habilita la automatización de Procesos de Negocio y la exposición de Servicios de Aplicación'],c:3,e:'La plataforma surge de la convergencia de Negocio + Proceso + Tecnología, y es la base del modelo de Ingeniería de Plataformas.'},
+  {mod:'mo',q:'Según el Gobierno del Modelo Operativo, ¿qué papel cumplen las métricas de los procesos de TI?',o:['Calcular el bono trimestral de los equipos','Medir exclusivamente la satisfacción del cliente externo','Definir el presupuesto anual de infraestructura','Ser el termómetro para "Verificar" si la operación funciona y señalar dónde "Actuar" para evolucionar'],c:3,e:'Las métricas son la evidencia objetiva que alimenta las fases Verificar y Actuar del ciclo PHVA.'},
+  {mod:'mo',q:'¿Cuál principio expresa correctamente el enfoque del MO hacia los procesos de TI?',o:['Los procesos son estructuras rígidas que no deben cambiar sin auditoría','Los procesos son opcionales si el equipo tiene las capacidades correctas','Los procesos aplican solo a Federal y State, no al Local','Los procesos no son "camisas de fuerza": pueden evolucionar, pero de forma ordenada mediante el ciclo PHVA'],c:3,e:'El MO promueve la adaptabilidad de los procesos, pero exige que cualquier evolución sea ordenada y gobernada.'},
+  {mod:'mo',q:'En el Modelo Operativo de Ingeniería de Plataformas, ¿cuál es la ecuación que genera una Plataforma?',o:['Federal + State + Local','Planear + Hacer + Verificar + Actuar','Personas + Procesos + Servicios','Negocio + Proceso + Tecnología = Plataforma'],c:3,e:'Una plataforma digital es la convergencia de los tres elementos: Negocio, Proceso y Tecnología.'},
+  {mod:'mo',q:'¿Cuál describe mejor la relación entre modelo operativo y estructura organizacional?',o:['Son sinónimos — describen lo mismo con términos distintos','Solo son iguales cuando la estructura está en el mismo documento','La estructura define cómo se ejecutan los procesos; el modelo define los organigramas','Están relacionados pero no son lo mismo: la estructura tiene mucho que ver con el modelo, pero no es el modelo en sí'],c:3,e:'Se insiste en esta distinción: muchos confunden el organigrama con el modelo operativo, pero no son lo mismo.'},
+  // ─── GESTIÓN DE LA CONFIGURACIÓN — preguntas adicionales ───
+  {mod:'cfg',q:'¿Qué consecuencia tiene un Incidente registrado con un CI incorrecto o sin CI asociado?',o:['El incidente se cancela automáticamente en Hilix','El ANS del incidente se duplica','Las dependencias no se identifican y el incidente puede quedar subestimado','El CI queda marcado para revisión trimestral'],c:2,e:'Sin el CI correcto no se conocen las dependencias del componente afectado y el impacto real del incidente puede quedar subestimado.'},
+  {mod:'cfg',q:'¿La CMDB puede utilizarse como herramienta de monitoreo en tiempo real de los componentes?',o:['Sí, es su función principal','Sí, complementa a Dynatrace en el monitoreo activo','Solo para aplicaciones VIA críticas','No — es para inventario y relacionamiento; el monitoreo lo hacen otras herramientas especializadas'],c:3,e:'La CMDB no monitorea: registra, relaciona y gobierna la información de los CIs.'},
+  {mod:'cfg',q:'¿Qué proceso de TI necesita la CMDB para identificar aplicaciones VIA y garantizar la recuperación ante contingencias?',o:['Gestión de Cambios','Gestión de Incidentes','Gestión de Problemas','Gestión de la Continuidad de negocio'],c:3,e:'La Continuidad de negocio usa la CMDB para identificar los componentes vitales (VIA) y sus responsables ante una contingencia.'},
+  {mod:'cfg',q:'¿Con qué frecuencia la nube carga automáticamente los componentes en la CMDB a través del tag App Code?',o:['Una vez al día','Dos veces al día','Tres veces al día','Una vez por semana'],c:2,e:'La actualización automática vía App Code se realiza tres veces al día para componentes en entornos cloud.'},
+  {mod:'cfg',q:'Si un CI tiene el App Code incorrecto, ¿cuál es el impacto directo en el proceso de Gestión de Cambios?',o:['El cambio se cancela automáticamente','El App Code no afecta los cambios, solo los escaneos','El CI queda marcado automáticamente para revisión','No se identifica el equipo responsable ni el impacto real del cambio'],c:3,e:'El App Code vincula el CI con su responsable; un código incorrecto rompe esa cadena y el impacto del cambio queda sin dimensionar.'},
+  // ─── GESTIÓN DE CAMBIOS — preguntas adicionales ───
+  {mod:'cam',q:'Según el Protocolo del Coordinador para el Consejo de Cambios TI, ¿cuál es la primera información que debe poder responder?',o:['¿Cuántos CIs están en la CMDB para este cambio?','¿Cuál es el nivel de riesgo de la encuesta?','¿Cuántos usuarios internos tiene la aplicación?','Describir claramente el Cambio que se ejecutará (Mantenimiento, Parchado, Actualización, etc.)'],c:3,e:'Lo primero es tener claridad total sobre la naturaleza del cambio antes de presentarlo al Consejo.'},
+  {mod:'cam',q:'¿Cuál de los siguientes casos NO se clasifica como un Cambio TI?',o:['Adición de un servidor a la infraestructura en producción','Modificación del código fuente de una aplicación','Eliminación de una base de datos productiva','Autorización de accesos y parametrización funcional realizada por el usuario'],c:3,e:'Según las definiciones, accesos, permisos y parametrizaciones funcionales por el usuario no son Cambios TI.'},
+  {mod:'cam',q:'Un cambio ejecutado directamente en una Plataforma On Premise sin herramientas como Azure DevOps o Solman se clasifica como:',o:['Cambio Automático','Cambio de Emergencia','Cambio Estándar','Cambio Manual'],c:3,e:'Los cambios que no pasan por herramientas de integración son Cambios Manuales, independientemente de su riesgo.'},
+  {mod:'cam',q:'¿Cuál es el propósito del Plan de Devolución que debe tener todo coordinador de un cambio?',o:['Documentar quién aprobó el cambio en el Consejo','Notificar a los clientes sobre la afectación prevista','Registrar el costo del cambio y el ROI esperado','Definir cómo y en cuánto tiempo se puede revertir el cambio si algo sale mal'],c:3,e:'El Plan de Devolución es la estrategia de rollback: garantiza que si el cambio falla, se puede regresar al estado anterior de forma controlada.'},
+  {mod:'cam',q:'¿Cuál es la definición de una "Afectación" en el proceso de Gestión de Cambios TI?',o:['Un cambio rechazado por el Consejo de Cambios','Una queja formal del cliente por indisponibilidad','Un incidente generado durante una CRQ','Interrupción y/o degradación (lentitud, intermitencia) en la disponibilidad de Aplicaciones o Componentes TI'],c:3,e:'Una afectación es cualquier degradación del servicio, desde lentitud hasta interrupción total, causada por un cambio.'},
+  // ─── GESTIÓN DE INCIDENTES — preguntas adicionales ───
+  {mod:'inc',q:'Al registrar un incidente en BMC Helix, ¿qué campo, al ser seleccionado, trae automáticamente el campo "Servicio" relacionado?',o:['Categoría operacional','Impacto','Grupo de soporte','CI (Elemento de Configuración)'],c:3,e:'El CI vincula automáticamente el servicio al que pertenece el componente afectado, sin necesidad de buscarlo manualmente.'},
+  {mod:'inc',q:'Según el control BC07110344C005, ¿con qué frecuencia el Equipo de Dueño de Producto debe revisar los incidentes para identificar patrones?',o:['Diariamente','Semanalmente','Mensualmente','Trimestralmente'],c:2,e:'La revisión mensual es el control definido para detectar proactivamente incidentes que deberían convertirse en problemas.'},
+  {mod:'inc',q:'¿En cuál pestaña de BMC Helix se deben documentar todas las acciones y análisis realizados durante la gestión de un incidente?',o:['Recursos','Relacionamientos','Aprobación','Actividad'],c:3,e:'La pestaña Actividad es el registro cronológico de todas las acciones; es fundamental para la calidad del ticket.'},
+  {mod:'inc',q:'¿Cuándo se considera que un incidente fue correctamente resuelto en términos de gestión de causa raíz?',o:['Cuando se cierra antes de la mitad del ANS definido','Cuando el usuario final aprobó la resolución por correo','Cuando la prioridad bajó a Bajo antes del cierre','Cuando la causa raíz es accionable, prevenible y verificable, o se creó un caso Problema'],c:3,e:'La calidad de la causa raíz es el indicador real de una buena gestión; si no se conoce, debe crearse el caso Problema.'},
+  {mod:'inc',q:'Si un incidente se repite con alta frecuencia (3-4 veces por semana) y el equipo no crea el caso Problema, ¿qué hace el proceso?',o:['Eleva automáticamente la prioridad a crítico','Cierra los duplicados y genera una sola notificación','Escala al área de Continuidad de Negocio','Crea directamente el caso Problema'],c:3,e:'El proceso tiene controles automáticos: la repetibilidad excesiva desencadena la creación del caso Problema si el equipo no actuó.'},
+  // ─── GESTIÓN DE PROBLEMAS — preguntas adicionales ───
+  {mod:'prob',q:'¿Cuál de las siguientes situaciones NO es criterio para postular un incidente como Problema?',o:['El incidente se repite con alta frecuencia','No se ha identificado la causa raíz','El impacto al negocio justifica una investigación profunda','El incidente fue resuelto dentro del ANS definido sin recurrencia'],c:3,e:'Resolver un incidente a tiempo y sin recurrencia es el resultado esperado, no un detonante para abrir un caso Problema.'},
+  {mod:'prob',q:'Según la casuística del corte de abril, ¿cuántos Problemas se registraron de un total de 108 incidentes?',o:['42','32','15','8'],c:3,e:'108 incidentes generaron solo 8 casos Problema — la proporción es un indicador de madurez del proceso.'},
+  {mod:'prob',q:'¿Cuál fue la segunda causa con mayor número de incidentes en la casuística de Canales Claves del corte de abril?',o:['Alta demanda de recursos (24)','Nequi (15)','Errores Humanos (8)','Ejecución CRQ (32)'],c:3,e:'Proveedor fue primero (42) y Ejecución CRQ fue segundo (32), señalando oportunidades de mejora en la gestión de cambios.'},
+  {mod:'prob',q:'¿Qué significa aplicar la técnica de resolución "invertir el problema"?',o:['Asignar el problema al equipo que lo originó','Buscar un tercero externo sin sesgo','Usar IA para agrupar incidentes en mapas de calor','Buscar caminos alternativos preguntándose qué haría que el problema EMPEORE, para luego invertir esa lógica'],c:3,e:'Invertir el problema cambia la perspectiva y a menudo revela soluciones que el enfoque directo no encontraría.'},
+  {mod:'prob',q:'¿Qué significa el concepto de "Repetibilidad" en el criterio de postulación a Problema?',o:['Que el mismo usuario reporta el incidente más de dos veces','Que el incidente ocurre en múltiples ambientes','Que el incidente fue reabierto más de una vez','La frecuencia con la que se presenta el incidente — si es alta, es criterio para abrir un caso Problema'],c:3,e:'La repetibilidad captura la frecuencia: si un incidente ocurre 3-4 veces por semana, la gestión de problemas debe intervenir.'},
+  // ─── HABILITAR Y MANTENER SOLUCIONES — preguntas adicionales ───
+  {mod:'hym',q:'¿Qué tipo de CRQ se genera cuando la encuesta de riesgos arroja nivel ALTO?',o:['CRQ Ágil aprobada por el Líder de línea de conocimiento','CRQ Estándar exenta de encuesta','CRQ de Emergencia aprobada por el Director de Entorno','CRQ Programada que pasa por el Consejo de Cambios y requiere aprobación del Líder técnico de EBC'],c:3,e:'El riesgo alto exige doble validación: Consejo de Cambios + Líder técnico de EBC.'},
+  {mod:'hym',q:'¿Por qué el proceso de Habilitar y Mantener Soluciones NO aplica a aplicaciones SaaS?',o:['Porque las SaaS no tienen usuarios en Bancolombia','Porque son demasiado pequeñas para requerir control SOX','Porque ya tienen su propio proceso en Azure DevOps','Porque no están dentro de la infraestructura del Banco y no se gestiona su código fuente'],c:3,e:'Las SaaS son administradas por el proveedor — Bancolombia no gestiona su código, por ello el proceso no aplica.'},
+  {mod:'hym',q:'¿Qué es BoolTracker en el ecosistema DevSecOps de Bancolombia?',o:['Una herramienta de gestión de proyectos tipo Kanban','El dashboard de seguimiento del ANS de incidentes','Un repositorio de código fuente alternativo a Azure DevOps','La plataforma central de gestión de vulnerabilidades donde se consolidan hallazgos de escaneos de seguridad'],c:3,e:'BoolTracker centraliza todos los hallazgos de ciberseguridad y es el tablero principal de la gestión de vulnerabilidades.'},
+  {mod:'hym',q:'¿Cuál es el requisito previo obligatorio para poder crear un repositorio o desplegar a producción por primera vez?',o:['Tener el DoD aprobado por el PO','Tener el Test Plan documentado en Azure DevOps','Tener el Pull Request aprobado por al menos un revisor','Tener un elemento de configuración (CI) creado en la CMDB'],c:3,e:'La CMDB es la puerta de entrada: sin CI no se puede iniciar el proceso de Habilitar y Mantener Soluciones.'},
+  {mod:'hym',q:'Desde el punto de vista regulatorio, ¿qué representan los 3 tipos de despliegue (manual, automático y SolMan)?',o:['Preferencias técnicas de cada equipo de desarrollo','Categorías opcionales de documentación del proceso','Fases del ciclo de vida del software','Controles SOX en sí mismos'],c:3,e:'Cada tipo de despliegue es, por definición, un control SOX — parte de la certificación anual ante auditorías internas y externas.'},
 ];
 
 /* ============================================================
@@ -387,6 +423,14 @@ const BANK = [
    ============================================================ */
 const CONTENT = {
 mo:`
+<a href="docs/01_Modelo_Operativo.pdf" target="_blank" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:6px;margin-bottom:20px;box-shadow:var(--shadow);text-decoration:none">
+  <span style="font-size:26px;flex:0 0 auto">📄</span>
+  <div style="flex:1;min-width:0">
+    <div style="font-weight:700;color:var(--navy);font-size:14px">Presentación — Modelo Operativo</div>
+    <div style="font-size:12px;color:var(--soft);margin-top:2px">13 páginas · Abre en nueva pestaña</div>
+  </div>
+  <span style="color:var(--brass);font-weight:700;font-size:13px;flex:0 0 auto">Ver PDF →</span>
+</a>
 <h3 class="section-title">¿Qué es un modelo operativo?</h3>
 <p class="body-p">Un modelo operativo es, en esencia, la manera en que una organización coordina sus esfuerzos para generar valor. Dentro de Bancolombia, esto se formaliza en la siguiente definición oficial:</p>
 <div class="callout key"><div class="callout-title">Definición oficial Bancolombia</div><p>"La manera en que coordinamos áreas, procesos y funciones para entregar valor a nuestros clientes y a la organización." — comparable a una partitura, un GPS o una hoja de ruta organizacional.</p></div>
@@ -434,6 +478,14 @@ mo:`
 `,
 
 cfg:`
+<a href="docs/02_Gestionar_Configuracion_TI.pdf" target="_blank" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--paper);border:1px solid var(--line);border-left:3px solid #3E7487;border-radius:6px;margin-bottom:20px;box-shadow:var(--shadow);text-decoration:none">
+  <span style="font-size:26px;flex:0 0 auto">📄</span>
+  <div style="flex:1;min-width:0">
+    <div style="font-weight:700;color:var(--navy);font-size:14px">Presentación — Gestión de la Configuración / CMDB</div>
+    <div style="font-size:12px;color:var(--soft);margin-top:2px">12 páginas · Abre en nueva pestaña</div>
+  </div>
+  <span style="color:#3E7487;font-weight:700;font-size:13px;flex:0 0 auto">Ver PDF →</span>
+</a>
 <h3 class="section-title">¿Qué es el proceso de Gestión de la Configuración?</h3>
 <p class="body-p">Es el proceso que gestiona —identifica, registra y controla— todos los componentes de infraestructura tecnológica del Banco. También se conoce como <b>ITCM</b> (IT Configuration Management) o, más comúnmente, como la <b>CMDB</b>.</p>
 <div class="callout key"><div class="callout-title">Los 3 pilares del proceso</div><p><b>CI</b> (Elemento de Configuración) + <b>CMDB</b> (repositorio) + <b>Herramienta</b> (BMC Helix / Hilix) = el ecosistema completo de gestión de la configuración.</p></div>
@@ -480,6 +532,14 @@ cfg:`
 `,
 
 cam:`
+<a href="docs/03_Gestionar_Cambios_TI.pdf" target="_blank" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--paper);border:1px solid var(--line);border-left:3px solid #A0552B;border-radius:6px;margin-bottom:20px;box-shadow:var(--shadow);text-decoration:none">
+  <span style="font-size:26px;flex:0 0 auto">📄</span>
+  <div style="flex:1;min-width:0">
+    <div style="font-weight:700;color:var(--navy);font-size:14px">Presentación — Gestión de Cambios TI</div>
+    <div style="font-size:12px;color:var(--soft);margin-top:2px">33 páginas · Abre en nueva pestaña</div>
+  </div>
+  <span style="color:#A0552B;font-weight:700;font-size:13px;flex:0 0 auto">Ver PDF →</span>
+</a>
 <h3 class="section-title">¿Por qué es crítico este proceso? — Ley SOX</h3>
 <p class="body-p">El proceso de Gestión de Cambios responde a tres razones fundamentales: mantener la imagen del Banco, garantizar disponibilidad de servicios, y cumplir con la <b>Ley SOX (Sarbanes-Oxley)</b> que rige a todas las empresas que cotizan en la Bolsa de Nueva York — como Bancolombia.</p>
 <div class="callout rule"><div class="callout-title">Control SOX del proceso</div><p>La <b>aprobación del cambio</b> es el control SOX. Cada año el Banco se certifica ante auditorías internas y externas. La aprobación NO puede ser "a la carrera" — es la certificación formal de que el equipo está listo para producción.</p></div>
@@ -527,6 +587,14 @@ cam:`
 `,
 
 inc:`
+<a href="docs/04_Gestion_de_incidentes_TI.pdf" target="_blank" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--paper);border:1px solid var(--line);border-left:3px solid #A6322C;border-radius:6px;margin-bottom:20px;box-shadow:var(--shadow);text-decoration:none">
+  <span style="font-size:26px;flex:0 0 auto">📄</span>
+  <div style="flex:1;min-width:0">
+    <div style="font-weight:700;color:var(--navy);font-size:14px">Presentación — Gestión de Incidentes y Problemas TI</div>
+    <div style="font-size:12px;color:var(--soft);margin-top:2px">35 slides · Abre en nueva pestaña</div>
+  </div>
+  <span style="color:#A6322C;font-weight:700;font-size:13px;flex:0 0 auto">Ver PDF →</span>
+</a>
 <h3 class="section-title">Incidente vs. Problema — diferencias clave</h3>
 <table class="tbl"><thead><tr><th></th><th>Incidente</th><th>Problema</th></tr></thead><tbody>
 <tr><td><b>Actúa sobre</b></td><td>El síntoma</td><td>La causa raíz</td></tr>
@@ -581,6 +649,14 @@ inc:`
 `,
 
 prob:`
+<a href="docs/05_Evolucionando_Gestion_Problemas.pdf" target="_blank" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--paper);border:1px solid var(--line);border-left:3px solid #4F6E45;border-radius:6px;margin-bottom:20px;box-shadow:var(--shadow);text-decoration:none">
+  <span style="font-size:26px;flex:0 0 auto">📄</span>
+  <div style="flex:1;min-width:0">
+    <div style="font-weight:700;color:var(--navy);font-size:14px">Presentación — Evolucionando la Gestión de Problemas 2026</div>
+    <div style="font-size:12px;color:var(--soft);margin-top:2px">20 páginas · Abre en nueva pestaña</div>
+  </div>
+  <span style="color:#4F6E45;font-weight:700;font-size:13px;flex:0 0 auto">Ver PDF →</span>
+</a>
 <h3 class="section-title">Las 4 fases de Gartner</h3>
 <table class="tbl"><thead><tr><th>Fase</th><th>Objetivo</th></tr></thead><tbody>
 <tr><td><b>1. Identificación</b></td><td>Saber dónde buscar problemas y cuáles son elegibles para crear un caso problema.</td></tr>
@@ -629,6 +705,13 @@ prob:`
 `,
 
 hym:`
+<div style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:#f5f5f5;border:1px solid var(--line);border-left:3px solid #3A4A73;border-radius:6px;margin-bottom:20px">
+  <span style="font-size:26px;flex:0 0 auto">ℹ️</span>
+  <div>
+    <div style="font-weight:700;color:var(--navy);font-size:14px">Presentación — Habilitar y Mantener Soluciones</div>
+    <div style="font-size:12px;color:var(--soft);margin-top:2px">No hay presentación adjunta para este módulo en el presente ciclo de certificación.</div>
+  </div>
+</div>
 <h3 class="section-title">¿Qué es y por qué existe el proceso?</h3>
 <p class="body-p">Habilitar y Mantener Soluciones define las <b>buenas prácticas para ejecutar el ciclo de vida de desarrollo</b> en la organización. Garantiza un estándar único que protege la calidad y el cumplimiento regulatorio.</p>
 <div class="callout rule"><div class="callout-title">¿Por qué es un proceso SOX?</div><p>Hace parte de la certificación de la <b>Ley SOX</b>, requisito para que el Grupo opere y cotice en la Bolsa de Nueva York. Aplica a todos los cambios de software — desde el incidente más pequeño hasta el proyecto más grande.</p></div>
