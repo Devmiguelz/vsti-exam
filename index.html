@@ -26,7 +26,7 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none}
 #nav{position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--paper);border-top:1px solid var(--line);display:flex;z-index:100}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;color:var(--soft);background:none;transition:color .15s}
 .nav-btn.active{color:var(--navy)}
-.nav-btn svg{width:22px;height:22px}
+.nav-btn svg{width:22px;height:22px;display:block;margin:0 auto 2px}
 
 /* Cards */
 .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:16px;box-shadow:var(--shadow)}
@@ -182,7 +182,38 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none}
 .pwa-banner{background:var(--navy);color:#fff;padding:12px 16px;border-radius:var(--radius);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .pwa-banner p{font-size:13px;line-height:1.4;flex:1}
 .pwa-banner button{flex:0 0 auto;background:#fff;color:var(--navy);border:none;border-radius:4px;padding:7px 12px;font-weight:700;font-size:13px;cursor:pointer}
+
+/* Lucide icons */
+[data-lucide]{display:inline-block;width:1em;height:1em;vertical-align:-0.15em;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.nav-btn [data-lucide]{width:22px;height:22px;display:block;margin:0 auto 2px;vertical-align:unset}
+.mod-icon [data-lucide]{width:28px;height:28px;vertical-align:middle}
+.mod-pill [data-lucide]{width:13px;height:13px;vertical-align:-2px}
+.rating-btn [data-lucide]{width:15px;height:15px;vertical-align:-2px}
+.verdict [data-lucide]{width:14px;height:14px;vertical-align:-2px}
+.back-btn [data-lucide]{width:14px;height:14px;vertical-align:-1px;margin-right:2px}
+.btn [data-lucide]{width:15px;height:15px;vertical-align:-2px}
+.callout-title [data-lucide]{margin-right:5px;vertical-align:-3px;width:15px;height:15px}
+
+/* Exam history */
+.exam-item{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;transition:border-color .15s}
+.exam-item:hover{border-color:var(--navy)}
+.exam-score{font-size:22px;font-weight:700;color:var(--navy);flex-shrink:0}
+.exam-score.pass{color:var(--good)}
+.exam-score.fail{color:var(--bad)}
+.exam-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.exam-badge.pass{background:var(--good-bg);color:var(--good)}
+.exam-badge.fail{background:var(--bad-bg);color:var(--bad)}
+/* Question review */
+.qr-item{border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px}
+.qr-item.ok{border-left:4px solid var(--good)}
+.qr-item.bad{border-left:4px solid var(--bad)}
+.qr-opt{padding:6px 10px;border-radius:6px;font-size:13px;margin-top:4px;display:flex;align-items:center;gap:8px}
+.qr-opt.correct{background:var(--good-bg);color:var(--good);font-weight:600}
+.qr-opt.wrong{background:var(--bad-bg);color:var(--bad)}
+.qr-opt.neutral{color:var(--soft)}
+.qr-explain{font-size:12px;color:var(--soft);margin-top:8px;padding-top:8px;border-top:1px solid var(--line);line-height:1.5}
 </style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -190,34 +221,53 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none}
 
 <nav id="nav">
   <button class="nav-btn" id="nb-home" onclick="go('home')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <i data-lucide="home"></i>
     Inicio
   </button>
   <button class="nav-btn" id="nb-modules" onclick="go('modules')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    <i data-lucide="layout-grid"></i>
     Módulos
   </button>
   <button class="nav-btn" id="nb-cards" onclick="go('cards','all')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+    <i data-lucide="layers"></i>
     Flashcards
   </button>
   <button class="nav-btn" id="nb-quiz" onclick="go('quiz','all')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+    <i data-lucide="clipboard-check"></i>
     Examen
+  </button>
+  <button class="nav-btn" id="nb-history" onclick="go('history')">
+    <i data-lucide="history"></i>
+    Historial
   </button>
 </nav>
 
 <script>
+function icon(name) { return `<i data-lucide="${name}"></i>`; }
+function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
+
+function openPdf(btn, id, src) {
+  if (window.innerWidth < 768 || ('ontouchstart' in window && window.innerWidth < 1024)) {
+    window.open(src, '_blank');
+    return;
+  }
+  var f = document.getElementById(id);
+  var open = f.style.display === 'block';
+  f.style.display = open ? 'none' : 'block';
+  btn.innerHTML = open ? `${icon('file-text')} Ver presentación` : `${icon('x')} Cerrar presentación`;
+  initIcons();
+}
+
 /* ============================================================
    DATOS — Módulos
    ============================================================ */
 const M = {
-  mo:  {name:'Modelo Operativo',              short:'Mod. Operativo',    color:'#A9843F', icon:'🏛️'},
-  cfg: {name:'Gestión de la Configuración',   short:'Configuración',     color:'#3E7487', icon:'⚙️'},
-  cam: {name:'Gestión de Cambios',            short:'Cambios',           color:'#A0552B', icon:'🔄'},
-  inc: {name:'Gestión de Incidentes',         short:'Incidentes',        color:'#A6322C', icon:'🚨'},
-  prob:{name:'Gestión de Problemas',          short:'Problemas',         color:'#4F6E45', icon:'🧩'},
-  hym: {name:'Habilitar y Mantener Sol.',     short:'Hab. y Mantener',   color:'#3A4A73', icon:'🛠️'},
+  mo:  {name:'Modelo Operativo',              short:'Mod. Operativo',    color:'#A9843F', icon:'🏛️', li:'landmark'},
+  cfg: {name:'Gestión de la Configuración',   short:'Configuración',     color:'#3E7487', icon:'⚙️', li:'settings'},
+  cam: {name:'Gestión de Cambios',            short:'Cambios',           color:'#A0552B', icon:'🔄', li:'refresh-cw'},
+  inc: {name:'Gestión de Incidentes',         short:'Incidentes',        color:'#A6322C', icon:'🚨', li:'alert-circle'},
+  prob:{name:'Gestión de Problemas',          short:'Problemas',         color:'#4F6E45', icon:'🧩', li:'puzzle'},
+  hym: {name:'Habilitar y Mantener Sol.',     short:'Hab. y Mantener',   color:'#3A4A73', icon:'🛠️', li:'wrench'},
 };
 const MOD_KEYS = Object.keys(M);
 
@@ -424,7 +474,7 @@ const BANK = [
 const CONTENT = {
 mo:`
 <h3 class="section-title">Presentación del módulo</h3>
-<div class="btn-row" style="margin-bottom:12px"><button class="btn btn-outline btn-sm" onclick="var f=document.getElementById('pdf-mo');var o=f.style.display==='block';f.style.display=o?'none':'block';this.textContent=o?'📄 Ver presentación':'✕ Cerrar presentación'">📄 Ver presentación</button></div>
+<div class="btn-row" style="margin-bottom:12px"><button class="btn btn-outline btn-sm" onclick="openPdf(this,'pdf-mo','docs/01_Modelo_Operativo.pdf')"><i data-lucide="file-text"></i> Ver presentación</button></div>
 <iframe id="pdf-mo" src="docs/01_Modelo_Operativo.pdf" width="100%" height="560" style="display:none;border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px" title="Modelo Operativo"></iframe>
 <h3 class="section-title">¿Qué es un modelo operativo?</h3>
 <p class="body-p">Un modelo operativo es, en esencia, la manera en que una organización coordina sus esfuerzos para generar valor. Dentro de Bancolombia, esto se formaliza en la siguiente definición oficial:</p>
@@ -461,7 +511,7 @@ mo:`
 <tr><td><b>State</b></td><td>Habilitación y estandarización</td><td>Habilita productos, estandariza la operación, apoya adopción de lineamientos y garantiza cumplimiento. Entrega capacidades listas para consumir.</td></tr>
 <tr><td><b>Local</b></td><td>Ejecución y consumo (BUs)</td><td>Consume los servicios/lineamientos con alta autonomía; ejecuta las acciones que generan el máximo valor. Incluye soporte, cercano al cliente final.</td></tr>
 </tbody></table>
-<div class="callout warn"><div class="callout-title">⚠️ Punto de atención para el examen</div><p>Un equipo Local <b>NO puede decidir unilateralmente</b> saltarse un lineamiento Federal. Que el modelo no sea "una camisa de fuerza" significa que es adaptable, pero toda excepción debe <b>coordinarse y aprobarse</b> bajo el ciclo PHVA.</p></div>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Punto de atención para el examen</div><p>Un equipo Local <b>NO puede decidir unilateralmente</b> saltarse un lineamiento Federal. Que el modelo no sea "una camisa de fuerza" significa que es adaptable, pero toda excepción debe <b>coordinarse y aprobarse</b> bajo el ciclo PHVA.</p></div>
 <div class="callout data"><div class="callout-title">Dato clave</div><p>Aproximadamente <b>2,534 personas</b> entre las dos vicepresidencias deben certificarse. El examen se lanzó el 17 de julio y queda abierto 1 mes.</p></div>
 
 <h3 class="section-title">Frameworks base: COBIT 5 e ITIL 4</h3>
@@ -498,7 +548,7 @@ mo:`
 
 cfg:`
 <h3 class="section-title">Presentación del módulo</h3>
-<div class="btn-row" style="margin-bottom:12px"><button class="btn btn-outline btn-sm" onclick="var f=document.getElementById('pdf-cfg');var o=f.style.display==='block';f.style.display=o?'none':'block';this.textContent=o?'📄 Ver presentación':'✕ Cerrar presentación'">📄 Ver presentación</button></div>
+<div class="btn-row" style="margin-bottom:12px"><button class="btn btn-outline btn-sm" onclick="openPdf(this,'pdf-cfg','docs/02_Gestionar_Configuracion_TI.pdf')"><i data-lucide="file-text"></i> Ver presentación</button></div>
 <iframe id="pdf-cfg" src="docs/02_Gestionar_Configuracion_TI.pdf" width="100%" height="560" style="display:none;border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px" title="Gestión de la Configuración"></iframe>
 <h3 class="section-title">¿Qué es el proceso de Gestión de la Configuración?</h3>
 <p class="body-p">Es el proceso que gestiona —identifica, registra y controla— todos los componentes de infraestructura tecnológica del Banco. También se conoce como <b>ITCM</b> (IT Configuration Management) o, más comúnmente, como la <b>CMDB</b>.</p>
@@ -527,7 +577,7 @@ cfg:`
 
 <h3 class="section-title">Políticas y herramientas clave</h3>
 <div class="callout rule"><div class="callout-title">App Code — el atributo obligatorio</div><p>Todo componente en la CMDB tiene un atributo clave y obligatorio: el <b>App Code</b>. A través de este código se identifica el responsable de cada componente.</p></div>
-<div class="callout warn"><div class="callout-title">⚠️ Segregación de funciones</div><p>En Hilix, <b>solo los dueños de cada tipo de componente</b> pueden actualizarlo. No cualquiera puede modificar la CMDB.</p></div>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Segregación de funciones</div><p>En Hilix, <b>solo los dueños de cada tipo de componente</b> pueden actualizarlo. No cualquiera puede modificar la CMDB.</p></div>
 
 <h3 class="section-title">Validación periódica</h3>
 <table class="tbl"><thead><tr><th>Tipo</th><th>Cómo funciona</th></tr></thead><tbody>
@@ -584,7 +634,7 @@ cfg:`
 
 cam:`
 <h3 class="section-title">Presentación del módulo</h3>
-<div class="btn-row" style="margin-bottom:12px"><button class="btn btn-outline btn-sm" onclick="var f=document.getElementById('pdf-cam');var o=f.style.display==='block';f.style.display=o?'none':'block';this.textContent=o?'📄 Ver presentación':'✕ Cerrar presentación'">📄 Ver presentación</button></div>
+<div class="btn-row" style="margin-bottom:12px"><button class="btn btn-outline btn-sm" onclick="openPdf(this,'pdf-cam','docs/03_Gestionar_Cambios_TI.pdf')"><i data-lucide="file-text"></i> Ver presentación</button></div>
 <iframe id="pdf-cam" src="docs/03_Gestionar_Cambios_TI.pdf" width="100%" height="560" style="display:none;border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px" title="Gestión de Cambios TI"></iframe>
 <h3 class="section-title">¿Por qué es crítico este proceso? — Ley SOX</h3>
 <p class="body-p">El proceso de Gestión de Cambios responde a tres razones fundamentales: mantener la imagen del Banco, garantizar disponibilidad de servicios, y cumplir con la <b>Ley SOX (Sarbanes-Oxley)</b> que rige a todas las empresas que cotizan en la Bolsa de Nueva York — como Bancolombia.</p>
@@ -603,7 +653,7 @@ cam:`
 </tbody></table>
 
 <h3 class="section-title">La Circular 028 — norma regulatoria clave</h3>
-<div class="callout warn"><div class="callout-title">⚠️ Circular 028 — Superintendencia Financiera</div><p>Si un servicio de cara al cliente tendrá indisponibilidad de <b>30 minutos o más</b>: comunicar a los clientes con <b>mínimo 8 días calendario de anticipación</b> y presentar al Consejo con <b>15 días de anticipación</b>. Incumplir implica sanciones económicas significativas.</p></div>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Circular 028 — Superintendencia Financiera</div><p>Si un servicio de cara al cliente tendrá indisponibilidad de <b>30 minutos o más</b>: comunicar a los clientes con <b>mínimo 8 días calendario de anticipación</b> y presentar al Consejo con <b>15 días de anticipación</b>. Incumplir implica sanciones económicas significativas.</p></div>
 
 <h3 class="section-title">El Consejo de Cambios</h3>
 <table class="tbl"><thead><tr><th>Día</th><th>Actividad</th></tr></thead><tbody>
@@ -622,7 +672,7 @@ cam:`
 <tr><td><b>Control SOX</b></td><td>Aprobación formal del cambio antes de producción.</td></tr>
 <tr><td><b>Control operativo</b></td><td>Cierre y validación del cambio ejecutado (con éxito / sin éxito / con problemas).</td></tr>
 </tbody></table>
-<div class="callout warn"><div class="callout-title">⚠️ Reglas de oro para cambios automáticos</div><p>• NUNCA se modifican manualmente en Hilix (excepto Git LFS).<br>• Si no se cerró correctamente: crear ticket a Procesos TI DevEx, NUNCA intervenir manualmente.</p></div>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Reglas de oro para cambios automáticos</div><p>• NUNCA se modifican manualmente en Hilix (excepto Git LFS).<br>• Si no se cerró correctamente: crear ticket a Procesos TI DevEx, NUNCA intervenir manualmente.</p></div>
 
 <h3 class="section-title">Origen y contexto de la Ley SOX</h3>
 <table class="tbl"><thead><tr><th>Dato</th><th>Detalle</th></tr></thead><tbody>
@@ -633,7 +683,7 @@ cam:`
 </tbody></table>
 
 <h3 class="section-title">¿Qué NO es un cambio TI?</h3>
-<div class="callout warn"><div class="callout-title">⚠️ NO se debe crear una CRQ para</div><p>• <b>Autorizaciones de accesos</b> — se gestionan por un proceso diferente (IAM).<br>• <b>Parametrizaciones funcionales</b> — cambios que hace el negocio, no el área de TI.<br>• <b>Pedidos del catálogo Helix</b> — son solicitudes de servicio (Service Request), no cambios de TI.<br>• Actividades que no impactan el ambiente de producción.</p></div>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>NO se debe crear una CRQ para</div><p>• <b>Autorizaciones de accesos</b> — se gestionan por un proceso diferente (IAM).<br>• <b>Parametrizaciones funcionales</b> — cambios que hace el negocio, no el área de TI.<br>• <b>Pedidos del catálogo Helix</b> — son solicitudes de servicio (Service Request), no cambios de TI.<br>• Actividades que no impactan el ambiente de producción.</p></div>
 
 <h3 class="section-title">Definiciones clave ampliadas</h3>
 <table class="tbl"><thead><tr><th>Concepto</th><th>Definición</th></tr></thead><tbody>
@@ -671,7 +721,7 @@ cam:`
 </tbody></table>
 
 <h3 class="section-title">Lineamientos de fechas de restricción (Quincena)</h3>
-<div class="callout warn"><div class="callout-title">⚠️ No ejecutar cambios con afectación durante</div><p>• <b>1 día hábil ANTES</b> de la quincena (días de pago: 15 y último día del mes).<br>• <b>El día de la quincena</b>.<br>• <b>1 día hábil DESPUÉS</b> de la quincena.<br>Esta restricción aplica a cambios <b>ágiles y programados</b>. <b>NO aplica</b> para estándar, emergencia ni aliados.<br>Para ejecutar en fecha restringida: requiere aprobación explícita del <b>Director o Líder de Entorno</b>.</p></div>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>No ejecutar cambios con afectación durante</div><p>• <b>1 día hábil ANTES</b> de la quincena (días de pago: 15 y último día del mes).<br>• <b>El día de la quincena</b>.<br>• <b>1 día hábil DESPUÉS</b> de la quincena.<br>Esta restricción aplica a cambios <b>ágiles y programados</b>. <b>NO aplica</b> para estándar, emergencia ni aliados.<br>Para ejecutar en fecha restringida: requiere aprobación explícita del <b>Director o Líder de Entorno</b>.</p></div>
 
 <h3 class="section-title">Protocolo del Consejo de Cambios</h3>
 <div class="callout rule"><div class="callout-title">Para Coordinadores — antes del Consejo</div><p>1. El cambio debe estar creado en Helix con todos los campos requeridos completos.<br>2. Debe contar con la aprobación del líder antes de llevarlo al Consejo.<br>3. Completar el campo <b>"Fecha Consejo"</b> con la sesión correcta (martes o jueves).<br>4. Completar el campo <b>"Gestión Consejo"</b>: <em>Recomendado</em> (sin necesidad de presencia física) o <em>Presencial</em> (debe asistir a la sesión).<br>5. El acta se genera los lunes y miércoles al mediodía — todos los cambios deben estar listos antes de ese corte.</p></div>
@@ -686,7 +736,7 @@ cam:`
 
 inc:`
 <h3 class="section-title">Presentación del módulo</h3>
-<div class="btn-row" style="margin-bottom:12px"><button class="btn btn-outline btn-sm" onclick="var f=document.getElementById('pdf-inc');var o=f.style.display==='block';f.style.display=o?'none':'block';this.textContent=o?'📄 Ver presentación':'✕ Cerrar presentación'">📄 Ver presentación</button></div>
+<div class="btn-row" style="margin-bottom:12px"><button class="btn btn-outline btn-sm" onclick="openPdf(this,'pdf-inc','docs/04_Gestion_de_incidentes_TI.pdf')"><i data-lucide="file-text"></i> Ver presentación</button></div>
 <iframe id="pdf-inc" src="docs/04_Gestion_de_incidentes_TI.pdf" width="100%" height="560" style="display:none;border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px" title="Gestión de Incidentes y Problemas TI"></iframe>
 <h3 class="section-title">Incidente vs. Problema — diferencias clave</h3>
 <table class="tbl"><thead><tr><th></th><th>Incidente</th><th>Problema</th></tr></thead><tbody>
@@ -720,7 +770,7 @@ inc:`
 <tr><td>Configuración incorrecta que causó consumo de memoria</td><td>Hubo un error</td></tr>
 <tr><td>Certificado expiró por falta de monitoreo</td><td>El servicio se cayó</td></tr>
 </tbody></table>
-<div class="callout warn"><div class="callout-title">⚠️ Error muy común</div><p>Nunca borrar la pregunta de causa raíz al cerrar un incidente. Si no se conoce: responder "no se ha identificado la causa raíz" y <b>crear inmediatamente un caso problema</b>.</p></div>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Error muy común</div><p>Nunca borrar la pregunta de causa raíz al cerrar un incidente. Si no se conoce: responder "no se ha identificado la causa raíz" y <b>crear inmediatamente un caso problema</b>.</p></div>
 
 <h3 class="section-title">Garantías, grupos y reglas clave</h3>
 <div class="callout key"><div class="callout-title">Ventana de garantía</div><p><b>5 días corridos</b> desde la resolución. La reapertura la gestiona únicamente <b>Mateo</b> (mesa de servicio). Pasado ese plazo, se debe crear un incidente nuevo.</p></div>
@@ -793,7 +843,7 @@ inc:`
 
 prob:`
 <h3 class="section-title">Presentación del módulo</h3>
-<div class="btn-row" style="margin-bottom:12px"><button class="btn btn-outline btn-sm" onclick="var f=document.getElementById('pdf-prob');var o=f.style.display==='block';f.style.display=o?'none':'block';this.textContent=o?'📄 Ver presentación':'✕ Cerrar presentación'">📄 Ver presentación</button></div>
+<div class="btn-row" style="margin-bottom:12px"><button class="btn btn-outline btn-sm" onclick="openPdf(this,'pdf-prob','docs/05_Evolucionando_Gestion_Problemas.pdf')"><i data-lucide="file-text"></i> Ver presentación</button></div>
 <iframe id="pdf-prob" src="docs/05_Evolucionando_Gestion_Problemas.pdf" width="100%" height="560" style="display:none;border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px" title="Evolucionando la Gestión de Problemas 2026"></iframe>
 <h3 class="section-title">Las 4 fases de Gartner</h3>
 <table class="tbl"><thead><tr><th>Fase</th><th>Objetivo</th></tr></thead><tbody>
@@ -813,7 +863,7 @@ prob:`
 
 <h3 class="section-title">El nuevo flujo del PKE</h3>
 <div class="callout rule"><div class="callout-title">¿Cómo se crea un PKE?</div><p>1. Tener el caso problema bien documentado (causa raíz y resolución completas).<br>2. Cambiar estado a "Terminado" → motivo: <b>"Error conocido"</b>.<br>3. Hilix genera automáticamente un artículo con ID <b>PKE</b>, heredando toda la documentación del caso problema.</p></div>
-<div class="callout warn"><div class="callout-title">⚠️ PKE ≠ NKW</div><p><b>PKE:</b> nace de un caso problema cerrado — hereda su documentación.<br><b>NKW:</b> plantilla independiente del módulo Knowledge de Hilix.<br>Ambos pueden aparecer en el panel de recursos de un ticket, pero NO son lo mismo.</p></div>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>PKE ≠ NKW</div><p><b>PKE:</b> nace de un caso problema cerrado — hereda su documentación.<br><b>NKW:</b> plantilla independiente del módulo Knowledge de Hilix.<br>Ambos pueden aparecer en el panel de recursos de un ticket, pero NO son lo mismo.</p></div>
 
 <h3 class="section-title">Gestión reactiva vs. proactiva</h3>
 <table class="tbl"><thead><tr><th>Camino</th><th>Cuándo aplica</th></tr></thead><tbody>
@@ -867,7 +917,7 @@ prob:`
 <div class="callout data"><div class="callout-title">Herramienta: Gestión Proactiva — ITSM Insights</div><p>Workspace en Helix que usa <b>IA para agrupar incidentes en mapas de calor</b>, detectar patrones y tendencias antes de que escalen. Permite crear casos problema directamente desde el mapa. La calidad del análisis depende directamente de la calidad de los datos cargados en los tickets.</p></div>
 
 <h3 class="section-title">Hallazgos — qué hacen mal los equipos</h3>
-<div class="callout warn"><div class="callout-title">⚠️ Problemas comunes identificados en el proceso</div><p>• Se documenta <b>qué pasó</b> pero no el <b>por qué real</b> — sin definiciones claras de causa raíz.<br>• La causa raíz describe el síntoma, no la causa subyacente.<br>• La mayoría de los casos problema los <b>crea el proceso automáticamente</b>, no los equipos proactivamente.<br>• El problema de fondo suele estar en la <b>disciplina operativa y la ejecución</b>, no en la tecnología.<br>• Equipos que no realizan la revisión mensual de incidentes (control BCOT110104C005).</p></div>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Problemas comunes identificados en el proceso</div><p>• Se documenta <b>qué pasó</b> pero no el <b>por qué real</b> — sin definiciones claras de causa raíz.<br>• La causa raíz describe el síntoma, no la causa subyacente.<br>• La mayoría de los casos problema los <b>crea el proceso automáticamente</b>, no los equipos proactivamente.<br>• El problema de fondo suele estar en la <b>disciplina operativa y la ejecución</b>, no en la tecnología.<br>• Equipos que no realizan la revisión mensual de incidentes (control BCOT110104C005).</p></div>
 
 <h3 class="section-title">Evolución del proceso — niveles de madurez</h3>
 <table class="tbl"><thead><tr><th>Nivel de madurez</th><th>Características</th></tr></thead><tbody>
@@ -904,7 +954,7 @@ hym:`
 <h3 class="section-title">¿Qué es y por qué existe el proceso?</h3>
 <p class="body-p">Habilitar y Mantener Soluciones define las <b>buenas prácticas para ejecutar el ciclo de vida de desarrollo</b> en la organización. Garantiza un estándar único que protege la calidad y el cumplimiento regulatorio.</p>
 <div class="callout rule"><div class="callout-title">¿Por qué es un proceso SOX?</div><p>Hace parte de la certificación de la <b>Ley SOX</b>, requisito para que el Grupo opere y cotice en la Bolsa de Nueva York. Aplica a todos los cambios de software — desde el incidente más pequeño hasta el proyecto más grande.</p></div>
-<div class="callout warn"><div class="callout-title">⚠️ Excepción importante</div><p>El proceso <b>NO aplica a aplicaciones SaaS</b> — no están dentro de la infraestructura del Banco.</p></div>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Excepción importante</div><p>El proceso <b>NO aplica a aplicaciones SaaS</b> — no están dentro de la infraestructura del Banco.</p></div>
 
 <h3 class="section-title">Las 5 etapas del proceso</h3>
 <table class="tbl"><thead><tr><th>Etapa</th><th>En qué consiste</th></tr></thead><tbody>
@@ -939,7 +989,7 @@ hym:`
 <tr><td><b>Automático (CI/CD)</b></td><td>Azure DevOps</td><td>Despliegue 100% automático sin intervención humana.</td></tr>
 <tr><td><b>SolMan</b></td><td>SolMan — Charm</td><td>Despliegue automatizado para SAP mediante documento Charm asociado a la CRQ.</td></tr>
 </tbody></table>
-<div class="callout warn"><div class="callout-title">⚠️ Regla estricta — despliegue manual</div><p>El instalador <b>NUNCA</b> debe recibir instrucciones por correo personal, Teams, OneDrive ni adjunto directo en la CRQ. Solo desde el correo automático de Azure DevOps. Esto mitiga el riesgo de fraude interno y ha causado incumplimientos SOX.</p></div>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Regla estricta — despliegue manual</div><p>El instalador <b>NUNCA</b> debe recibir instrucciones por correo personal, Teams, OneDrive ni adjunto directo en la CRQ. Solo desde el correo automático de Azure DevOps. Esto mitiga el riesgo de fraude interno y ha causado incumplimientos SOX.</p></div>
 
 <h3 class="section-title">El DoD y la encuesta de riesgos</h3>
 <div class="callout key"><div class="callout-title">Definition of Done (DoD)</div><p>Centraliza toda la evidencia en Azure DevOps. Requiere: Test Plan, documentación, encuesta de riesgos, y <b>aprobación PERSONAL del Dueño de Producto</b> — nunca delegada.</p></div>
@@ -1230,6 +1280,7 @@ function loadST() {
   ST.drills        = ST.drills        || {};
   ST.drills.match  = ST.drills.match  || {};
   ST.drills.order  = ST.drills.order  || {};
+  ST.examLog       = ST.examLog       || [];
 }
 
 function saveST() {
@@ -1369,7 +1420,8 @@ function go(screen, arg) {
   const btns = document.querySelectorAll('.nav-btn');
   btns.forEach(b => b.classList.remove('active'));
   const nbMap = { home:'nb-home', modules:'nb-modules', module:'nb-modules',
-                  cards:'nb-cards', quiz:'nb-quiz', results:'nb-quiz', setup:'nb-home' };
+                  cards:'nb-cards', quiz:'nb-quiz', results:'nb-quiz', setup:'nb-home',
+                  history:'nb-history', 'exam-review':'nb-history' };
   const nb = document.getElementById(nbMap[screen]);
   if (nb) nb.classList.add('active');
 
@@ -1384,7 +1436,10 @@ function go(screen, arg) {
   else if (screen === 'order')   { startOrder(arg, 0); }
   else if (screen === 'tf')      { startTF(arg); }
   else if (screen === 'fill')    { startFill(arg); }
-  else if (screen === 'quiz')    { startQuiz(arg); }
+  else if (screen === 'quiz')        { startQuiz(arg); }
+  else if (screen === 'history')     { app.innerHTML = renderHistory(); }
+  else if (screen === 'exam-review') { app.innerHTML = renderExamReview(arg); }
+  initIcons();
 }
 
 /* ============================================================
@@ -1483,7 +1538,7 @@ function renderHome() {
       <div style="font-size:12px;color:var(--soft)">Días para el examen</div>
       <div style="font-size:24px;font-weight:700;color:${examDays <= 3 ? 'var(--bad)' : 'var(--navy)'}">${examDays}</div>
     </div>
-    <button class="btn btn-outline btn-sm" onclick="go('setup')">⚙ Configurar</button>
+    <button class="btn btn-outline btn-sm" onclick="go('setup')">${icon('settings')} Configurar</button>
   </div>` : `<div class="card card-sm" style="margin-bottom:12px">
     <p style="font-size:14px;color:var(--soft);margin-bottom:10px">Configura tu plan de estudio para ver el conteo de días.</p>
     <button class="btn btn-brass btn-sm" onclick="go('setup')">Configurar plan</button>
@@ -1521,7 +1576,7 @@ function renderHome() {
     const due_k = dueCards(k).length;
     return `<div class="card card-sm" style="border-left:3px solid ${M[k].color};margin-bottom:10px;cursor:pointer" onclick="go('module','${k}')">
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="font-size:14px;font-weight:700;color:var(--navy)">${M[k].icon} ${M[k].name}</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy)">${icon(M[k].li)} ${M[k].name}</div>
         <div style="font-size:13px;color:var(--soft)">${pct}%${due_k > 0 ? ` · <span style="color:var(--bad);font-weight:600">${due_k} pendiente${due_k!==1?'s':''}</span>` : ''}</div>
       </div>
       <div class="prog-bar" style="margin-top:8px"><div class="prog-fill" style="width:${pct}%;background:${M[k].color}"></div></div>
@@ -1529,8 +1584,8 @@ function renderHome() {
   }).join('')}
 
   <div style="text-align:center;margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-    <button class="btn btn-outline btn-sm" onclick="exportST()">↓ Exportar progreso</button>
-    <button class="btn btn-outline btn-sm" onclick="importST()">↑ Importar progreso</button>
+    <button class="btn btn-outline btn-sm" onclick="exportST()">${icon('download')} Exportar progreso</button>
+    <button class="btn btn-outline btn-sm" onclick="importST()">${icon('upload')} Importar progreso</button>
   </div>
   `;
 }
@@ -1550,7 +1605,7 @@ function renderSetup() {
   const s = ST.setup || {};
   return `
   <div class="topbar">
-    <button class="back-btn" onclick="go('home')">← Inicio</button>
+    <button class="back-btn" onclick="go('home')">${icon('arrow-left')} Inicio</button>
     <h2>Configuración</h2>
   </div>
   <div class="card">
@@ -1575,7 +1630,7 @@ function renderSetup() {
     <div class="form-group">
       <label class="form-label">Reiniciar un módulo</label>
       <select class="form-input" id="resetModSel">
-        ${MOD_KEYS.map(k=>`<option value="${k}">${M[k].icon} ${M[k].name}</option>`).join('')}
+        ${MOD_KEYS.map(k=>`<option value="${k}">${M[k].name}</option>`).join('')}
       </select>
     </div>
     <div class="btn-row">
@@ -1633,7 +1688,7 @@ function renderModules() {
     ${MOD_KEYS.map(k => {
       const pct = domainPct(k); const due_k = dueCards(k).length;
       return `<div class="mod-card" style="border-top-color:${M[k].color}" onclick="go('module','${k}')">
-        <div class="mod-icon">${M[k].icon}</div>
+        <div class="mod-icon">${icon(M[k].li)}</div>
         <div class="mod-name">${M[k].name}</div>
         <div class="mod-meta">${FC.filter(c=>c.mod===k).length} tarjetas · ${quizPctForMod(k)||'—'}% quiz</div>
         <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${M[k].color}"></div></div>
@@ -1664,9 +1719,9 @@ function renderModule(id) {
   const orderDone = drillDoneCount('order', id);
 
   return `
-  <button class="back-btn" onclick="go('modules')">← Módulos</button>
+  <button class="back-btn" onclick="go('modules')">${icon('arrow-left')} Módulos</button>
   <div style="margin:12px 0 16px;padding-bottom:12px;border-bottom:2px solid ${mod.color}">
-    <div style="font-size:26px">${mod.icon}</div>
+    <div class="mod-icon" style="margin-bottom:6px">${icon(mod.li)}</div>
     <div style="font-size:20px;font-weight:700;color:var(--navy);margin:4px 0">${mod.name}</div>
     <div style="font-size:13px;color:var(--soft)">Dominio actual: <b>${pct}%</b></div>
     <div class="prog-bar" style="margin-top:8px"><div class="prog-fill" style="width:${pct}%;background:${mod.color}"></div></div>
@@ -1681,81 +1736,81 @@ function renderModule(id) {
   ${VIDEOS[id] ? `<div class="card card-sm" style="margin-bottom:10px">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div>
-        <div style="font-size:14px;font-weight:600;color:var(--navy)">🎬 Ver sesión de difusión</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">${icon('video')} Ver sesión de difusión</div>
         <div style="font-size:12px;color:var(--soft);margin-top:2px">${VIDEOS[id].title}</div>
       </div>
-      <a href="${VIDEOS[id].link || VIDEOS[id].src}" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="text-decoration:none">Ver →</a>
+      <a href="${VIDEOS[id].link || VIDEOS[id].src}" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="text-decoration:none">Ver ${icon('arrow-right')}</a>
     </div>
   </div>` : ''}
 
   <div class="card card-sm" style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
     <div>
-      <div style="font-size:14px;font-weight:600;color:var(--navy)">📖 Leer contenido</div>
-      <div style="font-size:12px;color:var(--soft);margin-top:2px">${isRead ? '✔ Completado' : 'Repasa los conceptos clave del módulo'}</div>
+      <div style="font-size:14px;font-weight:600;color:var(--navy)">${icon('book-open')} Leer contenido</div>
+      <div style="font-size:12px;color:var(--soft);margin-top:2px">${isRead ? `${icon('check')} Completado` : 'Repasa los conceptos clave del módulo'}</div>
     </div>
-    <button class="btn btn-outline btn-sm" onclick="go('read','${id}')">Abrir →</button>
+    <button class="btn btn-outline btn-sm" onclick="go('read','${id}')">Abrir ${icon('arrow-right')}</button>
   </div>
 
   <div class="card card-sm" style="margin-bottom:10px">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div>
-        <div style="font-size:14px;font-weight:600;color:var(--navy)">🃏 Flashcards</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">${icon('layers')} Flashcards</div>
         <div style="font-size:12px;color:var(--soft);margin-top:2px">
           ${due_k > 0 ? `<span style="color:var(--bad);font-weight:600">${due_k} para hoy</span>` : '0 vencidas'}
           · ${new_k} nuevas · 12 totales
         </div>
       </div>
-      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('cards','${id}')">Estudiar →</button>
+      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('cards','${id}')">Estudiar ${icon('arrow-right')}</button>
     </div>
   </div>
 
   <div class="card card-sm" style="margin-bottom:10px">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div>
-        <div style="font-size:14px;font-weight:600;color:var(--navy)">🔗 Ejercicios de emparejar</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">${icon('link')} Ejercicios de emparejar</div>
         <div style="font-size:12px;color:var(--soft);margin-top:2px">${matchDone}/${MATCH[id].length} completados · Toca y conecta los conceptos</div>
       </div>
-      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('match','${id}')">Jugar →</button>
+      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('match','${id}')">Jugar ${icon('arrow-right')}</button>
     </div>
   </div>
 
   <div class="card card-sm" style="margin-bottom:10px">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div>
-        <div style="font-size:14px;font-weight:600;color:var(--navy)">🔢 Ordenar pasos</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">${icon('list-ordered')} Ordenar pasos</div>
         <div style="font-size:12px;color:var(--soft);margin-top:2px">${orderDone}/${ORDER[id].length} completados · Ubica la secuencia correcta</div>
       </div>
-      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('order','${id}')">Jugar →</button>
+      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('order','${id}')">Jugar ${icon('arrow-right')}</button>
     </div>
   </div>
 
   <div class="card card-sm" style="margin-bottom:10px">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div>
-        <div style="font-size:14px;font-weight:600;color:var(--navy)">✅ Verdadero o Falso</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">${icon('circle-check')} Verdadero o Falso</div>
         <div style="font-size:12px;color:var(--soft);margin-top:2px">${TF[id].length} afirmaciones · ${tfHist.length} respondidas</div>
       </div>
-      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('tf','${id}')">Jugar →</button>
+      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('tf','${id}')">Jugar ${icon('arrow-right')}</button>
     </div>
   </div>
 
   <div class="card card-sm" style="margin-bottom:10px">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div>
-        <div style="font-size:14px;font-weight:600;color:var(--navy)">✏️ Completa la palabra</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">${icon('pencil')} Completa la palabra</div>
         <div style="font-size:12px;color:var(--soft);margin-top:2px">${FILL[id].length} frases · ${fillHist.length} respondidas</div>
       </div>
-      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('fill','${id}')">Jugar →</button>
+      <button class="btn btn-sm" style="background:${mod.color};color:#fff" onclick="go('fill','${id}')">Jugar ${icon('arrow-right')}</button>
     </div>
   </div>
 
   <div class="card card-sm">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div>
-        <div style="font-size:14px;font-weight:600;color:var(--navy)">📝 Quiz del módulo</div>
+        <div style="font-size:14px;font-weight:600;color:var(--navy)">${icon('clipboard-list')} Quiz del módulo</div>
         <div style="font-size:12px;color:var(--soft);margin-top:2px">10 preguntas · ${quizTotal} respondidas</div>
       </div>
-      <button class="btn btn-primary btn-sm" onclick="go('quiz','${id}')">Practicar →</button>
+      <button class="btn btn-primary btn-sm" onclick="go('quiz','${id}')">Practicar ${icon('arrow-right')}</button>
     </div>
   </div>
   `;
@@ -1767,16 +1822,16 @@ function renderModule(id) {
 function renderRead(id) {
   const mod = M[id];
   return `
-  <button class="back-btn" onclick="go('module','${id}')">← ${mod.name}</button>
-  <div style="margin:10px 0 16px">
-    <span style="font-size:20px">${mod.icon}</span>
-    <span style="font-size:18px;font-weight:700;color:var(--navy);margin-left:8px">${mod.name}</span>
+  <button class="back-btn" onclick="go('module','${id}')">${icon('arrow-left')} ${mod.name}</button>
+  <div style="margin:10px 0 16px;display:flex;align-items:center;gap:10px">
+    <span class="mod-icon" style="margin-bottom:0">${icon(mod.li)}</span>
+    <span style="font-size:18px;font-weight:700;color:var(--navy)">${mod.name}</span>
   </div>
   <div class="card">
     ${CONTENT[id] || '<p class="body-p">Contenido próximamente.</p>'}
   </div>
   <button class="btn btn-primary btn-full" style="margin-top:12px" onclick="markRead('${id}')">
-    ✔ Marcar como leído y continuar
+    ${icon('check')} Marcar como leído y continuar
   </button>
   `;
 }
@@ -1793,13 +1848,13 @@ function markRead(id) {
 function renderVideo(id) {
   const v = VIDEOS[id];
   const mod = M[id];
-  if (!v) return `<button class="back-btn" onclick="go('module','${id}')">← Volver</button><p style="margin-top:20px">Video no disponible.</p>`;
+  if (!v) return `<button class="back-btn" onclick="go('module','${id}')">${icon('arrow-left')} Volver</button><p style="margin-top:20px">Video no disponible.</p>`;
   const link = v.link || v.src;
   return `
-  <button class="back-btn" onclick="go('module','${id}')">← ${mod.name}</button>
-  <div style="margin:10px 0 20px">
-    <span style="font-size:20px">${mod.icon}</span>
-    <span style="font-size:17px;font-weight:700;color:var(--navy);margin-left:8px">${v.title}</span>
+  <button class="back-btn" onclick="go('module','${id}')">${icon('arrow-left')} ${mod.name}</button>
+  <div style="margin:10px 0 20px;display:flex;align-items:center;gap:10px">
+    <span class="mod-icon" style="margin-bottom:0">${icon(mod.li)}</span>
+    <span style="font-size:17px;font-weight:700;color:var(--navy)">${v.title}</span>
   </div>
   <div class="card" style="text-align:center;padding:32px 20px">
     <div style="font-size:48px;margin-bottom:12px">🎬</div>
@@ -1813,7 +1868,7 @@ function renderVideo(id) {
     </a>
     <div style="font-size:11px;color:var(--soft);margin-top:14px">Requiere sesión activa en Microsoft 365 / Bancolombia</div>
   </div>
-  <button class="btn btn-outline btn-full" style="margin-top:12px" onclick="go('module','${id}')">← Volver al módulo</button>
+  <button class="btn btn-outline btn-full" style="margin-top:12px" onclick="go('module','${id}')">${icon('arrow-left')} Volver al módulo</button>
   `;
 }
 
@@ -1829,7 +1884,7 @@ function startCards(modId) {
   _fcIdx = 0; _fcFlipped = false; _fcCorrect = 0; _fcTotal = _fcSession.length;
   if (!_fcTotal) {
     document.getElementById('app').innerHTML = `
-      <button class="back-btn" onclick="go('modules')">← Módulos</button>
+      <button class="back-btn" onclick="go('modules')">${icon('arrow-left')} Módulos</button>
       <div class="empty-state" style="margin-top:60px">
         <div style="font-size:48px">🎉</div>
         <div style="font-size:18px;font-weight:700;color:var(--navy);margin:12px 0">¡Todo al día!</div>
@@ -1852,8 +1907,8 @@ function renderFCScreen() {
   const mod = M[card.mod];
   app.innerHTML = `
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-    <button class="back-btn" onclick="go('modules')">← Salir</button>
-    <span class="mod-pill" style="background:${mod.color}">${mod.icon} ${mod.short}</span>
+    <button class="back-btn" onclick="go('modules')">${icon('arrow-left')} Salir</button>
+    <span class="mod-pill" style="background:${mod.color}">${icon(mod.li)} ${mod.short}</span>
   </div>
   <div class="fc-counter">${_fcIdx + 1} / ${_fcSession.length} · ${_fcIdx - (_fcTotal - _fcSession.length)} nuevas respondidas</div>
   <div class="fc-shell">
@@ -1863,14 +1918,15 @@ function renderFCScreen() {
     </div>
     ${_fcFlipped ? `
     <div class="rating-btns">
-      <button class="rating-btn rating-again" onclick="rateCard(0)">🔄 Otra vez</button>
-      <button class="rating-btn rating-hard" onclick="rateCard(1)">🤔 Difícil</button>
-      <button class="rating-btn rating-easy" onclick="rateCard(2)">✔ Fácil</button>
+      <button class="rating-btn rating-again" onclick="rateCard(0)">${icon('rotate-ccw')} Otra vez</button>
+      <button class="rating-btn rating-hard" onclick="rateCard(1)">${icon('help-circle')} Difícil</button>
+      <button class="rating-btn rating-easy" onclick="rateCard(2)">${icon('check')} Fácil</button>
     </div>
     <div style="text-align:center;font-size:11px;color:var(--soft);margin-top:8px">
       Intervalo actual: ${cs.interval} día${cs.interval!==1?'s':''} · Repeticiones: ${cs.reps}
     </div>` : ''}
   </div>`;
+  initIcons();
 }
 
 function flipCard() {
@@ -1901,7 +1957,7 @@ function renderFCResults() {
     <div style="font-size:48px">⭐</div>
     <div style="font-size:22px;font-weight:700;color:var(--navy);margin:10px 0" class="serif">¡Sesión completada!</div>
     <div style="font-size:15px;color:var(--soft);margin-bottom:20px">Repasaste <b>${_fcTotal}</b> tarjeta${_fcTotal!==1?'s':''}</div>
-    ${dueNow > 0 ? `<div style="font-size:13px;color:var(--bad);margin-bottom:16px">${dueNow} tarjeta${dueNow!==1?'s':''} siguen pendientes</div>` : '<div style="font-size:13px;color:var(--good);margin-bottom:16px">✔ Sin tarjetas pendientes por hoy</div>'}
+    ${dueNow > 0 ? `<div style="font-size:13px;color:var(--bad);margin-bottom:16px">${dueNow} tarjeta${dueNow!==1?'s':''} siguen pendientes</div>` : `<div style="font-size:13px;color:var(--good);margin-bottom:16px">${icon('check-circle')} Sin tarjetas pendientes por hoy</div>`}
     <div class="btn-row" style="justify-content:center">
       ${dueNow > 0 ? `<button class="btn btn-primary" onclick="startCards('${_fcMod}')">Continuar repasando</button>` : ''}
       <button class="btn btn-outline" onclick="go(${mod ? `'module','${_fcMod}'` : `'home'`})">Volver</button>
@@ -1955,7 +2011,7 @@ function renderMatch() {
 
   document.getElementById('app').innerHTML = `
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-    <button class="back-btn" onclick="go('module','${_mMod}')">← ${mod.name}</button>
+    <button class="back-btn" onclick="go('module','${_mMod}')">${icon('arrow-left')} ${mod.name}</button>
     <div class="ex-dots">${dots}</div>
   </div>
   <div class="card" style="border-top:3px solid ${mod.color}">
@@ -1972,7 +2028,7 @@ function renderMatch() {
       <div style="font-size:32px">🎉</div>
       <div style="font-size:16px;font-weight:700;color:var(--good);margin:6px 0">¡Perfecto!</div>
       ${_mExIdx + 1 < MATCH[_mMod].length
-        ? `<button class="btn btn-primary" onclick="startMatch('${_mMod}', ${_mExIdx+1})">Siguiente ejercicio →</button>`
+        ? `<button class="btn btn-primary" onclick="startMatch('${_mMod}', ${_mExIdx+1})">Siguiente ejercicio ${icon('arrow-right')}</button>`
         : `<div class="btn-row" style="justify-content:center">
              <button class="btn btn-brass" onclick="startMatch('${_mMod}', 0)">Repetir ejercicios</button>
              <button class="btn btn-outline" onclick="go('module','${_mMod}')">Volver al módulo</button>
@@ -1980,6 +2036,7 @@ function renderMatch() {
       }
     </div>` : ''}
   </div>`;
+  initIcons();
 }
 
 function selectLeft(pos) {
@@ -2047,7 +2104,7 @@ function renderOrder() {
 
   document.getElementById('app').innerHTML = `
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-    <button class="back-btn" onclick="go('module','${_ordMod}')">← ${mod.name}</button>
+    <button class="back-btn" onclick="go('module','${_ordMod}')">${icon('arrow-left')} ${mod.name}</button>
     <div class="ex-dots">${dots}</div>
   </div>
   <div class="card" style="border-top:3px solid ${mod.color}">
@@ -2063,7 +2120,7 @@ function renderOrder() {
                <div style="font-size:32px">🎉</div>
                <div style="font-size:16px;font-weight:700;color:var(--good);margin:6px 0">¡Orden correcto!</div>
                ${_ordExIdx + 1 < ORDER[_ordMod].length
-                  ? `<button class="btn btn-primary" onclick="startOrder('${_ordMod}', ${_ordExIdx + 1})">Siguiente ejercicio →</button>`
+                  ? `<button class="btn btn-primary" onclick="startOrder('${_ordMod}', ${_ordExIdx + 1})">Siguiente ejercicio ${icon('arrow-right')}</button>`
                   : `<div class="btn-row" style="justify-content:center">
                        <button class="btn btn-brass" onclick="startOrder('${_ordMod}', 0)">Repetir ejercicios</button>
                        <button class="btn btn-outline" onclick="go('module','${_ordMod}')">Volver al módulo</button>
@@ -2075,6 +2132,7 @@ function renderOrder() {
              </div>`)
       : (allPicked ? `<button class="btn btn-primary btn-full" style="margin-top:16px" onclick="checkOrder()">Verificar orden</button>` : '')}
   </div>`;
+  initIcons();
 }
 
 function pickOrder(i) {
@@ -2120,8 +2178,8 @@ function renderTFScreen() {
   const pct = _tfSession.length ? Math.round(_tfIdx / _tfSession.length * 100) : 0;
   app.innerHTML = `
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-    <button class="back-btn" onclick="go('modules')">← Salir</button>
-    <span class="mod-pill" style="background:${mod.color}">${mod.icon} ${mod.short}</span>
+    <button class="back-btn" onclick="go('modules')">${icon('arrow-left')} Salir</button>
+    <span class="mod-pill" style="background:${mod.color}">${icon(mod.li)} ${mod.short}</span>
   </div>
   <div class="prog-track"><div class="prog-fill-quiz" style="width:${pct}%"></div></div>
   <div style="font-size:12px;color:var(--soft);margin-bottom:12px">Afirmación ${_tfIdx + 1} de ${_tfSession.length}</div>
@@ -2132,8 +2190,9 @@ function renderTFScreen() {
   </div>
   <div class="explain-box" id="tfExplain"><span class="verdict" id="tfVerdict"></span><span id="tfExplainText"></span></div>
   <div style="display:flex;justify-content:flex-end;margin-top:20px;min-height:40px">
-    <button class="btn btn-primary hidden" id="tfNext" onclick="nextTF()">${_tfIdx === _tfSession.length - 1 ? 'Ver resultados' : 'Siguiente →'}</button>
+    <button class="btn btn-primary hidden" id="tfNext" onclick="nextTF()">${_tfIdx === _tfSession.length - 1 ? 'Ver resultados' : `Siguiente ${icon('arrow-right')}`}</button>
   </div>`;
+  initIcons();
 }
 
 function answerTF(val) {
@@ -2154,7 +2213,8 @@ function answerTF(val) {
 
   const box = document.getElementById('tfExplain');
   box.classList.add('show', ok ? 'ok' : 'bad');
-  document.getElementById('tfVerdict').textContent = ok ? '✔ Correcto — ' : '✘ Incorrecto — ';
+  document.getElementById('tfVerdict').innerHTML = ok ? `${icon('check-circle')} Correcto — ` : `${icon('x-circle')} Incorrecto — `;
+  initIcons();
   document.getElementById('tfExplainText').textContent = item.e;
   document.getElementById('tfNext').classList.remove('hidden');
 }
@@ -2176,7 +2236,7 @@ function renderTFResults() {
     .map(k => {
       const p = Math.round(_tfScores[k].ok / _tfScores[k].total * 100);
       return `<div style="padding:10px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:14px;font-weight:600;color:var(--navy)">${M[k].icon} ${M[k].name}</span>
+        <span style="font-size:14px;font-weight:600;color:var(--navy)">${icon(M[k].li)} ${M[k].name}</span>
         <span style="font-size:13px;color:var(--soft)">${_tfScores[k].ok}/${_tfScores[k].total} · ${p}%</span>
       </div>`;
     }).join('');
@@ -2192,6 +2252,7 @@ function renderTFResults() {
       <button class="btn btn-outline" onclick="go(${_tfMod !== 'all' ? `'module','${_tfMod}'` : `'home'`})">Volver</button>
     </div>
   </div>`;
+  initIcons();
 }
 
 /* ============================================================
@@ -2221,8 +2282,8 @@ function renderFillScreen() {
   const pct = _fiSession.length ? Math.round(_fiIdx / _fiSession.length * 100) : 0;
   app.innerHTML = `
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-    <button class="back-btn" onclick="go('modules')">← Salir</button>
-    <span class="mod-pill" style="background:${mod.color}">${mod.icon} ${mod.short}</span>
+    <button class="back-btn" onclick="go('modules')">${icon('arrow-left')} Salir</button>
+    <span class="mod-pill" style="background:${mod.color}">${icon(mod.li)} ${mod.short}</span>
   </div>
   <div class="prog-track"><div class="prog-fill-quiz" style="width:${pct}%"></div></div>
   <div style="font-size:12px;color:var(--soft);margin-bottom:12px">Frase ${_fiIdx + 1} de ${_fiSession.length}</div>
@@ -2235,8 +2296,9 @@ function renderFillScreen() {
   </div>
   <div class="explain-box" id="fiExplain"><span class="verdict" id="fiVerdict"></span><span id="fiExplainText"></span></div>
   <div style="display:flex;justify-content:flex-end;margin-top:20px;min-height:40px">
-    <button class="btn btn-primary hidden" id="fiNext" onclick="nextFill()">${_fiIdx === _fiSession.length - 1 ? 'Ver resultados' : 'Siguiente →'}</button>
+    <button class="btn btn-primary hidden" id="fiNext" onclick="nextFill()">${_fiIdx === _fiSession.length - 1 ? 'Ver resultados' : `Siguiente ${icon('arrow-right')}`}</button>
   </div>`;
+  initIcons();
 }
 
 function answerFill(i) {
@@ -2258,7 +2320,8 @@ function answerFill(i) {
   }
   const box = document.getElementById('fiExplain');
   box.classList.add('show', chosen.correct ? 'ok' : 'bad');
-  document.getElementById('fiVerdict').textContent = chosen.correct ? '✔ Correcto — ' : '✘ Incorrecto — ';
+  document.getElementById('fiVerdict').innerHTML = chosen.correct ? `${icon('check-circle')} Correcto — ` : `${icon('x-circle')} Incorrecto — `;
+  initIcons();
   document.getElementById('fiExplainText').textContent = item.e;
   document.getElementById('fiNext').classList.remove('hidden');
 }
@@ -2280,7 +2343,7 @@ function renderFillResults() {
     .map(k => {
       const p = Math.round(_fiScores[k].ok / _fiScores[k].total * 100);
       return `<div style="padding:10px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:14px;font-weight:600;color:var(--navy)">${M[k].icon} ${M[k].name}</span>
+        <span style="font-size:14px;font-weight:600;color:var(--navy)">${icon(M[k].li)} ${M[k].name}</span>
         <span style="font-size:13px;color:var(--soft)">${_fiScores[k].ok}/${_fiScores[k].total} · ${p}%</span>
       </div>`;
     }).join('');
@@ -2296,12 +2359,13 @@ function renderFillResults() {
       <button class="btn btn-outline" onclick="go(${_fiMod !== 'all' ? `'module','${_fiMod}'` : `'home'`})">Volver</button>
     </div>
   </div>`;
+  initIcons();
 }
 
 /* ============================================================
    PANTALLA: QUIZ (simulacro)
    ============================================================ */
-let _qSession = [], _qIdx = 0, _qScores = {}, _qAnswered = false, _qMod = '';
+let _qSession = [], _qIdx = 0, _qScores = {}, _qAnswered = false, _qMod = '', _qLog = [];
 
 function startQuiz(modId) {
   _qMod = modId;
@@ -2312,7 +2376,7 @@ function startQuiz(modId) {
     const opts = q.o.map((text,i) => ({ text, correct: i === q.c }));
     return { ...q, shuffled: shuffle(opts) };
   });
-  _qIdx = 0; _qAnswered = false;
+  _qIdx = 0; _qAnswered = false; _qLog = [];
   _qScores = {};
   MOD_KEYS.forEach(k => _qScores[k] = { ok: 0, total: 0 });
   renderQuizScreen();
@@ -2329,8 +2393,8 @@ function renderQuizScreen() {
   const pct = _qSession.length ? Math.round(_qIdx / _qSession.length * 100) : 0;
   app.innerHTML = `
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-    <button class="back-btn" onclick="go('modules')">← Salir</button>
-    <span class="mod-pill" style="background:${mod.color}">${mod.icon} ${mod.short}</span>
+    <button class="back-btn" onclick="go('modules')">${icon('arrow-left')} Salir</button>
+    <span class="mod-pill" style="background:${mod.color}">${icon(mod.li)} ${mod.short}</span>
   </div>
   <div class="prog-track"><div class="prog-fill-quiz" style="width:${pct}%"></div></div>
   <div style="font-size:12px;color:var(--soft);margin-bottom:12px">Pregunta ${_qIdx+1} de ${_qSession.length}</div>
@@ -2347,9 +2411,10 @@ function renderQuizScreen() {
   </div>
   <div style="display:flex;justify-content:flex-end;margin-top:20px;min-height:40px">
     <button class="btn btn-primary hidden" id="btnNext" onclick="nextQ()">
-      ${_qIdx === _qSession.length - 1 ? 'Ver resultados' : 'Siguiente →'}
+      ${_qIdx === _qSession.length - 1 ? 'Ver resultados' : `Siguiente ${icon('arrow-right')}`}
     </button>
   </div>`;
+  initIcons();
 }
 
 function selectOpt(i) {
@@ -2360,7 +2425,16 @@ function selectOpt(i) {
   _qScores[q.mod].total++;
   if (chosen.correct) _qScores[q.mod].ok++;
 
-  // Record in history
+  // Record question detail for exam log
+  _qLog.push({
+    mod: q.mod,
+    q: q.q,
+    opts: q.shuffled.map(o => o.text),
+    chosenIdx: i,
+    correctIdx: q.shuffled.findIndex(o => o.correct),
+    ok: chosen.correct,
+    e: q.e
+  });
   ST.quizHist.push({ mod: q.mod, ok: chosen.correct, date: TODAY });
   saveST();
 
@@ -2374,7 +2448,8 @@ function selectOpt(i) {
   }
   const box = document.getElementById('explain');
   box.classList.add('show', chosen.correct ? 'ok' : 'bad');
-  document.getElementById('verdict').textContent = chosen.correct ? '✔ Correcta — ' : '✘ Incorrecta — ';
+  document.getElementById('verdict').innerHTML = chosen.correct ? `${icon('check-circle')} Correcta — ` : `${icon('x-circle')} Incorrecta — `;
+  initIcons();
   document.getElementById('explainText').textContent = q.e;
   document.getElementById('btnNext').classList.remove('hidden');
   _qAnswered = true;
@@ -2400,7 +2475,7 @@ function renderQuizResults() {
       const msg = p < 60 ? 'Prioridad de repaso. Vuelve al contenido del módulo.' : p < 85 ? 'Vas bien, repasa donde fallaste.' : 'Dominado. Solo un vistazo antes del examen.';
       return `<div style="padding:12px 0;border-top:1px solid var(--line)">
         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
-          <span style="font-size:14px;font-weight:700;color:var(--navy)">${M[k].icon} ${M[k].name}</span>
+          <span style="font-size:14px;font-weight:700;color:var(--navy)">${icon(M[k].li)} ${M[k].name}</span>
           <span style="font-size:13px;color:var(--soft)">${_qScores[k].ok}/${_qScores[k].total} · ${p}%</span>
         </div>
         <div class="prog-bar"><div class="prog-fill" style="width:${p}%;background:${M[k].color}"></div></div>
@@ -2411,6 +2486,22 @@ function renderQuizResults() {
   const scores = {};
   MOD_KEYS.forEach(k => scores[k] = _qScores[k].total ? Math.round(_qScores[k].ok/_qScores[k].total*100) : 0);
 
+  // Save full exam session to log
+  const examId = Date.now();
+  ST.examLog.unshift({
+    id: examId,
+    date: TODAY,
+    ts: examId,
+    mod: _qMod,
+    total: totalQ,
+    ok: totalOk,
+    pct,
+    scores: JSON.parse(JSON.stringify(_qScores)),
+    questions: _qLog
+  });
+  if (ST.examLog.length > 60) ST.examLog = ST.examLog.slice(0, 60);
+  saveST();
+
   app.innerHTML = `
   <div class="card">
     <div style="font-size:12px;color:var(--soft);margin-bottom:4px">Resultado del simulacro</div>
@@ -2420,12 +2511,161 @@ function renderQuizResults() {
     ${breakdown}
     <div class="btn-row">
       <button class="btn btn-primary" onclick="startQuiz('${_qMod}')">Repetir quiz</button>
-      <button class="btn btn-outline" onclick="go('home')">Inicio</button>
+      <button class="btn btn-outline" onclick="go('exam-review','${examId}')">${icon('search')} Revisar preguntas</button>
+      <button class="btn btn-outline" onclick="go('history')">${icon('history')} Historial</button>
     </div>
   </div>`;
 
   const wrap2 = document.getElementById('radarWrap2');
   if (wrap2) wrap2.innerHTML = drawRadar(scores, Math.min(280, window.innerWidth - 60));
+  initIcons();
+}
+
+/* ============================================================
+   PANTALLA: HISTORIAL DE EXÁMENES
+   ============================================================ */
+function renderHistory() {
+  const log = ST.examLog;
+  if (!log.length) {
+    return `
+    <div class="topbar" style="margin-bottom:16px">
+      <button class="back-btn" onclick="go('home')">${icon('arrow-left')} Inicio</button>
+      <h2 class="serif">Historial</h2>
+    </div>
+    <div class="empty-state" style="margin-top:60px;text-align:center">
+      <div style="margin-bottom:16px;color:var(--soft)"><i data-lucide="file-clock" style="width:52px;height:52px"></i></div>
+      <div style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:8px">Sin exámenes aún</div>
+      <p style="font-size:14px;color:var(--soft);margin-bottom:20px">Completa un simulacro para ver tu historial aquí.</p>
+      <button class="btn btn-primary" onclick="go('quiz','all')">Ir al simulacro ${icon('arrow-right')}</button>
+    </div>`;
+  }
+
+  const totalExams = log.length;
+  const avgPct = Math.round(log.reduce((s, e) => s + e.pct, 0) / totalExams);
+  const best = Math.max(...log.map(e => e.pct));
+
+  const items = log.map((exam, idx) => {
+    const dt = new Date(exam.ts);
+    const dateStr = dt.toLocaleDateString('es-CO', { weekday:'short', day:'numeric', month:'short' });
+    const timeStr = dt.toLocaleTimeString('es-CO', { hour:'2-digit', minute:'2-digit' });
+    const modLabel = exam.mod === 'all' ? 'Todos los módulos' : (M[exam.mod]?.name || exam.mod);
+    const pass = exam.pct >= 70;
+    return `
+    <div class="exam-item" onclick="go('exam-review','${exam.id}')">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span class="exam-badge ${pass ? 'pass' : 'fail'}">${pass ? 'Aprobado' : 'A reforzar'}</span>
+          <span style="font-size:12px;color:var(--soft)">${dateStr} · ${timeStr}</span>
+        </div>
+        <div style="font-size:13px;color:var(--navy);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${modLabel}</div>
+        <div style="font-size:12px;color:var(--soft);margin-top:2px">${exam.ok} correctas · ${exam.total - exam.ok} incorrectas de ${exam.total}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
+        <div class="exam-score ${pass ? 'pass' : 'fail'}">${exam.pct}%</div>
+        <div style="color:var(--soft)">${icon('chevron-right')}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `
+  <div class="topbar" style="margin-bottom:16px">
+    <button class="back-btn" onclick="go('home')">${icon('arrow-left')} Inicio</button>
+    <h2 class="serif">Historial</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">
+    <div class="stat-box"><div class="stat-num">${totalExams}</div><div class="stat-label">Exámenes</div></div>
+    <div class="stat-box"><div class="stat-num">${avgPct}%</div><div class="stat-label">Promedio</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--good)">${best}%</div><div class="stat-label">Mejor nota</div></div>
+  </div>
+  ${items}`;
+}
+
+/* ============================================================
+   PANTALLA: REVISIÓN DE EXAMEN
+   ============================================================ */
+function renderExamReview(examId) {
+  const exam = ST.examLog.find(e => String(e.id) === String(examId));
+  if (!exam) return `<button class="back-btn" onclick="go('history')">${icon('arrow-left')} Historial</button><p style="margin-top:20px">Examen no encontrado.</p>`;
+
+  const dt = new Date(exam.ts);
+  const dateStr = dt.toLocaleDateString('es-CO', { weekday:'long', day:'numeric', month:'long' });
+  const timeStr = dt.toLocaleTimeString('es-CO', { hour:'2-digit', minute:'2-digit' });
+  const modLabel = exam.mod === 'all' ? 'Todos los módulos' : (M[exam.mod]?.name || exam.mod);
+  const pass = exam.pct >= 70;
+
+  const filterBtns = `
+  <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+    <button class="btn btn-sm btn-outline qr-filter active" data-filter="all" onclick="filterQR(this,'all')" style="border-color:var(--navy);color:var(--navy)">Todas (${exam.total})</button>
+    <button class="btn btn-sm btn-outline qr-filter" data-filter="ok" onclick="filterQR(this,'ok')" style="border-color:var(--good);color:var(--good)">${icon('check-circle')} Correctas (${exam.ok})</button>
+    <button class="btn btn-sm btn-outline qr-filter" data-filter="bad" onclick="filterQR(this,'bad')" style="border-color:var(--bad);color:var(--bad)">${icon('x-circle')} Incorrectas (${exam.total - exam.ok})</button>
+  </div>`;
+
+  const questions = (exam.questions || []).map((qr, i) => {
+    const opts = qr.opts.map((text, oi) => {
+      let cls = 'neutral';
+      let marker = '';
+      if (oi === qr.correctIdx) { cls = 'correct'; marker = icon('check'); }
+      else if (oi === qr.chosenIdx && !qr.ok) { cls = 'wrong'; marker = icon('x'); }
+      return `<div class="qr-opt ${cls}">${marker}<span>${'ABCD'[oi]}. ${text}</span></div>`;
+    }).join('');
+
+    const modName = M[qr.mod]?.name || qr.mod;
+    return `
+    <div class="qr-item ${qr.ok ? 'ok' : 'bad'}" data-result="${qr.ok ? 'ok' : 'bad'}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+        <span style="font-size:12px;color:var(--soft);font-weight:600">${i+1}. ${modName}</span>
+        <span style="font-size:12px;font-weight:700;color:${qr.ok ? 'var(--good)' : 'var(--bad)'}">${qr.ok ? `${icon('check-circle')} Correcta` : `${icon('x-circle')} Incorrecta`}</span>
+      </div>
+      <div style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:8px;line-height:1.4">${qr.q}</div>
+      ${opts}
+      ${qr.e ? `<div class="qr-explain">${icon('info')} ${qr.e}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  const breakdown = MOD_KEYS
+    .filter(k => exam.scores[k]?.total > 0)
+    .map(k => {
+      const s = exam.scores[k];
+      const p = Math.round(s.ok / s.total * 100);
+      return `<div style="padding:8px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:13px;color:var(--navy)">${icon(M[k].li)} ${M[k].name}</span>
+        <span style="font-size:13px;color:var(--soft)">${s.ok}/${s.total} · ${p}%</span>
+      </div>`;
+    }).join('');
+
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <button class="back-btn" onclick="go('history')">${icon('arrow-left')} Historial</button>
+    <button class="btn btn-sm btn-outline" onclick="deleteExam('${exam.id}')" style="color:var(--bad);border-color:var(--bad)">${icon('trash-2')}</button>
+  </div>
+  <div class="card card-sm" style="margin-bottom:16px">
+    <div style="font-size:12px;color:var(--soft);margin-bottom:4px">${dateStr} · ${timeStr} · ${modLabel}</div>
+    <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:10px">
+      <div style="font-size:40px;font-weight:700;color:${pass ? 'var(--good)' : 'var(--bad)'}" class="serif">${exam.pct}%</div>
+      <div style="font-size:14px;color:var(--soft)">${exam.ok} correctas<br>${exam.total - exam.ok} incorrectas</div>
+    </div>
+    ${breakdown}
+  </div>
+  ${exam.questions?.length ? filterBtns + `<div id="qrList">${questions}</div>` : '<p style="color:var(--soft);font-size:13px">Este examen no tiene detalle de preguntas guardado.</p>'}`;
+}
+
+function filterQR(btn, filter) {
+  document.querySelectorAll('.qr-filter').forEach(b => {
+    b.classList.remove('active');
+    b.style.background = '';
+  });
+  btn.classList.add('active');
+  btn.style.background = filter === 'ok' ? 'var(--good-bg)' : filter === 'bad' ? 'var(--bad-bg)' : 'var(--paper)';
+  document.querySelectorAll('#qrList .qr-item').forEach(el => {
+    el.style.display = (filter === 'all' || el.dataset.result === filter) ? '' : 'none';
+  });
+}
+
+function deleteExam(examId) {
+  if (!confirm('¿Eliminar este examen del historial?')) return;
+  ST.examLog = ST.examLog.filter(e => String(e.id) !== String(examId));
+  saveST();
+  go('history');
 }
 
 /* ============================================================
@@ -2511,6 +2751,8 @@ window.go = function(screen, arg) {
 // Call go again now that we overrode window.go
 // (the first go() above used the inner reference, so radar was drawn via direct call)
 requestAnimationFrame(() => { if (_curScreen === 'home') afterHomeRender(); });
+// Initialize Lucide icons in static nav elements
+requestAnimationFrame(() => initIcons());
 </script>
 </body>
 </html>
