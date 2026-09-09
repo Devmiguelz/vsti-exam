@@ -606,10 +606,11 @@ mo:`
 
 <h3 class="section-title">Frameworks base: COBIT 5 e ITIL 4</h3>
 <p class="body-p">El MOTI (Modelo Operativo de TI de Bancolombia) está sustentado en dos marcos internacionales reconocidos globalmente:</p>
-<table class="tbl"><thead><tr><th>Framework</th><th>Aporte al MOTI</th></tr></thead><tbody>
-<tr><td><b>COBIT 5</b></td><td>Gobierno corporativo de TI: define quién decide, cómo se controla y cómo se rinden cuentas sobre los procesos de TI.</td></tr>
-<tr><td><b>ITIL 4</b></td><td>Gestión de servicios de TI: mejores prácticas para diseñar, entregar y mejorar continuamente los servicios tecnológicos.</td></tr>
+<table class="tbl"><thead><tr><th>Framework</th><th>Aporte al MOTI</th><th>Pregunta que responde</th></tr></thead><tbody>
+<tr><td><b>COBIT 5</b></td><td>Gobierno corporativo de TI: define quién decide, cómo se controla y cómo se rinden cuentas.</td><td>¿Quién es responsable y cómo se gobierna?</td></tr>
+<tr><td><b>ITIL 4</b></td><td>Gestión de servicios de TI: mejores prácticas para diseñar, entregar y mejorar continuamente los servicios.</td><td>¿Cómo se opera y mejora el servicio?</td></tr>
 </tbody></table>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Distinción clave para el examen</div><p>COBIT 5 responde la pregunta del <b>gobierno</b> (quién decide, quién rinde cuentas). ITIL 4 responde la pregunta de la <b>operación</b> (cómo se diseña y entrega el servicio). No son lo mismo — son complementarios.</p></div>
 <div class="callout key"><div class="callout-title">Prácticas del MOTI incluyen</div><p>Gestionar la Configuración TI · Gestionar Cambios TI · Gestión de Incidentes · Gestión de Problemas · Habilitar y Mantener Soluciones — todos conectados bajo el mismo Modelo Operativo.</p></div>
 
 <h3 class="section-title">Estructura M.O. Tecnología Bancolombia</h3>
@@ -620,6 +621,8 @@ mo:`
 <tr><td><b>Federal</b></td><td>Administración Integral · Modernización y Gobierno de TI — lineamientos, centros de excelencia y normatividad global.</td></tr>
 <tr><td><b>CDEs (transversales)</b></td><td>CDE Infraestructura &amp; Operación · CDE DevExp · CDE Arquitectura y Arquitectura Empresarial — soporte cross a todos los entornos.</td></tr>
 </tbody></table>
+<div class="callout key"><div class="callout-title">¿Qué son los CDEs?</div><p>Los <b>CDE (Centros de Excelencia)</b> son equipos <b>transversales</b> que dan soporte especializado a todos los niveles y entornos simultáneamente — no pertenecen a un solo entorno:<br>• <b>CDE Infraestructura &amp; Operación:</b> gestión y operación de la infraestructura tecnológica.<br>• <b>CDE DevExp:</b> experiencia de desarrollo, herramientas y plataformas (procesos como HyMS).<br>• <b>CDE Arquitectura Empresarial:</b> diseño y gobierno de arquitectura de TI.</p></div>
+<div class="callout data"><div class="callout-title">¿Qué es un EVC?</div><p>Un <b>EVC (Equipo de Valor para el Cliente)</b> es la célula del nivel Local con responsabilidad integral de extremo a extremo (E2E) sobre sus productos y servicios. Tienen soporte completo: desarrollo, operación y relación con el cliente final. Son la expresión más concreta del modelo Federal–State–Local en el día a día.</p></div>
 
 <h3 class="section-title">El modelo de plataforma</h3>
 <div class="callout rule"><div class="callout-title">Plataforma = Negocio + Proceso + Tecnología</div><p>Una plataforma en Bancolombia no es solo tecnología; es la integración de tres elementos: el <b>negocio</b> (propósito y valor), el <b>proceso</b> (cómo se opera), y la <b>tecnología</b> (cómo se habilita). Solo cuando los tres están alineados, la plataforma genera valor real y sostenible.</p></div>
@@ -698,12 +701,14 @@ cfg:`
 <tr><td><b>Módulo CMDB</b></td><td>Repositorio central de CIs, atributos y relaciones.</td></tr>
 <tr><td><b>Portal Configuración</b></td><td>Interfaz de usuario para consultar y gestionar CIs.</td></tr>
 <tr><td><b>Automatización Nube</b></td><td>Carga automática de CIs cloud 3 veces al día via tag App Code.</td></tr>
-<tr><td><b>PBI (Power BI)</b></td><td>Dashboards de seguimiento y métricas del proceso de configuración.</td></tr>
+<tr><td><b>PBI (Power BI)</b></td><td>Dashboards de seguimiento: miden la <b>completitud</b> y <b>exactitud</b> de los CIs — qué tan bien documentados y actualizados están.</td></tr>
 <tr><td><b>Módulo Dashboards</b></td><td>Visualización del estado de la CMDB en tiempo real.</td></tr>
 <tr><td><b>WO (Work Orders)</b></td><td>Órdenes de trabajo relacionadas con CIs y actividades de mantenimiento.</td></tr>
-<tr><td><b>API</b></td><td>Integración de la CMDB con otros sistemas del Banco.</td></tr>
-<tr><td><b>Ofertas</b></td><td>Catálogo de servicios disponibles para consumir desde Helix.</td></tr>
+<tr><td><b>API</b></td><td>Integración de la CMDB con otros sistemas del Banco. <b>Acceso exclusivo para dueños de clase.</b></td></tr>
+<tr><td><b>Ofertas</b></td><td>Catálogo con 2 tipos: aplicaciones de negocio y aplicaciones de soporte.</td></tr>
 </tbody></table>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Estado del Portal de Configuración</div><p>El <b>Portal de Configuración</b> está actualmente <b>en construcción</b>. Facilitará la certificación trimestral y la documentación de CIs de forma más amigable. Por ahora, la gestión se hace directamente en Hilix.</p></div>
+<div class="callout rule"><div class="callout-title">API de la CMDB — acceso restringido</div><p>La API solo está disponible para <b>dueños de clase</b>. Garantiza segregación de funciones: nadie puede integrar sistemas externos con la CMDB sin ser responsable de esa tipología de componente.</p></div>
 
 <h3 class="section-title">¿Qué pasa si no se gestiona correctamente?</h3>
 <table class="tbl"><thead><tr><th>Situación</th><th>Consecuencia real</th></tr></thead><tbody>
@@ -793,6 +798,18 @@ cam:`
 <tr><td><b>4. Validación y Cierre</b></td><td>Se confirma si el cambio fue exitoso, fallido o con problemas. Se documenta el resultado y se cierra la CRQ — <b>control operativo</b> (detectivo).</td></tr>
 </tbody></table>
 <div class="callout data"><div class="callout-title">Transversal a todas las etapas</div><p>Seguimiento, medición y mejora continua aplican en todo el ciclo, no solo al final. El proceso genera entre <b>5,000 y 6,000 cambios mensuales</b>.</p></div>
+
+<h3 class="section-title">Estados de una CRQ en Hilix</h3>
+<p class="body-p">Toda CRQ pasa por estos estados en Hilix — conocerlos es clave para el coordinador y para el Consejo:</p>
+<table class="tbl"><thead><tr><th>Estado</th><th>Qué significa</th></tr></thead><tbody>
+<tr><td><b>Borrador</b></td><td>La CRQ fue creada pero aún no tiene todos los campos completos ni aprobaciones.</td></tr>
+<tr><td><b>Programado para aprobación</b></td><td>Está lista para que el aprobador la revise y dé el visto bueno (control SOX).</td></tr>
+<tr><td><b>Programado</b></td><td>Aprobada y lista para ejecutar en la fecha y ventana definida.</td></tr>
+<tr><td><b>Implementación en curso</b></td><td>El cambio se está ejecutando activamente en producción.</td></tr>
+<tr><td><b>Terminado</b></td><td>La ejecución finalizó. Pendiente de cierre formal con resultado documentado.</td></tr>
+<tr><td><b>CERRADO</b></td><td>Estado final — control operativo completado. La CRQ queda archivada.</td></tr>
+</tbody></table>
+<div class="callout key"><div class="callout-title">BullSolver — caso de éxito en integración automática</div><p>BullSolver es el proceso de <b>parchado</b> (patching) que ejemplifica la integración automática exitosa con Hilix: crea la CRQ, ejecuta el parche y cierra el cambio de forma 100% automática, sin intervención humana. Es el estándar que se busca replicar en otros procesos de parchado.</p></div>
 
 <h3 class="section-title">Niveles de aprobación — Cambios Manuales</h3>
 <table class="tbl"><thead><tr><th>Tipo de cambio</th><th>Quién aprueba</th></tr></thead><tbody>
@@ -906,13 +923,16 @@ inc:`
 </tbody></table>
 
 <h3 class="section-title">Notificaciones automáticas del sistema</h3>
-<table class="tbl"><thead><tr><th>Notificación</th><th>Canal</th><th>Cuándo se dispara</th></tr></thead><tbody>
-<tr><td>Asignación de ticket</td><td>BancolombiaTSM</td><td>Al asignar el ticket a un grupo o persona.</td></tr>
-<tr><td>Alerta de ANS al 75%</td><td>BancolombiaTSM</td><td>Cuando se consume el 75% del tiempo de SLA.</td></tr>
-<tr><td>Notificación de solución</td><td>Procesos_TI_1</td><td>Cuando el incidente pasa a estado "Resuelto".</td></tr>
-<tr><td>Recordatorio por días abiertos</td><td>BancolombiaTSM</td><td>Eventos: 2 días sin actualizar · Incidentes: 10 días · Problemas: 60 días.</td></tr>
-<tr><td>Único integrante del grupo</td><td>BancolombiaTSM</td><td>Alerta cuando un grupo queda con un solo integrante activo.</td></tr>
+<table class="tbl"><thead><tr><th>Notificación</th><th>Canal</th><th>Cuándo se dispara</th><th>A quién</th></tr></thead><tbody>
+<tr><td>Asignación de ticket</td><td>BancolombiaTSM</td><td>Al asignar el ticket a un grupo o persona.</td><td>Miembros del grupo</td></tr>
+<tr><td>Alerta de ANS al <b>50%</b></td><td>BancolombiaTSM</td><td>Cuando se consume el 50% del tiempo de SLA.</td><td>Miembros del grupo de soporte</td></tr>
+<tr><td>Alerta de ANS al <b>75%</b></td><td>BancolombiaTSM</td><td>Cuando se consume el 75% del tiempo de SLA.</td><td>Gerentes / directivos del área</td></tr>
+<tr><td>Notificación de solución</td><td>procesosti1</td><td>Cuando el incidente pasa a estado "Resuelto".</td><td>Equipo de proceso</td></tr>
+<tr><td>Recordatorio por días abiertos</td><td>BancolombiaTSM</td><td>Eventos: 2 días · Incidentes: 10 días · Problemas: 60 días.</td><td>Miembros del grupo</td></tr>
+<tr><td>Único integrante del grupo</td><td>BancolombiaTSM</td><td>Cada martes si el grupo tiene solo un integrante activo.</td><td>Ese integrante</td></tr>
+<tr><td>Grupo sin actividad</td><td>BancolombiaTSM</td><td>Cada 60 días si el grupo no ha recibido tickets.</td><td>Miembros del grupo</td></tr>
 </tbody></table>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Los dos buzones clave del proceso</div><p>• <b>BancolombiaTSM:</b> recibe todas las notificaciones automáticas de tickets al equipo técnico.<br>• <b>procesosti1:</b> canal de comunicación del equipo de gestión del proceso (no es para tickets).<br>Confundirlos genera comunicaciones que no llegan a quien corresponde.</p></div>
 
 <h3 class="section-title">¿Qué pasa si no gestionamos correctamente los incidentes?</h3>
 <table class="tbl"><thead><tr><th>Consecuencia</th><th>Por qué ocurre</th></tr></thead><tbody>
@@ -1006,6 +1026,15 @@ prob:`
 </tbody></table>
 <div class="callout data"><div class="callout-title">Herramienta: Gestión Proactiva — ITSM Insights</div><p>Workspace en Helix que usa <b>IA para agrupar incidentes en mapas de calor</b>, detectar patrones y tendencias antes de que escalen. Permite crear casos problema directamente desde el mapa. La calidad del análisis depende directamente de la calidad de los datos cargados en los tickets.</p></div>
 
+<h3 class="section-title">ITSM Insights vs. Correlación de Incidentes — dos herramientas distintas</h3>
+<table class="tbl"><thead><tr><th></th><th>Gestión Proactiva (ITSM Insights)</th><th>Correlación de Incidentes</th></tr></thead><tbody>
+<tr><td><b>Configuración</b></td><td>Requiere configuración previa por el equipo — se definen rangos de fechas y filtros.</td><td>Viene preconfigurada por defecto. Sin configuración inicial.</td></tr>
+<tr><td><b>Tiempo</b></td><td>Analiza periodos históricos definidos por el equipo (mes anterior, año, etc.).</td><td>Muestra agrupaciones y tendencias <b>en tiempo real</b>.</td></tr>
+<tr><td><b>Para qué sirve</b></td><td>Detectar patrones periódicos para crear casos problema proactivamente.</td><td>Identificar correlaciones de incidentes activos y posibles incidentes graves en curso.</td></tr>
+<tr><td><b>Resultado</b></td><td>Mapas de calor exportables, compartibles, con opción de crear caso problema desde el mapa.</td><td>Bloques de incidentes agrupados por similitud de resumen o CI en tiempo real.</td></tr>
+</tbody></table>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>La calidad del análisis depende de la calidad del registro</div><p>Si los campos del ticket (CI, categoría operacional, resumen) se llenan con cualquier valor, la IA no puede agrupar correctamente. <b>Un ticket mal documentado contamina el mapa de calor de todo el equipo.</b></p></div>
+
 <h3 class="section-title">Hallazgos — qué hacen mal los equipos</h3>
 <div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Problemas comunes identificados en el proceso</div><p>• Se documenta <b>qué pasó</b> pero no el <b>por qué real</b> — sin definiciones claras de causa raíz.<br>• La causa raíz describe el síntoma, no la causa subyacente.<br>• La mayoría de los casos problema los <b>crea el proceso automáticamente</b>, no los equipos proactivamente.<br>• El problema de fondo suele estar en la <b>disciplina operativa y la ejecución</b>, no en la tecnología.<br>• Equipos que no realizan la revisión mensual de incidentes (control BCOT110104C005).</p></div>
 
@@ -1016,7 +1045,16 @@ prob:`
 <tr><td><b>Gestionado</b> ← <em>aquí está Bancolombia</em></td><td>Se mide, monitorea y corrige sistemáticamente. 84.9% de cumplimiento (meta: 60%).</td></tr>
 <tr><td><b>Optimizado</b></td><td>Mejora continua con IA, métricas predictivas y gestión proactiva consolidada.</td></tr>
 </tbody></table>
-<div class="callout key"><div class="callout-title">Caso de éxito — SAF</div><p>El equipo SAF redujo significativamente la recurrencia de incidentes adoptando la gestión proactiva: revisión mensual sistemática, uso de mapas de calor e identificación anticipada de casos problema antes de que impacten al negocio.</p></div>
+<h3 class="section-title">Caso de éxito — SAF (Administración de Factoring)</h3>
+<p class="body-p">Equipo que estuvo en el <b>top de incidentes durante 2 años consecutivos</b>. Lejos de ignorarlo, documentaron su estrategia y lograron resultados sobresalientes:</p>
+<table class="tbl"><thead><tr><th>Acción implementada</th><th>Resultado</th></tr></thead><tbody>
+<tr><td>Reforzar la calidad de los pasos a producción del nuevo CORE</td><td>Calidad del 95-97% en implementaciones grandes</td></tr>
+<tr><td>Mesas de triaje diarias con diagnóstico en dos niveles</td><td>Menos incidentes "escapados" y mejor cumplimiento de ANS</td></tr>
+<tr><td>Creación proactiva de casos problema (sin importar criticidad)</td><td>Identificación de causa raíz y reducción de reincidencias</td></tr>
+<tr><td>Ventanas de restricción propias para pasos a producción</td><td>Menor número de incidentes por ejecución de CRQ</td></tr>
+<tr><td>Validaciones más rigurosas con responsabilidad directa en aprobaciones</td><td>El aprobador revisa objetivamente, no aprueba por cumplir el rol</td></tr>
+</tbody></table>
+<div class="callout key"><div class="callout-title">Lección del caso SAF</div><p>No esperaron a que el proceso los obligara — tomaron la iniciativa. La clave: disciplina operativa, documentación correcta y <b>no tener miedo de crear casos problema</b>. Los casos problema no son una sanción, son el instrumento para mejorar.</p></div>
 
 <h3 class="section-title">Consecuencias de no gestionar los problemas</h3>
 <table class="tbl"><thead><tr><th>Consecuencia</th><th>Impacto en el negocio</th></tr></thead><tbody>
@@ -1088,6 +1126,38 @@ hym:`
 <tr><td>Medio</td><td>Ágil (más análisis)</td><td>Líder técnico de EBC.</td></tr>
 <tr><td>Alto</td><td>Programada</td><td>Consejo de Cambios + Líder técnico de EBC.</td></tr>
 </tbody></table>
+<div class="callout rule"><div class="callout-title">¿Quiénes pueden hacer la aprobación técnica (Criedo C)?</div><p>Solo 3 roles pueden realizar la aprobación técnica del paso a producción, determinados por el nivel de riesgo:<br>• <b>Líder técnico de EBC</b><br>• <b>Líder de línea de conocimiento (LLK)</b><br>• <b>Ingeniero de software autorizado</b><br>Esta aprobación es el control SOX que queda en la trazabilidad del pipeline — los entes regulatorios la verifican.</p></div>
+
+<h3 class="section-title">DevSecOps — Escaneos de seguridad por fase</h3>
+<p class="body-p">La seguridad se integra en el pipeline en dos momentos clave, con escaneos distintos según la naturaleza de la fase:</p>
+<table class="tbl"><thead><tr><th>Fase del pipeline</th><th>Tipo de escaneo</th><th>Qué revisa</th></tr></thead><tbody>
+<tr><td rowspan="3"><b>DevBill — CI<br>(Integración Continua)</b></td><td>SAST código e IaC</td><td>Vulnerabilidades en el código fuente y en la infraestructura como código.</td></tr>
+<tr><td>Secret scanning</td><td>Credenciales o secretos expuestos inadvertidamente en el código.</td></tr>
+<tr><td>Dependency scanning</td><td>Vulnerabilidades en las dependencias y librerías externas del proyecto.</td></tr>
+<tr><td rowspan="3"><b>Release</b></td><td>DAST</td><td>Análisis dinámico — evalúa la aplicación en ejecución, no el código estático.</td></tr>
+<tr><td>Container scanning</td><td>Vulnerabilidades en las imágenes Docker utilizadas.</td></tr>
+<tr><td>Kubernetes manifests</td><td>Configuraciones inseguras en los manifests de despliegue.</td></tr>
+</tbody></table>
+<div class="callout data"><div class="callout-title">Mutation Testing — solo para Java</div><p>Técnica que <b>modifica el código fuente deliberadamente</b> para verificar que las pruebas unitarias lo detecten. Si la prueba no "mata" la mutación, la cobertura es insuficiente. Solo aplica para proyectos en <b>Java</b>, usando la librería <b>PIT</b>.</p></div>
+
+<h3 class="section-title">BoolTracker — Gestión centralizada de vulnerabilidades</h3>
+<p class="body-p">BoolTracker es la <b>plataforma central de gestión de vulnerabilidades (DevSecOps)</b> donde se consolidan todos los hallazgos de los escaneos del pipeline.</p>
+<table class="tbl"><thead><tr><th>Elemento</th><th>Detalle</th></tr></thead><tbody>
+<tr><td><b>Propósito</b></td><td>Centralizar, priorizar y hacer seguimiento a todas las vulnerabilidades de seguridad encontradas.</td></tr>
+<tr><td><b>Modelo de priorización</b></td><td>Clasifica vulnerabilidades por criticidad para determinar urgencia de remediación.</td></tr>
+<tr><td><b>Modelo de apetito/tolerancia</b></td><td>Define cuánto riesgo es aceptable y por cuánto tiempo según la criticidad.</td></tr>
+<tr><td><b>Vulnerabilidad crítica</b></td><td>Máximo <b>45 días</b> para remediar — requiere aprobación de EBC, CD y líder funcional para aceptar el riesgo en ese plazo.</td></tr>
+<tr><td><b>Aceptación de riesgo</b></td><td>Proceso formal cuando no se puede remediar en el plazo. Requiere aprobadores según criticidad.</td></tr>
+</tbody></table>
+
+<h3 class="section-title">Supervisión regulatoria — quién vigila el proceso</h3>
+<p class="body-p">El proceso HyMS tiene ojos de todos los entes regulatorios — internos y externos:</p>
+<table class="tbl"><thead><tr><th>Ente</th><th>Tipo</th><th>Ciclos/año</th><th>Qué revisa</th></tr></thead><tbody>
+<tr><td><b>Auditoría Interna</b></td><td>Interno</td><td>2</td><td>Muestras de cambios de todos los tamaños. Verifica CRQ, DoD, Test Plan, aprobaciones y backlog del equipo.</td></tr>
+<tr><td><b>PricewaterhouseCoopers (PWC)</b></td><td>Externo (revisoría fiscal)</td><td>2</td><td>Revisa diseño del control + operatividad real. Puede presentarse <b>sin previo aviso</b> y va directamente a las plataformas.</td></tr>
+<tr><td><b>Superintendencia Financiera</b></td><td>Regulador</td><td>Variable</td><td>Visitas y requerimientos institucionales sobre controles SOX y cumplimiento normativo.</td></tr>
+</tbody></table>
+<div class="callout warn"><div class="callout-title"><i data-lucide="alert-triangle"></i>Cada ingeniero es protagonista de este proceso</div><p>Si PWC llega y revisa un cambio de cualquier tamaño — hasta el más pequeño — verifica que tenga CRQ, DoD, aprobación técnica, Test Plan y esté en el repositorio de código autorizado. <b>No existe el cambio "tan chiquito que no importa".</b></p></div>
 
 <h3 class="section-title">Glosario rápido</h3>
 <div class="term-row"><span class="term-word">DoD</span><span class="term-def">Definition of Done — centraliza evidencia y aprobaciones para pasar a producción.</span></div>
