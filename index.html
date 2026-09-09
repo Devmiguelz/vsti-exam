@@ -275,7 +275,7 @@ const MOD_KEYS = Object.keys(M);
    DATOS — Flashcards (72 tarjetas: 12 × 6 módulos)
    ============================================================ */
 const FC = [
-// ── MÓDULO 1: Modelo Operativo ──────────────────────────────
+// ── MÓDULO 1: Modelo Operativo (18 tarjetas) ────────────────
 {id:'mo-1',  mod:'mo', f:'¿Cuál es la definición oficial de modelo operativo según Bancolombia?', b:'"La manera en que coordinamos áreas, procesos y funciones para entregar valor a nuestros clientes y a la organización."'},
 {id:'mo-2',  mod:'mo', f:'¿Cuáles son los 4 pilares del modelo operativo?', b:'Personas · Procesos · Servicios · Tecnología'},
 {id:'mo-3',  mod:'mo', f:'¿Qué representa el ciclo PHVA en el modelo operativo?', b:'Planear, Hacer, Verificar, Actuar. El modelo NO es fijo: debe evolucionar y adaptarse constantemente.'},
@@ -288,6 +288,12 @@ const FC = [
 {id:'mo-10', mod:'mo', f:'¿Qué modelo operativo pone el producto o plataforma en el centro?', b:'Hub and Spoke — muy centralizado en plataformas; entrega capacidades para que otros equipos construyan sobre ellas.'},
 {id:'mo-11', mod:'mo', f:'¿Son lo mismo el modelo operativo y la estructura organizacional?', b:'NO. La estructura tiene mucho que ver con el modelo, pero no son lo mismo.'},
 {id:'mo-12', mod:'mo', f:'¿Cuántas personas deben certificarse en los procesos críticos?', b:'Aproximadamente 2,534 personas entre las dos vicepresidencias de tecnología.'},
+{id:'mo-13', mod:'mo', f:'¿Qué son los CDEs en la estructura del modelo operativo?', b:'Equipos transversales de soporte cruzado: CDE Infraestructura & Operación · CDE DevExp · CDE Arquitectura Empresarial. Dan soporte a todos los niveles y entornos.'},
+{id:'mo-14', mod:'mo', f:'¿Qué aporta COBIT 5 al MOTI de Bancolombia?', b:'Gobierno corporativo de TI: define quién decide, cómo se controla y cómo se rinden cuentas sobre los procesos de TI.'},
+{id:'mo-15', mod:'mo', f:'¿Qué aporta ITIL 4 al MOTI de Bancolombia?', b:'Gestión de servicios de TI: mejores prácticas para diseñar, entregar y mejorar continuamente los servicios tecnológicos.'},
+{id:'mo-16', mod:'mo', f:'¿Qué significa EVC en el contexto del modelo operativo?', b:'Equipo de Valor para el Cliente — células del nivel Local con soporte E2E a sus productos y clientes.'},
+{id:'mo-17', mod:'mo', f:'¿Qué ofrece el State a los equipos Local?', b:'Capacidades listas para consumir: estandarización, automatización, habilitación de productos y garantía del cumplimiento de lineamientos.'},
+{id:'mo-18', mod:'mo', f:'¿Cuál es la regla de oro del cumplimiento del proceso?', b:'"Cumplir el proceso es lo que asegura que el valor no sea un evento de una sola vez, sino una constante." El MO promueve evolución ordenada bajo el ciclo PHVA.'},
 
 // ── MÓDULO 2: Gestión de la Configuración ───────────────────
 {id:'cfg-1',  mod:'cfg', f:'¿Qué es un Elemento de Configuración (CI)?', b:'Cualquier componente que requiera ser gestionado para habilitar un servicio de TI (servidores, aplicaciones, bases de datos, etc.).'},
@@ -302,6 +308,12 @@ const FC = [
 {id:'cfg-10', mod:'cfg', f:'¿Quién puede actualizar la información de un CI en Hilix?', b:'Solo los dueños de ese tipo de componente (segregación de funciones).'},
 {id:'cfg-11', mod:'cfg', f:'¿La CMDB es una herramienta de monitoreo?', b:'NO. Es para inventario y relacionamiento. El monitoreo lo hacen otras herramientas.'},
 {id:'cfg-12', mod:'cfg', f:'¿Qué consecuencia puede tener crear un CRQ con el CI incorrecto?', b:'No se identifica correctamente el impacto del cambio, lo que puede derivar en un incidente en producción.'},
+{id:'cfg-13', mod:'cfg', f:'¿Qué evalúan los reportes de Power BI del proceso de configuración?', b:'Completitud y exactitud de los CIs: permiten identificar qué tan bien documentados y actualizados están los elementos en la CMDB.'},
+{id:'cfg-14', mod:'cfg', f:'¿Quién tiene acceso a la API de la CMDB?', b:'Solo los dueños de clase — garantiza segregación de funciones. Permite integraciones con otros sistemas del Banco.'},
+{id:'cfg-15', mod:'cfg', f:'¿Qué es un "dueño de clase" en la CMDB?', b:'El responsable de una tipología completa de componentes en la CMDB (ej. todos los servidores x86). Es quien certifica y actualiza esa clase.'},
+{id:'cfg-16', mod:'cfg', f:'¿Cuál es la relación de la CMDB con el proceso de ciberseguridad?', b:'Ciberseguridad NO escanea ningún componente que no esté registrado en la CMDB. Sin CI, no hay escaneo de vulnerabilidades.'},
+{id:'cfg-17', mod:'cfg', f:'¿Cuántas ofertas tiene el catálogo de Helix de la CMDB?', b:'2 ofertas: aplicaciones de negocio y aplicaciones de soporte.'},
+{id:'cfg-18', mod:'cfg', f:'¿Cuáles son las 4 políticas clave del proceso de Gestión de la Configuración?', b:'1. Responsabilidad compartida e integridad. 2. CMDB como fuente oficial. 3. Certificación periódica. 4. Todo ticket debe tener CI activo relacionado.'},
 
 // ── MÓDULO 3: Gestión de Cambios ────────────────────────────
 {id:'cam-1',  mod:'cam', f:'¿Cuáles son los 4 tipos de cambio TI?', b:'Ágil · Estándar · Programado · Emergencia (aplica tanto a cambios manuales como automáticos)'},
@@ -316,6 +328,12 @@ const FC = [
 {id:'cam-10', mod:'cam', f:'¿Qué hacer si un cambio automático no se cierra correctamente en Hilix?', b:'Crear un ticket de soporte al equipo de Procesos TI DevEx — NUNCA modificarlo manualmente.'},
 {id:'cam-11', mod:'cam', f:'En una fecha de restricción, ¿quién debe aprobar para ejecutar un cambio ágil?', b:'El Director o Líder de Entorno (el cargo más alto del equipo).'},
 {id:'cam-12', mod:'cam', f:'¿Qué incumplimiento representa crear un cambio manual paralelo a un cambio automático de bajo riesgo?', b:'Es un incumplimiento del proceso. Si el riesgo ya es bajo/ágil automático, el nivel de aprobación definido ya es el correcto — el Consejo no reemplaza esa responsabilidad.'},
+{id:'cam-13', mod:'cam', f:'¿Cuántos cambios mensuales genera el proceso de Gestión de Cambios?', b:'Entre 5,000 y 6,000 cambios mensuales. Aproximadamente el 52-53% son cambios automáticos.'},
+{id:'cam-14', mod:'cam', f:'¿Qué evalúa la encuesta de riesgos para clasificar un cambio automático?', b:'4 factores: aplicación VIA/SOX, canal (impacto en clientes), transaccionalidad y malla (dependencias). Determina si el cambio es ágil o programado.'},
+{id:'cam-15', mod:'cam', f:'¿Qué es una "afectación" en Gestión de Cambios?', b:'Interrupción y/o degradación (lentitud, intermitencia) en la disponibilidad de Aplicaciones o Componentes TI. No es solo caída total.'},
+{id:'cam-16', mod:'cam', f:'¿Cuándo debe estar listo un cambio para incluirse en el Acta del Consejo?', b:'Antes del mediodía del lunes (para el Consejo del martes) o del miércoles (para el Consejo del jueves). Debe estar creado Y aprobado por el líder.'},
+{id:'cam-17', mod:'cam', f:'¿Cuál es el propósito del plan de devolución (rollback)?', b:'Definir cómo y en cuánto tiempo se puede revertir el cambio si algo sale mal durante la implementación. Obligatorio para cambios programados.'},
+{id:'cam-18', mod:'cam', f:'¿Qué actividades NO son cambios TI?', b:'• Autorizaciones de accesos (IAM). • Parametrizaciones funcionales del negocio. • Pedidos del catálogo Helix (son solicitudes de servicio). • Actividades que no impactan producción.'},
 
 // ── MÓDULO 4: Gestión de Incidentes ─────────────────────────
 {id:'inc-1',  mod:'inc', f:'¿Cuál es la diferencia principal entre incidente y problema?', b:'Incidente: actúa sobre el síntoma, urgente, reactivo → restablecer el servicio. Problema: actúa sobre la causa raíz, reduce recurrencia.'},
@@ -330,6 +348,12 @@ const FC = [
 {id:'inc-10', mod:'inc', f:'¿Qué es el HADA?', b:'Análisis de la Afectación de un incidente: qué pasó, por qué, RQs involucrados, planes de acción y línea de tiempo.'},
 {id:'inc-11', mod:'inc', f:'¿Un plan de acción real es igual a mejora continua? ¿Cuál es la diferencia?', b:'NO. Plan de acción real: implementación técnica que ELIMINA la causa raíz. Mejora continua: documentación, checklists, reuniones (válido pero no evita la recurrencia directamente).'},
 {id:'inc-12', mod:'inc', f:'Si "reinicié el servidor" ¿es una causa raíz de calidad?', b:'NO. Es solo el síntoma. Una causa raíz responde POR QUÉ pasó: ej. "Error en script automatizado que reinició el servicio fuera de ventana".'},
+{id:'inc-13', mod:'inc', f:'¿Cuál es el ANS para un incidente crítico de la dirección Transformación y Soporte?', b:'8 horas en horario hábil (no 24/7). A diferencia de infraestructura: crítico 4h 24/7; Transformación: crítico 8h hábiles, medio 3 días, bajo 5 días.'},
+{id:'inc-14', mod:'inc', f:'¿Cuándo se envía la notificación de escalamiento por ANS?', b:'Al 50% del ANS: notifica a los miembros del grupo. Al 75% del ANS: escala a los gerentes/directivos. Ambas son automáticas desde Hilix.'},
+{id:'inc-15', mod:'inc', f:'¿Cuáles son los dos buzones clave del proceso de incidentes?', b:'• BancolombiaTSM: notificaciones automáticas de tickets al equipo. • procesosti1: comunicaciones del equipo de proceso para gestión.'},
+{id:'inc-16', mod:'inc', f:'¿Cuál es la meta de cumplimiento de ANS para incidentes?', b:'90.5% (comparado con 60% para problemas y 80% para eventos — la más alta de las tres).'},
+{id:'inc-17', mod:'inc', f:'¿En qué pestaña de Hilix se registran todas las acciones del análisis de un incidente?', b:'En la pestaña "Actividad" — es el registro cronológico de todo lo que se hizo. Fundamental para la calidad del ticket y el seguimiento.'},
+{id:'inc-18', mod:'inc', f:'¿Cuál es el control BCOT110104C005?', b:'La revisión mensual obligatoria de los incidentes del periodo, realizada por el Equipo Dueño de Producto, para identificar patrones y postular casos a Gestión de Problemas.'},
 
 // ── MÓDULO 5: Gestión de Problemas ──────────────────────────
 {id:'prob-1',  mod:'prob', f:'¿Cuáles son las 4 fases de Gartner para gestión de problemas?', b:'Identificación → Mitigación → Resolución → Optimización'},
@@ -344,6 +368,12 @@ const FC = [
 {id:'prob-10', mod:'prob', f:'¿Cuándo es proactiva (no reactiva) la gestión de problemas?', b:'Cuando el equipo revisa periódicamente (idealmente mensual) sus incidentes para detectar patrones antes de que se repitan — sin esperar a "estar corchados".'},
 {id:'prob-11', mod:'prob', f:'¿Qué significa RCA?', b:'Root Cause Analysis — análisis formal y riguroso de la causa raíz.'},
 {id:'prob-12', mod:'prob', f:'¿Qué significa MTTR?', b:'Mean Time To Resolve — tiempo medio de resolución de un incidente. Reducirlo es uno de los beneficios principales del PKE.'},
+{id:'prob-13', mod:'prob', f:'¿Cuántos problemas tiene Bancolombia acumulados y cuál es el cumplimiento?', b:'~750 problemas totales. Cumplimiento acumulado: 84.9% (muy por encima de la meta del 60%).'},
+{id:'prob-14', mod:'prob', f:'¿En qué nivel de madurez se encuentra Bancolombia en gestión de problemas?', b:'Nivel "Gestionado" (tercer nivel): mide, monitorea y corrige sistemáticamente. Niveles: Inicial → Estandarizado → Gestionado → Optimizado.'},
+{id:'prob-15', mod:'prob', f:'¿Qué es ITSM Insights en Hilix?', b:'Workspace de Gestión Proactiva de Problemas con IA para agrupar incidentes en mapas de calor y detectar patrones antes de que se conviertan en recurrencia.'},
+{id:'prob-16', mod:'prob', f:'¿Cuál fue la principal causa de incidentes en el análisis de Canales Claves?', b:'1.º Fallas de proveedor (42 casos) · 2.º Ejecución de CRQ (32 casos) · 3.º Nequi (15 casos). Llevó a crear 8 casos problema.'},
+{id:'prob-17', mod:'prob', f:'¿Cuáles son los 7 estados posibles de un PKE?', b:'Asignado · Planificado para corrección · Asignado al proveedor · Sin acción planificada · Corregido · Cerrado · Cancelado'},
+{id:'prob-18', mod:'prob', f:'¿Qué es la técnica "invertir el problema"?', b:'Preguntar qué acciones harían que el problema EMPEORE, luego invertir esa lógica para encontrar soluciones — cambia la perspectiva y revela caminos que el enfoque directo no detecta.'},
 
 // ── MÓDULO 6: Habilitar y Mantener Soluciones ───────────────
 {id:'hym-1',  mod:'hym', f:'¿Cuáles son las 5 etapas del proceso Habilitar y Mantener Soluciones?', b:'1. Analizar y arquitectar · 2. Preparar · 3. Implementar (corazón) · 4. Desplegar · 5. Estabilizar'},
@@ -358,10 +388,16 @@ const FC = [
 {id:'hym-10', mod:'hym', f:'¿Qué pruebas están en la base de la pirámide de testing y quién es responsable?', b:'Pruebas unitarias — a cargo del equipo de desarrollo. JUnit para Java, PyTest para Python. Medidas en Sonar.'},
 {id:'hym-11', mod:'hym', f:'¿Qué es BoolTracker?', b:'La plataforma central de gestión de vulnerabilidades (DevSecOps) donde se consolidan todos los hallazgos de los escaneos de seguridad.'},
 {id:'hym-12', mod:'hym', f:'¿Sin qué no se puede crear un repositorio ni desplegar a producción?', b:'Sin un elemento de configuración (CI) creado en la CMDB — es la puerta de entrada al proceso.'},
+{id:'hym-13', mod:'hym', f:'¿Qué es el Mutation Testing y a qué lenguaje aplica?', b:'Técnica que modifica código fuente para verificar si las pruebas unitarias detectan el cambio. Solo aplica para Java, usando la librería PIT.'},
+{id:'hym-14', mod:'hym', f:'¿Qué escaneos de seguridad se realizan en la fase DevBill (Integración Continua)?', b:'SAST de código fuente e IaC, secret scanning (secretos expuestos) y dependency scanning (vulnerabilidades en dependencias).'},
+{id:'hym-15', mod:'hym', f:'¿Qué escaneos de seguridad se realizan en la fase de Release?', b:'DAST (análisis dinámico), container scanning (imágenes Docker) y escaneo de Kubernetes manifests.'},
+{id:'hym-16', mod:'hym', f:'¿Cuántos días máximo se tienen para remediar una vulnerabilidad crítica?', b:'45 días (con modelo de aceptación de riesgo en BoolTracker, que requiere aprobación de EBC, CD y líder funcional).'},
+{id:'hym-17', mod:'hym', f:'¿Quiénes pueden realizar la aprobación técnica del paso a producción?', b:'Líder técnico de EBC · Líder de línea de conocimiento · Ingeniero de software autorizado (según nivel de riesgo definido por la encuesta).'},
+{id:'hym-18', mod:'hym', f:'¿Qué pasa si el pipeline de release no tiene el stage de CRQ aprobada?', b:'El pipeline de deploy PDN cancela y abandona automáticamente el release — es un control SOX automático que no puede esquivarse.'},
 ];
 
 /* ============================================================
-   DATOS — Banco de preguntas (60 preguntas × 6 módulos)
+   DATOS — Banco de preguntas (23 preguntas × 6 módulos ≈ 138)
    ============================================================ */
 const BANK = [
   // ─── MODELO OPERATIVO ───
@@ -436,36 +472,90 @@ const BANK = [
   {mod:'mo',q:'¿Cuál principio expresa correctamente el enfoque del MO hacia los procesos de TI?',o:['Los procesos son estructuras rígidas que no deben cambiar sin auditoría','Los procesos son opcionales si el equipo tiene las capacidades correctas','Los procesos aplican solo a Federal y State, no al Local','Los procesos no son "camisas de fuerza": pueden evolucionar, pero de forma ordenada mediante el ciclo PHVA'],c:3,e:'El MO promueve la adaptabilidad de los procesos, pero exige que cualquier evolución sea ordenada y gobernada.'},
   {mod:'mo',q:'En el Modelo Operativo de Ingeniería de Plataformas, ¿cuál es la ecuación que genera una Plataforma?',o:['Federal + State + Local','Planear + Hacer + Verificar + Actuar','Personas + Procesos + Servicios','Negocio + Proceso + Tecnología = Plataforma'],c:3,e:'Una plataforma digital es la convergencia de los tres elementos: Negocio, Proceso y Tecnología.'},
   {mod:'mo',q:'¿Cuál describe mejor la relación entre modelo operativo y estructura organizacional?',o:['Son sinónimos — describen lo mismo con términos distintos','Solo son iguales cuando la estructura está en el mismo documento','La estructura define cómo se ejecutan los procesos; el modelo define los organigramas','Están relacionados pero no son lo mismo: la estructura tiene mucho que ver con el modelo, pero no es el modelo en sí'],c:3,e:'Se insiste en esta distinción: muchos confunden el organigrama con el modelo operativo, pero no son lo mismo.'},
+  // ─── MODELO OPERATIVO — casos de uso y contexto ───
+  {mod:'mo',q:'Un equipo Local lleva semanas esperando que el State automatice un componente que necesita urgentemente. ¿Qué debe hacer?',o:['Esperar indefinidamente al State sin actuar','Construir su propia solución ignorando los lineamientos','Coordinar con State un despliegue manual controlado y levantar solicitud de mejora','Escalar directamente a la Superintendencia Financiera'],c:2,e:'La acción correcta combina cubrir la necesidad inmediata (despliegue manual controlado bajo lineamientos) y mejorar el proceso mediante solicitud formal de mejora al State.'},
+  {mod:'mo',q:'¿Cuál es la prioridad diaria de los equipos de tecnología según el modelo operativo?',o:['Desplegar el máximo número de features posibles','Garantizar que la tecnología sea una plataforma robusta y estable para los equipos internos','Reducir el presupuesto de TI al mínimo posible','Preparar informes para el Comité Directivo'],c:1,e:'El propósito del área de tecnología es ser una plataforma confiable que habilite a los equipos internos y, a través de ellos, a los clientes del negocio.'},
+  {mod:'mo',q:'El State detecta que 3 equipos Local están construyendo de forma independiente exactamente la misma solución. ¿Qué debe hacer el State?',o:['Dejar que cada Local construya su versión para fomentar la innovación','Cancelar todos los proyectos y esperar un lineamiento Federal','Centralizar la solución y exponerla como servicio de plataforma para que todos la consuman','Delegar la decisión a los propios equipos Local'],c:2,e:'El rol del State es precisamente evitar duplicación: centraliza soluciones comunes y las expone como servicios estándar reutilizables para todos los equipos Local.'},
+  {mod:'mo',q:'¿Qué aporta COBIT 5 específicamente al MOTI de Bancolombia?',o:['Metodología de desarrollo ágil y sprints','Gobierno corporativo: define quién decide, cómo se controla y cómo se rinden cuentas','Mejores prácticas para entregar servicios TI de calidad','Marco de ciberseguridad y gestión de riesgos'],c:1,e:'COBIT 5 aporta el gobierno: la estructura de decisión y control sobre TI. ITIL 4 aporta la operación y mejora de servicios.'},
+  {mod:'mo',q:'¿Qué aporta ITIL 4 al MOTI de Bancolombia?',o:['Gobierno corporativo: quién decide y cómo se rinden cuentas','Normas de auditoría interna y externa','Mejores prácticas para diseñar, entregar y mejorar continuamente los servicios de TI','Metodología de gestión de proyectos tipo PMBOK'],c:2,e:'ITIL 4 aporta la capa de gestión de servicios: cómo diseñar, operar y mejorar los servicios que consume el negocio.'},
+  {mod:'mo',q:'¿Qué son los CDEs (Centros de Excelencia transversales) en la estructura del MO?',o:['Los directores de área de cada vicepresidencia','Equipos especializados transversales que dan soporte a todos los entornos (Infra & Operación, DevExp, Arquitectura)','Los equipos del nivel Federal que emiten lineamientos','Los clientes internos del nivel Local'],c:1,e:'Los CDEs son transversales: sirven a todos los niveles y entornos simultáneamente, no pertenecen a un entorno específico.'},
+  {mod:'mo',q:'¿Qué significa que "cumplir el proceso asegura que el valor no sea un evento de una sola vez"?',o:['Que los procesos deben documentarse en cada iteración','Que la consistencia en la ejecución hace el valor sostenible y repetible, no un pico aislado','Que el valor solo se genera cuando Federal lo autoriza','Que el proceso garantiza el bono de desempeño trimestral'],c:1,e:'El proceso es el mecanismo que convierte el valor en algo repetible y sostenible. Sin proceso, el valor es accidental y efímero.'},
+  {mod:'mo',q:'¿Qué significa EVC en el nivel Local del modelo operativo?',o:['Estándares de Validación de Configuración','Equipos externos de auditoría de tecnología','Equipo de Valor para el Cliente — célula con soporte E2E a sus productos y clientes','Líderes de los Centros de Excelencia Federal'],c:2,e:'Los EVC (Equipos de Valor para el Cliente) son las células del nivel Local con responsabilidad integral de extremo a extremo sobre sus productos y servicios.'},
   // ─── GESTIÓN DE LA CONFIGURACIÓN — preguntas adicionales ───
   {mod:'cfg',q:'¿Qué consecuencia tiene un Incidente registrado con un CI incorrecto o sin CI asociado?',o:['El incidente se cancela automáticamente en Hilix','El ANS del incidente se duplica','Las dependencias no se identifican y el incidente puede quedar subestimado','El CI queda marcado para revisión trimestral'],c:2,e:'Sin el CI correcto no se conocen las dependencias del componente afectado y el impacto real del incidente puede quedar subestimado.'},
   {mod:'cfg',q:'¿La CMDB puede utilizarse como herramienta de monitoreo en tiempo real de los componentes?',o:['Sí, es su función principal','Sí, complementa a Dynatrace en el monitoreo activo','Solo para aplicaciones VIA críticas','No — es para inventario y relacionamiento; el monitoreo lo hacen otras herramientas especializadas'],c:3,e:'La CMDB no monitorea: registra, relaciona y gobierna la información de los CIs.'},
   {mod:'cfg',q:'¿Qué proceso de TI necesita la CMDB para identificar aplicaciones VIA y garantizar la recuperación ante contingencias?',o:['Gestión de Cambios','Gestión de Incidentes','Gestión de Problemas','Gestión de la Continuidad de negocio'],c:3,e:'La Continuidad de negocio usa la CMDB para identificar los componentes vitales (VIA) y sus responsables ante una contingencia.'},
   {mod:'cfg',q:'¿Con qué frecuencia la nube carga automáticamente los componentes en la CMDB a través del tag App Code?',o:['Una vez al día','Dos veces al día','Tres veces al día','Una vez por semana'],c:2,e:'La actualización automática vía App Code se realiza tres veces al día para componentes en entornos cloud.'},
   {mod:'cfg',q:'Si un CI tiene el App Code incorrecto, ¿cuál es el impacto directo en el proceso de Gestión de Cambios?',o:['El cambio se cancela automáticamente','El App Code no afecta los cambios, solo los escaneos','El CI queda marcado automáticamente para revisión','No se identifica el equipo responsable ni el impacto real del cambio'],c:3,e:'El App Code vincula el CI con su responsable; un código incorrecto rompe esa cadena y el impacto del cambio queda sin dimensionar.'},
+  // ─── GESTIÓN DE LA CONFIGURACIÓN — políticas y gobierno ───
+  {mod:'cfg',q:'¿Cuáles son las 4 políticas clave del proceso de Gestión de la Configuración?',o:['Planear, hacer, verificar, actuar','Responsabilidad compartida, CMDB como fuente oficial, certificación periódica, todo ticket debe tener CI activo','Registrar, clasificar, resolver, cerrar','Descubrir, documentar, validar, actualizar'],c:1,e:'Las 4 políticas son los pilares de gobierno: todos son responsables, la CMDB es LA referencia, certificación trimestral, y todo ticket debe relacionar un CI activo.'},
+  {mod:'cfg',q:'¿Para qué sirven los reportes de Power BI en el proceso de Gestión de la Configuración?',o:['Para aprobar cambios en la CMDB','Para monitorear en tiempo real los componentes de producción','Para medir la completitud y exactitud de los CIs en la CMDB','Para gestionar las solicitudes de nuevos CIs'],c:2,e:'Power BI entrega dashboards de seguimiento y métricas del proceso: qué tan completa y exacta está la información de la CMDB en cada momento.'},
+  {mod:'cfg',q:'¿Qué consecuencia directa tiene que un CI no tenga responsable asignado en la CMDB?',o:['El CI queda marcado automáticamente como "obsoleto"','Si hay un incidente con ese componente, nadie sabe a quién escalar — el ticket queda huérfano y el ANS corre','El CI se elimina automáticamente después de 30 días','Se envía una alerta al Federal para gestión'],c:1,e:'La cadena responsable → CI → incidente → resolución depende del responsable. Sin él, el incidente queda sin atención y el ANS sigue corriendo.'},
+  {mod:'cfg',q:'¿Qué son las "Aplicaciones VIA" en el contexto de la CMDB?',o:['Aplicaciones en proceso de desarrollo activo','Aplicaciones con muy bajo uso y candidatas a retiro','Aplicaciones vitales para la continuidad del negocio, identificadas con ese atributo en la CMDB','Aplicaciones de uso exclusivo del área de auditoría'],c:2,e:'Las aplicaciones VIA (vitales para el negocio) se identifican en la CMDB para garantizar su recuperación ante contingencias. Las usa el proceso de Continuidad de negocio.'},
+  {mod:'cfg',q:'¿Cuál de las siguientes es una práctica INCORRECTA en la gestión de la CMDB?',o:['Actualizar la CMDB inmediatamente después de un cambio de sistema operativo','Relacionar todos los CIs asociados a una aplicación entre sí','Asumir que los CIs on-premise se actualizan solos igual que los de nube','Certificar trimestralmente los CIs como dueño de clase'],c:2,e:'En nube la actualización es automática (3 veces/día via App Code), pero on-premise requiere certificación manual trimestral. No se actualiza solo.'},
+  {mod:'cfg',q:'¿Cuál de los siguientes roles tiene acceso a la API de la CMDB?',o:['Todos los usuarios con acceso a Hilix','Solo los analistas del proceso de Gestión de la Configuración','Cualquier equipo de desarrollo que lo solicite por correo','Solo los dueños de clase de cada tipología de componente'],c:3,e:'La API de la CMDB está disponible exclusivamente para los dueños de clase — garantiza segregación de funciones en las integraciones.'},
+  {mod:'cfg',q:'¿Por qué la CMDB es considerada el "cerebro de la operación de TI"?',o:['Porque reemplaza a los sistemas de monitoreo en tiempo real','Porque es la fuente oficial y autoritativa de todos los componentes, sus responsables y sus relaciones','Porque la administran directamente los líderes de tecnología','Porque genera automáticamente los cambios de configuración sin intervención humana'],c:1,e:'La CMDB conecta todo: componentes, responsables, servicios, cambios, incidentes y vulnerabilidades. Sin ella, la operación de TI pierde visibilidad y trazabilidad.'},
+  {mod:'cfg',q:'¿Qué es el Portal de Configuración en el ecosistema Helix?',o:['La herramienta principal de la CMDB para todos los usuarios','Una interfaz para consultar y gestionar CIs — en proceso de construcción para el ciclo de certificación','El módulo de monitoreo en tiempo real de componentes','El sistema de tickets de soporte para incidentes de la CMDB'],c:1,e:'El Portal de Configuración es el módulo en construcción que facilitará la certificación y documentación de CIs de forma más amigable para los dueños.'},
   // ─── GESTIÓN DE CAMBIOS — preguntas adicionales ───
   {mod:'cam',q:'Según el Protocolo del Coordinador para el Consejo de Cambios TI, ¿cuál es la primera información que debe poder responder?',o:['¿Cuántos CIs están en la CMDB para este cambio?','¿Cuál es el nivel de riesgo de la encuesta?','¿Cuántos usuarios internos tiene la aplicación?','Describir claramente el Cambio que se ejecutará (Mantenimiento, Parchado, Actualización, etc.)'],c:3,e:'Lo primero es tener claridad total sobre la naturaleza del cambio antes de presentarlo al Consejo.'},
   {mod:'cam',q:'¿Cuál de los siguientes casos NO se clasifica como un Cambio TI?',o:['Adición de un servidor a la infraestructura en producción','Modificación del código fuente de una aplicación','Eliminación de una base de datos productiva','Autorización de accesos y parametrización funcional realizada por el usuario'],c:3,e:'Según las definiciones, accesos, permisos y parametrizaciones funcionales por el usuario no son Cambios TI.'},
   {mod:'cam',q:'Un cambio ejecutado directamente en una Plataforma On Premise sin herramientas como Azure DevOps o Solman se clasifica como:',o:['Cambio Automático','Cambio de Emergencia','Cambio Estándar','Cambio Manual'],c:3,e:'Los cambios que no pasan por herramientas de integración son Cambios Manuales, independientemente de su riesgo.'},
   {mod:'cam',q:'¿Cuál es el propósito del Plan de Devolución que debe tener todo coordinador de un cambio?',o:['Documentar quién aprobó el cambio en el Consejo','Notificar a los clientes sobre la afectación prevista','Registrar el costo del cambio y el ROI esperado','Definir cómo y en cuánto tiempo se puede revertir el cambio si algo sale mal'],c:3,e:'El Plan de Devolución es la estrategia de rollback: garantiza que si el cambio falla, se puede regresar al estado anterior de forma controlada.'},
   {mod:'cam',q:'¿Cuál es la definición de una "Afectación" en el proceso de Gestión de Cambios TI?',o:['Un cambio rechazado por el Consejo de Cambios','Una queja formal del cliente por indisponibilidad','Un incidente generado durante una CRQ','Interrupción y/o degradación (lentitud, intermitencia) en la disponibilidad de Aplicaciones o Componentes TI'],c:3,e:'Una afectación es cualquier degradación del servicio, desde lentitud hasta interrupción total, causada por un cambio.'},
+  // ─── GESTIÓN DE CAMBIOS TI — ciclo y casos de uso ───
+  {mod:'cam',q:'BullSolver es un caso de éxito en el proceso de cambios. ¿Qué lo hace exitoso?',o:['Que implementa cambios directamente sin pasar por el Consejo','Que integra automáticamente con Hilix para crear y cerrar los cambios sin intervención manual','Que permite modificar cambios automáticos en Hilix cuando hay urgencia','Que es un tipo de cambio estándar que no requiere encuesta'],c:1,e:'BullSolver (parchado) es un caso exitoso porque está plenamente integrado con Hilix: crea, ejecuta y cierra los cambios automáticamente, sin intervención humana.'},
+  {mod:'cam',q:'Del total de cambios mensuales (5,000-6,000), ¿qué porcentaje aproximado son automáticos?',o:['Cerca del 10-15%','Cerca del 30-35%','Cerca del 52-53%','Cerca del 80-90%'],c:2,e:'Aproximadamente la mitad de todos los cambios mensuales son automáticos — integrados vía Azure DevOps o SolMan directamente con Hilix.'},
+  {mod:'cam',q:'¿Qué ocurre cuando la encuesta de riesgos arroja nivel ALTO para un cambio automático de software?',o:['El cambio se cancela automáticamente','La herramienta obliga a generar una CRQ ágil aprobada por el líder técnico','La herramienta obliga a generar una CRQ programada que debe pasar por el Consejo de Cambios','El cambio puede ejecutarse igual pero queda como observación'],c:2,e:'Riesgo alto implica CRQ programada con doble validación: Consejo de Cambios + líder técnico de EBC — el nivel más alto de control del proceso.'},
+  {mod:'cam',q:'¿Quiénes participan en la aprobación de un cambio de emergencia?',o:['Solo el aprobador del Equipo de Producto','El Aprobador del Equipo de Producto y el Consejo en sesión extraordinaria','El Aprobador del Equipo de Producto y GIOTI (en paralelo con la ejecución)','Solo GIOTI puede aprobar cambios de emergencia'],c:2,e:'La emergencia es el único tipo donde la aprobación va en paralelo con la ejecución. GIOTI y el Aprobador del Equipo de Producto actúan simultáneamente.'},
+  {mod:'cam',q:'¿Cuáles son los estados del ciclo de vida de una CRQ, en orden?',o:['Registrado → Aprobado → Ejecutado → Cerrado','Borrador → Programado para aprobación → Programado → Implementación en curso → Terminado → CERRADO','Abierto → En análisis → En ejecución → Validado → Cerrado','Solicitado → Revisado → Autorizado → Desplegado → Archivado'],c:1,e:'El ciclo de vida oficial en Hilix: Borrador → Programado para aprobación → Programado → Implementación en curso → Terminado → CERRADO.'},
+  {mod:'cam',q:'¿Qué debe completar el coordinador en el campo "Gestión Consejo" al preparar un cambio programado?',o:['El número de usuarios afectados por el cambio','Si el cambio se presentará como "Recomendado" (sin presencia) o "Presencial" (debe asistir a la sesión)','El monto económico del riesgo del cambio','El nombre del sistema que recibirá el cambio'],c:1,e:'El campo "Gestión Consejo" define la modalidad: Recomendado (el Consejo lo aprueba sin presencia física del coordinador) o Presencial (debe asistir a la sesión).'},
+  {mod:'cam',q:'¿Cuándo genera el equipo de procesos el Acta del Consejo de Cambios?',o:['El mismo día del Consejo (martes/jueves) en la mañana','Los lunes y miércoles al mediodía — todos los cambios deben estar listos ANTES de ese corte','Al final de cada mes como resumen de cambios aprobados','Una vez que el cambio se cierra exitosamente en Hilix'],c:1,e:'El Acta se genera los lunes y miércoles al mediodía. Los cambios deben estar creados Y aprobados por el líder antes de ese corte para quedar en el Acta.'},
+  {mod:'cam',q:'Un coordinador identifica que su cambio afectará a los clientes por más de 30 minutos. ¿Cuál es la acción correcta?',o:['Registrarlo como cambio ágil para evitar el Consejo','Avisar a clientes con mínimo 8 días de anticipación (Circular 028) y presentar al Consejo con 15 días','Ejecutarlo en horario nocturno para reducir el impacto percibido','Solicitar una extensión del plazo a la Superintendencia Financiera'],c:1,e:'La Circular 028 es clara: 8 días de anticipación mínima para comunicar a clientes + 15 días para el Consejo. Incumplirla implica sanciones económicas significativas.'},
   // ─── GESTIÓN DE INCIDENTES — preguntas adicionales ───
   {mod:'inc',q:'Al registrar un incidente en BMC Helix, ¿qué campo, al ser seleccionado, trae automáticamente el campo "Servicio" relacionado?',o:['Categoría operacional','Impacto','Grupo de soporte','CI (Elemento de Configuración)'],c:3,e:'El CI vincula automáticamente el servicio al que pertenece el componente afectado, sin necesidad de buscarlo manualmente.'},
   {mod:'inc',q:'Según el control BC07110344C005, ¿con qué frecuencia el Equipo de Dueño de Producto debe revisar los incidentes para identificar patrones?',o:['Diariamente','Semanalmente','Mensualmente','Trimestralmente'],c:2,e:'La revisión mensual es el control definido para detectar proactivamente incidentes que deberían convertirse en problemas.'},
   {mod:'inc',q:'¿En cuál pestaña de BMC Helix se deben documentar todas las acciones y análisis realizados durante la gestión de un incidente?',o:['Recursos','Relacionamientos','Aprobación','Actividad'],c:3,e:'La pestaña Actividad es el registro cronológico de todas las acciones; es fundamental para la calidad del ticket.'},
   {mod:'inc',q:'¿Cuándo se considera que un incidente fue correctamente resuelto en términos de gestión de causa raíz?',o:['Cuando se cierra antes de la mitad del ANS definido','Cuando el usuario final aprobó la resolución por correo','Cuando la prioridad bajó a Bajo antes del cierre','Cuando la causa raíz es accionable, prevenible y verificable, o se creó un caso Problema'],c:3,e:'La calidad de la causa raíz es el indicador real de una buena gestión; si no se conoce, debe crearse el caso Problema.'},
   {mod:'inc',q:'Si un incidente se repite con alta frecuencia (3-4 veces por semana) y el equipo no crea el caso Problema, ¿qué hace el proceso?',o:['Eleva automáticamente la prioridad a crítico','Cierra los duplicados y genera una sola notificación','Escala al área de Continuidad de Negocio','Crea directamente el caso Problema'],c:3,e:'El proceso tiene controles automáticos: la repetibilidad excesiva desencadena la creación del caso Problema si el equipo no actuó.'},
+  // ─── GESTIÓN DE INCIDENTES — ANS, notificaciones y operación ───
+  {mod:'inc',q:'¿Cuál es el ANS para un incidente crítico en la dirección de Transformación y Soporte (desarrollo)?',o:['4 horas','8 horas hábiles','16 horas','10 horas'],c:1,e:'Para Transformación/Soporte: crítico 8h hábiles, medio 3 días, bajo 5 días. Estos ANS son en horario hábil, NO 24/7 como los de infraestructura (4h, 10h, 18h).'},
+  {mod:'inc',q:'¿A quién notifica el sistema cuando un ticket consume el 75% del ANS?',o:['Al usuario que reportó el incidente','A los miembros del grupo de soporte asignado','A los gerentes o directivos responsables del área','A la Superintendencia Financiera'],c:2,e:'La escalación es en dos pasos: al 50% notifica a los miembros del grupo; al 75% escala a los managers/directivos. Ambas notificaciones son automáticas desde Hilix.'},
+  {mod:'inc',q:'¿Cuáles son los dos buzones clave para las notificaciones del proceso de incidentes?',o:['Outlook del grupo y el chat de Teams','BancolombiaTSM (notificaciones de tickets) y procesosti1 (gestión del proceso)','El correo personal del técnico y el del líder','La bandeja de entrada de Hilix y el portal del cliente'],c:1,e:'BancolombiaTSM recibe todas las notificaciones automáticas de los tickets. procesosti1 es el canal del equipo de proceso para comunicaciones de gestión.'},
+  {mod:'inc',q:'¿Con qué frecuencia recibe alerta el grupo de soporte cuando tiene un solo integrante activo?',o:['Diariamente','Cada martes','Mensualmente','Solo cuando el incidente ya venció el ANS'],c:1,e:'La alerta de "grupo con un solo integrante activo" se envía cada martes — recordatorio para garantizar cobertura mínima en el equipo.'},
+  {mod:'inc',q:'¿Cuándo recibe notificación automática un grupo de soporte por estar sin actividad?',o:['Después de 10 días sin tickets','Después de 30 días sin actividad','Después de 60 días sin tickets asignados','Después de un año fiscal sin actividad'],c:2,e:'Cada 60 días se notifica a grupos sin tickets — señal de que el grupo podría estar mal configurado o ser innecesario.'},
+  {mod:'inc',q:'¿Cuál es la meta de cumplimiento de ANS para los incidentes?',o:['60%','80%','90.5%','100%'],c:2,e:'La meta de incidentes (90.5%) es la más alta de las tres métricas del proceso: eventos (80%) y problemas (60%). Refleja el impacto directo en la continuidad del negocio.'},
+  {mod:'inc',q:'Un usuario reporta que el servicio está "lento pero disponible". ¿Se debe crear un ticket de incidente?',o:['No, solo se crea incidente si el servicio está completamente caído','Sí, la lentitud es una forma de degradación y también se considera incidente','Solo si el usuario lleva más de 30 minutos esperando','Solo si el CI afectado es de criticidad alta'],c:1,e:'La degradación del servicio (lentitud, intermitencia) también es un incidente. Cualquier afectación en la disponibilidad — no solo las caídas totales — debe gestionarse.'},
+  {mod:'inc',q:'¿Cuál es el control BCOT110104C005 en el proceso de incidentes?',o:['La revisión trimestral de CIs en la CMDB','La revisión mensual de incidentes del periodo para identificar patrones y postular casos a Gestión de Problemas','El control SOX de aprobación de cambios','La auditoria semestral del proceso de configuración'],c:1,e:'El control BCOT110104C005 es la revisión mensual obligatoria realizada por el Equipo Dueño de Producto para detectar proactivamente problemas potenciales.'},
   // ─── GESTIÓN DE PROBLEMAS — preguntas adicionales ───
   {mod:'prob',q:'¿Cuál de las siguientes situaciones NO es criterio para postular un incidente como Problema?',o:['El incidente se repite con alta frecuencia','No se ha identificado la causa raíz','El impacto al negocio justifica una investigación profunda','El incidente fue resuelto dentro del ANS definido sin recurrencia'],c:3,e:'Resolver un incidente a tiempo y sin recurrencia es el resultado esperado, no un detonante para abrir un caso Problema.'},
   {mod:'prob',q:'Según la casuística del corte de abril, ¿cuántos Problemas se registraron de un total de 108 incidentes?',o:['42','32','15','8'],c:3,e:'108 incidentes generaron solo 8 casos Problema — la proporción es un indicador de madurez del proceso.'},
   {mod:'prob',q:'¿Cuál fue la segunda causa con mayor número de incidentes en la casuística de Canales Claves del corte de abril?',o:['Alta demanda de recursos (24)','Nequi (15)','Errores Humanos (8)','Ejecución CRQ (32)'],c:3,e:'Proveedor fue primero (42) y Ejecución CRQ fue segundo (32), señalando oportunidades de mejora en la gestión de cambios.'},
   {mod:'prob',q:'¿Qué significa aplicar la técnica de resolución "invertir el problema"?',o:['Asignar el problema al equipo que lo originó','Buscar un tercero externo sin sesgo','Usar IA para agrupar incidentes en mapas de calor','Buscar caminos alternativos preguntándose qué haría que el problema EMPEORE, para luego invertir esa lógica'],c:3,e:'Invertir el problema cambia la perspectiva y a menudo revela soluciones que el enfoque directo no encontraría.'},
   {mod:'prob',q:'¿Qué significa el concepto de "Repetibilidad" en el criterio de postulación a Problema?',o:['Que el mismo usuario reporta el incidente más de dos veces','Que el incidente ocurre en múltiples ambientes','Que el incidente fue reabierto más de una vez','La frecuencia con la que se presenta el incidente — si es alta, es criterio para abrir un caso Problema'],c:3,e:'La repetibilidad captura la frecuencia: si un incidente ocurre 3-4 veces por semana, la gestión de problemas debe intervenir.'},
+  // ─── GESTIÓN DE PROBLEMAS — madurez, casos y técnicas ───
+  {mod:'prob',q:'¿Cuáles son los 4 niveles de madurez en gestión de problemas y en cuál está Bancolombia?',o:['Básico, Intermedio, Avanzado, Experto — en Avanzado','Inicial, Estandarizado, Gestionado, Optimizado — en Gestionado','Reactividad, Prevención, Optimización, Innovación — en Prevención','PHVA niveles 1-4 — en nivel 3'],c:1,e:'Bancolombia está en el nivel Gestionado (tercer nivel de cuatro): mide, monitorea y corrige sistemáticamente con 84.9% de cumplimiento contra meta del 60%.'},
+  {mod:'prob',q:'El equipo SAF (Administración de Factoring) implementó varias mejoras. ¿Cuál de estas NO fue parte de su estrategia?',o:['Mesas de triaje diarias con diagnóstico en dos niveles','Ventanas de restricción propias para pasos a producción','Cerrar todos sus casos problema para limpiar el indicador','Validaciones más rigurosas con responsabilidad directa en aprobaciones'],c:2,e:'El equipo SAF NO cerró problemas para limpiar indicadores — al contrario, creó más casos problema de forma proactiva para diagnosticar causas raíz y evitar reincidencias.'},
+  {mod:'prob',q:'¿Qué sucede con el módulo de Gestión Proactiva si los equipos no documentan correctamente sus incidentes?',o:['El módulo igual genera mapas de calor precisos con la información disponible','La IA no tiene datos de calidad y los mapas de calor pierden precisión y valor analítico','El proceso crea los datos automáticamente basado en históricos','El módulo envía una alerta al Federal para auditar al equipo'],c:1,e:'ITSM Insights es tan buena como la calidad de los datos que recibe. Sin categorización correcta (CI, servicio, categoría operacional), los mapas de calor son imprecisos e inútiles.'},
+  {mod:'prob',q:'¿Cuál de los siguientes planes de acción SÍ es válido para documentar en un HADA?',o:['Actualizar la documentación del proceso afectado','Crear un checklist de verificación para el próximo reinicio','Implementar automatización en el aprovisionamiento del componente afectado','Definir un modelo de atención de incidentes para el equipo'],c:2,e:'Solo la implementación técnica elimina directamente la causa raíz. Documentación, checklists y modelos de atención son mejora continua — válidos pero no evitan la recurrencia del incidente específico.'},
+  {mod:'prob',q:'¿Cuántos casos problema se crearon a partir del análisis de los 108 incidentes de Canales Claves?',o:['42','15','8','32'],c:2,e:'108 incidentes generaron 8 casos problema — un porcentaje bajo que muestra la madurez de saber cuándo crear un caso problema con criterio, no por volumen o por cumplir indicadores.'},
+  {mod:'prob',q:'Según la sesión, ¿por qué el plan de acción "vamos a reunirnos para encontrar la causa raíz" es inadecuado?',o:['Porque las reuniones no están permitidas en el proceso','Porque significa que la causa raíz aún no se conoce — y en ese caso lo correcto es crear un caso problema','Porque este plan solo lo puede documentar el equipo Federal','Porque las reuniones deben planificarse con 15 días de anticipación'],c:1,e:'Si el plan es "buscar la causa raíz", significa que aún no se sabe el por qué. En ese punto, el caso problema es el instrumento correcto para investigarla formalmente.'},
+  {mod:'prob',q:'¿Cuál fue la segunda causa con mayor número de incidentes en el corte de Canales Claves?',o:['Fallas de proveedor (42 casos)','Ejecución de CRQ (32 casos)','Nequi (15 casos)','Errores humanos (8 casos)'],c:1,e:'El top 3: 1.º Proveedor (42), 2.º Ejecución de CRQ (32), 3.º Nequi (15). El segundo puesto señala que la gestión de cambios impacta directamente en los incidentes.'},
+  {mod:'prob',q:'¿Qué diferencia hay entre el módulo de "Gestión Proactiva" y el de "Correlación de Incidentes" en Hilix?',o:['No hay diferencia, son dos nombres para el mismo módulo','Los dos requieren configuración previa y analizan rangos históricos','Gestión Proactiva requiere configuración y analiza periodos; Correlación viene preconfigurada y muestra tendencias en tiempo real','Correlación solo aplica a infraestructura; Proactiva solo a software'],c:2,e:'Diferencia clave: Gestión Proactiva requiere configuración y analiza periodos definidos por el equipo. Correlación viene configurada por defecto y muestra agrupaciones de incidentes en tiempo real.'},
   // ─── HABILITAR Y MANTENER SOLUCIONES — preguntas adicionales ───
   {mod:'hym',q:'¿Qué tipo de CRQ se genera cuando la encuesta de riesgos arroja nivel ALTO?',o:['CRQ Ágil aprobada por el Líder de línea de conocimiento','CRQ Estándar exenta de encuesta','CRQ de Emergencia aprobada por el Director de Entorno','CRQ Programada que pasa por el Consejo de Cambios y requiere aprobación del Líder técnico de EBC'],c:3,e:'El riesgo alto exige doble validación: Consejo de Cambios + Líder técnico de EBC.'},
   {mod:'hym',q:'¿Por qué el proceso de Habilitar y Mantener Soluciones NO aplica a aplicaciones SaaS?',o:['Porque las SaaS no tienen usuarios en Bancolombia','Porque son demasiado pequeñas para requerir control SOX','Porque ya tienen su propio proceso en Azure DevOps','Porque no están dentro de la infraestructura del Banco y no se gestiona su código fuente'],c:3,e:'Las SaaS son administradas por el proveedor — Bancolombia no gestiona su código, por ello el proceso no aplica.'},
   {mod:'hym',q:'¿Qué es BoolTracker en el ecosistema DevSecOps de Bancolombia?',o:['Una herramienta de gestión de proyectos tipo Kanban','El dashboard de seguimiento del ANS de incidentes','Un repositorio de código fuente alternativo a Azure DevOps','La plataforma central de gestión de vulnerabilidades donde se consolidan hallazgos de escaneos de seguridad'],c:3,e:'BoolTracker centraliza todos los hallazgos de ciberseguridad y es el tablero principal de la gestión de vulnerabilidades.'},
   {mod:'hym',q:'¿Cuál es el requisito previo obligatorio para poder crear un repositorio o desplegar a producción por primera vez?',o:['Tener el DoD aprobado por el PO','Tener el Test Plan documentado en Azure DevOps','Tener el Pull Request aprobado por al menos un revisor','Tener un elemento de configuración (CI) creado en la CMDB'],c:3,e:'La CMDB es la puerta de entrada: sin CI no se puede iniciar el proceso de Habilitar y Mantener Soluciones.'},
   {mod:'hym',q:'Desde el punto de vista regulatorio, ¿qué representan los 3 tipos de despliegue (manual, automático y SolMan)?',o:['Preferencias técnicas de cada equipo de desarrollo','Categorías opcionales de documentación del proceso','Fases del ciclo de vida del software','Controles SOX en sí mismos'],c:3,e:'Cada tipo de despliegue es, por definición, un control SOX — parte de la certificación anual ante auditorías internas y externas.'},
+  // ─── HABILITAR Y MANTENER SOLUCIONES — DevSecOps, auditoría y controles ───
+  {mod:'hym',q:'¿Qué sucede si el pipeline de release (deploy PDN) detecta que no existe el stage de CRQ aprobada?',o:['Envía una notificación al coordinador para que la cree','Continúa el despliegue y lo marca como observación pendiente','Cancela y abandona el release automáticamente','Reduce el nivel de privilegio del despliegue'],c:2,e:'El control es 100% automático y sin excepciones: si no existe el stage de CRQ válido, el pipeline cancela el release. Es imposible esquivarlo.'},
+  {mod:'hym',q:'¿Cuántas veces al año hace ciclos de revisión la auditoría interna de Bancolombia sobre el proceso HyMS?',o:['Una vez','Dos veces','Cuatro veces (trimestral)','De forma continua sin ciclos definidos'],c:1,e:'Auditoría interna hace 2 ciclos al año — toma muestras de cambios de todos los tamaños y revisa toda la cadena: CRQ, DoD, Test Plan, aprobaciones técnicas y funcionales.'},
+  {mod:'hym',q:'¿Qué hace la firma PricewaterhouseCoopers (PWC) en relación con el proceso HyMS?',o:['Audita solo los cambios de emergencia','Revisa el diseño del control y la operatividad, y puede presentarse sin previo aviso con requerimientos institucionales','Solo revisa la CMDB una vez al año','Aprueba formalmente los cambios de alto riesgo'],c:1,e:'Como revisoría fiscal externa, PWC hace dos ciclos al año: revisa el diseño del control Y la operatividad real. Puede presentarse de forma imprevista y va directamente a las plataformas.'},
+  {mod:'hym',q:'¿Qué herramientas de seguridad se activan en la fase de DevBill (Integración Continua)?',o:['DAST, container scanning y Kubernetes manifests','SAST de código e IaC, secret scanning y dependency scanning','Solo pruebas unitarias y análisis de cobertura de código','Mutation testing y performance testing con JMeter'],c:1,e:'En CI (DevBill) los escaneos son estáticos: análisis de código (SAST), infraestructura como código (IaC), secretos expuestos y vulnerabilidades en dependencias.'},
+  {mod:'hym',q:'¿Qué tipos de escaneos de seguridad se realizan en la fase de Release?',o:['SAST de código fuente y secret scanning','Pruebas de performance con JMeter y SiteSpeed','DAST (análisis dinámico), container scanning y Kubernetes manifests','Solo vulnerability scanning de dependencias'],c:2,e:'En Release los escaneos son más dinámicos y de infraestructura: DAST analiza la aplicación en ejecución; container scanning verifica imágenes Docker; se escanean los manifests de Kubernetes.'},
+  {mod:'hym',q:'¿Cuántos días máximo tiene un equipo para remediar una vulnerabilidad CRÍTICA registrada en BoolTracker?',o:['15 días','30 días','45 días','90 días'],c:2,e:'El modelo de apetito/tolerancia de BoolTracker establece 45 días máximo para vulnerabilidades críticas. Requiere aprobación formal de EBC, CD y líder funcional para aceptar el riesgo en ese plazo.'},
+  {mod:'hym',q:'¿Quiénes pueden realizar la aprobación técnica (Criedo C) de un paso a producción?',o:['Cualquier miembro del equipo de desarrollo','Solo el arquitecto de la solución','Líder técnico de EBC, Líder de línea de conocimiento o Ingeniero de software autorizado (según nivel de riesgo)','Solo el Dueño de Producto (PO)'],c:2,e:'Hay 3 roles que pueden hacer esta aprobación técnica, determinados por el nivel de riesgo. El PO hace la aprobación funcional en el DoD, no la aprobación técnica de producción.'},
+  {mod:'hym',q:'Si como instalador de un despliegue manual te piden instalar un objeto que te enviaron por correo personal del coordinador, ¿qué haces?',o:['Instalarlo si el coordinador es de confianza y lo justifica verbalmente','Rechazar la instalación — ningún objeto puede llegar por fuera del correo automático de Azure DevOps','Instalarlo solo si hay una CRQ aprobada que lo respalde','Esperar que llegue también el correo automático para comparar objetos'],c:1,e:'Regla absoluta: el instalador solo puede actuar con lo que llega del correo automático de Azure DevOps. Correo personal, Teams, USB, OneDrive → rechazo inmediato. Es el control de fraude interno.'},
 ];
 
 /* ============================================================
@@ -1044,6 +1134,13 @@ mo:[
       {l:'Federal–State–Local',   r:'Equilibrio: buen control + alineación al negocio'},
       {l:'Hub and Spoke',         r:'Centrado en el producto/plataforma'},
     ]},
+  { title:'Framework → Aporte al MOTI',
+    pairs:[
+      {l:'COBIT 5',  r:'Gobierno corporativo — define quién decide y cómo se rinden cuentas'},
+      {l:'ITIL 4',   r:'Gestión de servicios — diseñar, entregar y mejorar servicios TI'},
+      {l:'PHVA',     r:'Ciclo de mejora continua del modelo operativo'},
+      {l:'MOTI',     r:'Modelo Operativo de TI de Bancolombia, basado en COBIT 5 e ITIL 4'},
+    ]},
 ],
 cfg:[
   { title:'Causa → Consecuencia en la CMDB',
@@ -1058,6 +1155,13 @@ cfg:[
       {l:'Power BI',               r:'Reportes de inventario y métricas del proceso'},
       {l:'Automatización nube',    r:'Carga automática de componentes AWS, 3 veces al día'},
       {l:'Portal de configuración',r:'Módulo de certificación trimestral y documentación (en construcción)'},
+    ]},
+  { title:'Política CMDB → Qué establece',
+    pairs:[
+      {l:'Responsabilidad compartida',  r:'Todos son responsables de mantener actualizada la información de sus CIs'},
+      {l:'CMDB como fuente oficial',    r:'Es LA referencia de inventario TI — no hay otro inventario válido'},
+      {l:'Certificación periódica',     r:'Control trimestral con dueños de clase para componentes on-premise'},
+      {l:'CI activo en todo ticket',    r:'Todo cambio, incidente o problema debe relacionar un CI activo en la CMDB'},
     ]},
 ],
 cam:[
@@ -1075,6 +1179,13 @@ cam:[
       {l:'Circular 028',         r:'Aviso al cliente con 8 días ante indisponibilidad ≥30 min'},
       {l:'Fecha de restricción', r:'No ejecutar cambios salvo urgencia — requiere aprobación del Director'},
     ]},
+  { title:'Nivel de riesgo (cambio automático SW) → Tipo de CRQ y aprobador',
+    pairs:[
+      {l:'Riesgo Bajo',   r:'CRQ Ágil — aprueba el Equipo de Producto'},
+      {l:'Riesgo Medio',  r:'CRQ Ágil — aprueba el Líder Técnico del EVC o Líder de Línea'},
+      {l:'Riesgo Alto',   r:'CRQ Programada — Líder Técnico del EVC + Consejo de Cambios'},
+      {l:'Emergencia',    r:'Aprobación en paralelo — Equipo de Producto + GIOTI'},
+    ]},
 ],
 inc:[
   { title:'ANS → Tiempo de resolución',
@@ -1090,6 +1201,13 @@ inc:[
       {l:'Garantía',   r:'5 días corridos para reabrir un ticket — solo gestionada por Mateo'},
       {l:'PKE',        r:'ID de Error Conocido generado automáticamente en Hilix'},
       {l:'Workaround', r:'Solución temporal que reduce el impacto mientras no hay solución definitiva'},
+    ]},
+  { title:'Entorno → ANS del incidente crítico',
+    pairs:[
+      {l:'Infraestructura — Crítico',          r:'4 horas (24/7)'},
+      {l:'Transformación y Soporte — Crítico', r:'8 horas hábiles'},
+      {l:'Incidentes — Meta de cumplimiento',  r:'90.5%'},
+      {l:'Problemas — Meta de cumplimiento',   r:'60%'},
     ]},
 ],
 prob:[
@@ -1107,6 +1225,13 @@ prob:[
       {l:'Workaround', r:'Solución temporal documentada en el PKE'},
       {l:'RCA',        r:'Root Cause Analysis — análisis formal y riguroso de causa raíz'},
     ]},
+  { title:'Estado del PKE → Significado',
+    pairs:[
+      {l:'Asignado',                    r:'PKE creado automáticamente, pendiente de revisión por el equipo'},
+      {l:'Planificado para corrección',  r:'Existe solución definitiva en proceso de implementación'},
+      {l:'Sin acción planificada',       r:'Se decidió no implementar solución (ej. app próxima a jubilarse)'},
+      {l:'Corregido',                    r:'Causa raíz eliminada con solución definitiva implementada'},
+    ]},
 ],
 hym:[
   { title:'Tipo de despliegue → Herramienta',
@@ -1120,6 +1245,12 @@ hym:[
       {l:'Riesgo Bajo',  r:'CRQ Ágil → Líder de línea de conocimiento'},
       {l:'Riesgo Medio', r:'CRQ Ágil → Líder técnico de EBC'},
       {l:'Riesgo Alto',  r:'CRQ Programada → Consejo de Cambios + Líder técnico EBC (dos validaciones)'},
+    ]},
+  { title:'Fase del ciclo DevSecOps → Escaneos de seguridad',
+    pairs:[
+      {l:'DevBill (CI)',  r:'SAST código e IaC · secret scanning · dependency scanning'},
+      {l:'Release',       r:'DAST · container scanning · Kubernetes manifests'},
+      {l:'BoolTracker',   r:'Plataforma central de gestión y seguimiento de todas las vulnerabilidades'},
     ]},
 ],
 };
@@ -1136,6 +1267,9 @@ mo:[
   {s:'Un equipo Local puede saltarse un lineamiento Federal si eso le permite avanzar más rápido.', a:false, e:'Toda excepción debe coordinarse y aprobarse con el Federal.'},
   {s:'El modelo centralizado ofrece alto control pero baja alineación con el negocio.', a:true, e:'Es el trade-off característico del modelo centralizado.'},
   {s:'La estructura organizacional y el modelo operativo son exactamente lo mismo.', a:false, e:'Están relacionados pero no son lo mismo.'},
+  {s:'COBIT 5 e ITIL 4 son los dos marcos internacionales que sustentan el MOTI de Bancolombia.', a:true, e:'COBIT 5 aporta gobierno corporativo; ITIL 4 aporta gestión de servicios de TI.'},
+  {s:'Los CDEs son equipos del nivel Local que reportan directamente a los EVC.', a:false, e:'Los CDEs son equipos transversales que dan soporte cruzado a todos los niveles y entornos simultáneamente.'},
+  {s:'Un equipo Local puede decidir unilateralmente saltar un lineamiento Federal si considera que le generará más valor.', a:false, e:'Toda excepción a un lineamiento Federal debe coordinarse y aprobarse formalmente. El modelo es adaptable, no libertario.'},
 ],
 cfg:[
   {s:'Un CI es cualquier componente que deba gestionarse para habilitar un servicio de TI.', a:true, e:'Esa es la definición de Elemento de Configuración.'},
@@ -1145,6 +1279,9 @@ cfg:[
   {s:'Cualquier persona con acceso a Hilix puede actualizar cualquier CI.', a:false, e:'Solo los dueños de cada tipo de componente pueden actualizarlo.'},
   {s:'La validación de CIs on-premise se realiza trimestralmente con los dueños de las aplicaciones.', a:true, e:'Correcto, validación manual trimestral.'},
   {s:'La jerarquía de la CMDB inicia en los componentes técnicos y termina en el servicio.', a:false, e:'Es al revés: Servicio → Aplicaciones → Transacciones → Componentes técnicos.'},
+  {s:'Los dueños de clase son los únicos que pueden acceder a la API de la CMDB.', a:true, e:'La API de la CMDB tiene acceso restringido a los dueños de clase para garantizar segregación de funciones en las integraciones.'},
+  {s:'El Portal de Configuración ya está completamente operativo para la certificación trimestral.', a:false, e:'El Portal de Configuración está en construcción — la certificación se gestiona directamente en Hilix.'},
+  {s:'La CMDB identifica qué aplicaciones son VIA (vitales) para ser usadas por el proceso de Continuidad de negocio.', a:true, e:'Las aplicaciones VIA se marcan en la CMDB específicamente para que el proceso de Continuidad de negocio identifique los componentes críticos ante contingencias.'},
 ],
 cam:[
   {s:'Los cambios estándar requieren siempre diligenciar la encuesta de riesgos.', a:false, e:'Son el único tipo exento de la encuesta.'},
@@ -1154,6 +1291,9 @@ cam:[
   {s:'Un cambio automático puede modificarse manualmente en Hilix sin ningún problema.', a:false, e:'Nunca, excepto los cambios Git LFS.'},
   {s:'El control SOX en Gestión de Cambios corresponde a la aprobación formal antes de producción.', a:true, e:'Correcto; el control operativo es el cierre y validación.'},
   {s:'Crear un cambio manual paralelo a uno automático de bajo riesgo, "para ir tranquilos", es una buena práctica.', a:false, e:'Es un incumplimiento del proceso.'},
+  {s:'Los cambios Git LFS (manuales) se autorizan de manera diferente al resto de cambios automáticos.', a:true, e:'Git LFS es la excepción dentro de los cambios automáticos: aunque se auto-integra, la instalación la ejecuta una persona con privilegios y sigue el flujo del correo automático de Azure DevOps.'},
+  {s:'Aproximadamente el 52-53% de los cambios mensuales en Bancolombia son de tipo automático.', a:true, e:'Más de la mitad del volumen mensual (5,000-6,000 cambios) son automáticos — integrados vía Azure DevOps o SolMan con Hilix.'},
+  {s:'Un coordinador puede presentar un cambio al Consejo aunque no tenga aún la aprobación de su líder.', a:false, e:'El cambio debe estar aprobado por el líder ANTES de incluirse en el Acta del Consejo (corte: mediodía del lunes/miércoles).'},
 ],
 inc:[
   {s:'Un incidente actúa sobre el síntoma; un problema actúa sobre la causa raíz.', a:true, e:'Es la diferencia clave entre ambos procesos.'},
@@ -1163,6 +1303,9 @@ inc:[
   {s:'La ventana de garantía para solicitar reapertura de un ticket es de 30 días corridos.', a:false, e:'Es de 5 días corridos, gestionada solo por Mateo.'},
   {s:'Un grupo de soporte puede tener un único integrante sin ningún problema.', a:false, e:'Debe tener más de uno para evitar incidentes huérfanos.'},
   {s:'Actualizar la documentación del proceso cuenta como un plan de acción real.', a:false, e:'Es mejora continua, no elimina la causa raíz.'},
+  {s:'El ANS para incidentes de la dirección Transformación y Soporte es el mismo que el de Infraestructura.', a:false, e:'Son distintos: Infraestructura es 24/7 (crítico 4h, medio 10h, bajo 18h). Transformación es en horario hábil (crítico 8h, medio 3 días, bajo 5 días).'},
+  {s:'La meta de cumplimiento de ANS para incidentes es del 90.5%.', a:true, e:'La meta de incidentes (90.5%) es la más alta de las tres métricas: incidentes (90.5%) > eventos (80%) > problemas (60%).'},
+  {s:'El campo "Categoría de resolución" es obligatorio al momento de crear el ticket de incidente.', a:false, e:'La Categoría de resolución es obligatoria solo al momento de resolver el incidente, no al crearlo. Al crear, es obligatorio el campo CI y los campos de impacto/urgencia.'},
 ],
 prob:[
   {s:'Un error conocido (PKE) tiene causa raíz documentada y un workaround, pero no una solución definitiva.', a:true, e:'Correcto, esa es la definición de error conocido.'},
@@ -1172,6 +1315,9 @@ prob:[
   {s:'Un incidente con más de 20 días abierto debe generar un caso problema.', a:true, e:'Es el lineamiento del proceso.'},
   {s:'La gestión proactiva de problemas espera a estar "corchado" antes de actuar.', a:false, e:'Eso describe la gestión reactiva; la proactiva revisa periódicamente.'},
   {s:'La meta de cumplimiento del proceso de problemas era 60%, con un cumplimiento real de 84.9%.', a:true, e:'Correcto, superó ampliamente la meta.'},
+  {s:'El módulo de Correlación de Incidentes en tiempo real de Hilix requiere configuración previa del equipo.', a:false, e:'La Correlación de Incidentes viene preconfigurada por defecto. Es el módulo de Gestión Proactiva de Problemas el que requiere configuración inicial del equipo.'},
+  {s:'Bancolombia se encuentra en el nivel "Gestionado" de madurez en gestión de problemas.', a:true, e:'Tercer nivel de cuatro: Inicial → Estandarizado → Gestionado → Optimizado. Cumplimiento 84.9% vs meta 60%.'},
+  {s:'Un plan de acción que dice "definir un modelo de atención de incidentes" es suficiente para evitar la recurrencia del incidente.', a:false, e:'Definir modelos de atención es mejora continua, no elimina la causa raíz del incidente específico. Un plan de acción válido implementa una solución técnica concreta.'},
 ],
 hym:[
   {s:'El proceso Habilitar y Mantener Soluciones aplica también a aplicaciones SaaS.', a:false, e:'No aplica — las SaaS no están dentro de la infraestructura del Banco.'},
@@ -1181,6 +1327,9 @@ hym:[
   {s:'Las pruebas unitarias están en la base de la pirámide de pruebas, con la mayor cobertura.', a:true, e:'Correcto, JUnit/PyTest, medidas en Sonar.'},
   {s:'JMeter es la herramienta oficial del Banco para pruebas de performance.', a:true, e:'Correcto, a veces complementada con SiteSpeed.'},
   {s:'Sin un elemento de configuración (CI) creado en la CMDB no se puede desplegar a producción.', a:true, e:'Es la puerta de entrada obligatoria al proceso.'},
+  {s:'El Mutation Testing aplica a todos los lenguajes de programación utilizados en el Banco.', a:false, e:'El Mutation Testing solo aplica para Java, usando la librería PIT.'},
+  {s:'La aprobación técnica del paso a producción (Criedo C) puede realizarla cualquier miembro del equipo de desarrollo.', a:false, e:'Solo puede hacerla el Líder técnico de EBC, el Líder de línea de conocimiento o un Ingeniero de software autorizado — según el nivel de riesgo.'},
+  {s:'PricewaterhouseCoopers (PWC) puede presentarse sin previo aviso a revisar los pasos a producción del equipo.', a:true, e:'Como revisoría fiscal externa, PWC hace visitas con requerimientos institucionales y puede ir directamente a las plataformas sin aviso previo para verificar operatividad.'},
 ],
 };
 
