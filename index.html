@@ -24,9 +24,9 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none}
 /* Layout */
 #app{min-height:calc(100vh - 60px);padding:20px 16px 80px;max-width:720px;margin:0 auto}
 #nav{position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--paper);border-top:1px solid var(--line);display:flex;z-index:100}
-.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;color:var(--soft);background:none;transition:color .15s}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;color:var(--soft);background:none;transition:color .15s}
 .nav-btn.active{color:var(--navy)}
-.nav-btn svg{width:22px;height:22px;display:block;margin:0 auto 2px}
+.nav-btn svg{width:20px;height:20px;display:block;margin:0 auto 1px}
 
 /* Cards */
 .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:16px;box-shadow:var(--shadow)}
@@ -212,6 +212,28 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none}
 .qr-opt.wrong{background:var(--bad-bg);color:var(--bad)}
 .qr-opt.neutral{color:var(--soft)}
 .qr-explain{font-size:12px;color:var(--soft);margin-top:8px;padding-top:8px;border-top:1px solid var(--line);line-height:1.5}
+
+/* Chat */
+#chat-wrap{display:flex;flex-direction:column;height:calc(100vh - 120px);min-height:300px}
+#chat-messages{flex:1;overflow-y:auto;padding:4px 0 8px;display:flex;flex-direction:column;gap:10px}
+.chat-bubble{max-width:90%;padding:10px 13px;border-radius:12px;font-size:14px;line-height:1.55}
+.chat-user{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:3px}
+.chat-bot{align-self:flex-start;background:var(--paper);border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:3px}
+.chat-result{align-self:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;max-width:96%;font-size:13.5px;line-height:1.6}
+.chat-result-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.chat-result-title{font-weight:700;font-size:13px;color:var(--ink)}
+.chat-result-text{color:var(--soft)}
+.chat-result-text b{color:var(--ink)}
+.chat-result + .chat-result{margin-top:-2px}
+.chat-input-row{display:flex;gap:8px;padding:10px 0 2px;border-top:1px solid var(--line);margin-top:4px}
+#chat-input{flex:1;padding:10px 14px;border:1.5px solid var(--line);border-radius:22px;font-size:14.5px;font-family:inherit;outline:none;background:var(--paper);color:var(--ink)}
+#chat-input:focus{border-color:var(--navy)}
+#chat-send{padding:10px 18px;border-radius:22px;background:var(--navy);color:#fff;font-size:14px;font-weight:600;flex-shrink:0}
+#chat-send:hover{opacity:.88}
+.chat-empty{text-align:center;padding:32px 16px;color:var(--soft);font-size:14px}
+.chat-suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;justify-content:center}
+.chat-sug{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:6px 14px;font-size:12.5px;color:var(--navy);cursor:pointer;transition:background .15s}
+.chat-sug:hover{background:var(--brass-bg)}
 </style>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
@@ -239,6 +261,10 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none}
   <button class="nav-btn" id="nb-history" onclick="go('history')">
     <i data-lucide="history"></i>
     Historial
+  </button>
+  <button class="nav-btn" id="nb-chat" onclick="go('chat')">
+    <i data-lucide="message-circle"></i>
+    Consultar
   </button>
 </nav>
 
@@ -1640,7 +1666,7 @@ function go(screen, arg) {
   btns.forEach(b => b.classList.remove('active'));
   const nbMap = { home:'nb-home', modules:'nb-modules', module:'nb-modules',
                   cards:'nb-cards', quiz:'nb-quiz', results:'nb-quiz', setup:'nb-home',
-                  history:'nb-history', 'exam-review':'nb-history' };
+                  history:'nb-history', 'exam-review':'nb-history', chat:'nb-chat' };
   const nb = document.getElementById(nbMap[screen]);
   if (nb) nb.classList.add('active');
 
@@ -1658,6 +1684,7 @@ function go(screen, arg) {
   else if (screen === 'quiz')        { startQuiz(arg); }
   else if (screen === 'history')     { app.innerHTML = renderHistory(); }
   else if (screen === 'exam-review') { app.innerHTML = renderExamReview(arg); }
+  else if (screen === 'chat')        { app.innerHTML = renderChat(); setupChat(); }
   initIcons();
 }
 
@@ -2885,6 +2912,172 @@ function deleteExam(examId) {
   ST.examLog = ST.examLog.filter(e => String(e.id) !== String(examId));
   saveST();
   go('history');
+}
+
+/* ============================================================
+   CHAT — Búsqueda local por keywords
+   ============================================================ */
+let _corpus = null;
+
+const _STOPWORDS = new Set([
+  'de','la','el','en','que','es','se','para','por','con','del','los','las',
+  'un','una','al','su','lo','como','más','pero','sus','le','ya','o','fue',
+  'ha','si','no','te','lo','da','y','a','e','ni','esto','esta','ese','esa',
+  'son','ser','una','ante','bajo','cabe','con','sin','so','tras','hacia','hasta',
+  'desde','durante','según','entre','sobre','cuál','cual','qué','que','cómo',
+  'puede','pueden','debe','deben','tiene','tienen','hacer','hace','hay','este'
+]);
+
+function _norm(t) {
+  return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+}
+function _tok(t) {
+  return _norm(t).split(' ').filter(w => w.length > 2 && !_STOPWORDS.has(w));
+}
+function _stripHtml(h) {
+  return h.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+}
+
+function _buildCorpus() {
+  const chunks = [];
+  // De CONTENT: dividir por sección h3
+  for (const mk of MOD_KEYS) {
+    const html = CONTENT[mk] || '';
+    const modName = M[mk].name;
+    const modColor = M[mk].color;
+    const parts = html.split(/(?=<h3)/i);
+    parts.forEach(part => {
+      const titleMatch = part.match(/<h3[^>]*>([^<]+)<\/h3>/i);
+      const title = titleMatch ? titleMatch[1].trim() : modName;
+      const text = _stripHtml(part);
+      if (text.length > 60) {
+        chunks.push({ mod: mk, modName, modColor, title, text: title + ' ' + text, display: text.slice(0, 400), source: 'content' });
+      }
+    });
+  }
+  // De FC: flashcards
+  FC.forEach(card => {
+    const text = card.f + ' ' + card.b;
+    chunks.push({ mod: card.mod, modName: M[card.mod].name, modColor: M[card.mod].color, title: card.f, text, display: card.b, source: 'flashcard' });
+  });
+  // De BANK: preguntas con explicación
+  BANK.forEach(q => {
+    const correct = q.o[q.c] || '';
+    const text = q.q + ' ' + q.o.join(' ') + ' ' + (q.e || '');
+    const display = `Respuesta: <b>${correct}</b>${q.e ? '<br><span style="color:var(--soft)">'+q.e+'</span>' : ''}`;
+    chunks.push({ mod: q.mod, modName: M[q.mod].name, modColor: M[q.mod].color, title: q.q, text, display, source: 'quiz' });
+  });
+  return chunks;
+}
+
+function _searchCorpus(query, n) {
+  if (!_corpus) _corpus = _buildCorpus();
+  const qToks = _tok(query);
+  if (!qToks.length) return [];
+  const scored = _corpus.map(chunk => {
+    const cToks = _tok(chunk.text);
+    let score = 0;
+    for (const qt of qToks) {
+      for (const ct of cToks) {
+        if (ct === qt) score += 3;
+        else if (ct.startsWith(qt) || qt.startsWith(ct)) score += 1;
+      }
+    }
+    return { chunk, score };
+  });
+  return scored.filter(x => x.score > 0).sort((a,b) => b.score - a.score).slice(0, n || 4).map(x => x.chunk);
+}
+
+const _SUGGESTIONS = [
+  '¿Cuál es la diferencia entre incidente y problema?',
+  '¿Qué es el modelo Federal-State-Local?',
+  '¿Qué es un CI en gestión de configuración?',
+  '¿Cómo se clasifica un cambio?',
+  '¿Qué es el ciclo PHVA?',
+  '¿Qué es la gestión de problemas?',
+];
+
+let _chatHistory = [];
+
+function renderChat() {
+  return `
+  <div style="margin-bottom:8px">
+    <h2 style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:4px">Consultor de estudio</h2>
+    <p style="font-size:13px;color:var(--soft)">Busca en el contenido de los 6 módulos. Sin IA — respuestas basadas en el material del examen.</p>
+  </div>
+  <div id="chat-wrap">
+    <div id="chat-messages">
+      <div class="chat-empty" id="chat-placeholder">
+        <div style="font-size:32px;margin-bottom:8px">🔍</div>
+        <div style="font-weight:600;color:var(--navy);margin-bottom:4px">Escribe una pregunta</div>
+        <div style="margin-bottom:14px">Ejemplo: ¿Qué es un cambio de emergencia?</div>
+        <div class="chat-suggestions" id="chat-sugs">
+          ${_SUGGESTIONS.map(s => `<button class="chat-sug" onclick="chatSuggest(this)">${s}</button>`).join('')}
+        </div>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input id="chat-input" type="text" placeholder="Escribe tu pregunta…" onkeydown="if(event.key==='Enter')chatSend()" autocomplete="off" />
+      <button id="chat-send" onclick="chatSend()">${icon('search')} Buscar</button>
+    </div>
+  </div>`;
+}
+
+function setupChat() {
+  // restore history if any
+  if (_chatHistory.length) {
+    const container = document.getElementById('chat-messages');
+    const placeholder = document.getElementById('chat-placeholder');
+    if (placeholder) placeholder.remove();
+    _chatHistory.forEach(msg => {
+      container.insertAdjacentHTML('beforeend', msg);
+    });
+    container.scrollTop = container.scrollHeight;
+  }
+  initIcons();
+}
+
+function chatSuggest(btn) {
+  const input = document.getElementById('chat-input');
+  if (input) { input.value = btn.textContent; chatSend(); }
+}
+
+function chatSend() {
+  const input = document.getElementById('chat-input');
+  if (!input) return;
+  const query = input.value.trim();
+  if (!query) return;
+  input.value = '';
+
+  const container = document.getElementById('chat-messages');
+  const placeholder = document.getElementById('chat-placeholder');
+  if (placeholder) placeholder.remove();
+
+  const userBubble = `<div class="chat-bubble chat-user">${query}</div>`;
+  container.insertAdjacentHTML('beforeend', userBubble);
+  _chatHistory.push(userBubble);
+
+  const results = _searchCorpus(query, 4);
+
+  let botHtml;
+  if (!results.length) {
+    botHtml = `<div class="chat-bubble chat-bot" style="color:var(--soft)">No encontré información relacionada en el material. Intenta con otras palabras.</div>`;
+  } else {
+    const sourceLabel = { content: 'Contenido', flashcard: 'Flashcard', quiz: 'Pregunta de examen' };
+    botHtml = results.map(r => `
+      <div class="chat-result">
+        <div class="chat-result-header">
+          <span class="mod-pill" style="background:${r.modColor}">${r.modName}</span>
+          <span style="font-size:11px;color:var(--soft);background:var(--bg);padding:2px 8px;border-radius:10px;border:1px solid var(--line)">${sourceLabel[r.source]}</span>
+        </div>
+        <div style="font-weight:600;font-size:13px;color:var(--navy);margin-bottom:5px">${r.title}</div>
+        <div class="chat-result-text">${r.display}</div>
+      </div>`).join('');
+  }
+  container.insertAdjacentHTML('beforeend', botHtml);
+  _chatHistory.push(botHtml);
+  container.scrollTop = container.scrollHeight;
+  initIcons();
 }
 
 /* ============================================================
